@@ -1,12 +1,12 @@
 package com.dfirago.dlt.dashboard.adapters;
 
 import android.graphics.Color;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dfirago.dlt.R;
@@ -25,19 +25,22 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Item
 
     private final List<DashboardItem> data = new ArrayList<>();
 
+    private OnItemSelectedListener onItemSelectedListener;
+
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        final LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        final View view = layoutInflater.inflate(R.layout.grid_item_dashboard, parent, false);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        View view = layoutInflater.inflate(R.layout.grid_item_dashboard, parent, false);
         return new ItemViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
         DashboardItem item = data.get(position);
-        holder.contentLayout.setBackgroundColor(Color.parseColor(item.getColor()));
+        holder.cardView.setOnClickListener(view -> onItemSelectedListener.onItemSelected(item));
+        holder.cardView.setCardBackgroundColor(Color.parseColor(item.getColor()));
         holder.titleView.setText(item.getTitle());
-        holder.iconView.setImageResource(item.getDrawable());
+        holder.iconView.setImageResource(item.getIconResource());
     }
 
     @Override
@@ -52,8 +55,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Item
 
     static class ItemViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.grid_item_content)
-        RelativeLayout contentLayout;
+        @BindView(R.id.grid_item_card_view)
+        CardView cardView;
         @BindView(R.id.grid_item_title)
         TextView titleView;
         @BindView(R.id.grid_item_icon)
@@ -63,5 +66,13 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Item
             super(view);
             ButterKnife.bind(this, view);
         }
+    }
+
+    public interface OnItemSelectedListener {
+        void onItemSelected(DashboardItem item);
+    }
+
+    public void setOnItemSelectedListener(OnItemSelectedListener onItemSelectedListener) {
+        this.onItemSelectedListener = onItemSelectedListener;
     }
 }

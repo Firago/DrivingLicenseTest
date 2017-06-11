@@ -9,5 +9,5 @@ import java.util.List;
  */
 public interface DashboardView {
 
-    void showDashboard(List<DashboardItem> items);
+    void showDashboard(List<DashboardItem> dashboardItems);
 }

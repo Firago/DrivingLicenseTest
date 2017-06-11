@@ -1,7 +1,7 @@
 package com.dfirago.dlt.dashboard;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import com.dfirago.dlt.R;
 import com.dfirago.dlt.dashboard.adapters.DashboardAdapter;
 import com.dfirago.dlt.dashboard.model.DashboardItem;
+import com.dfirago.dlt.training.TrainingActivity;
 
 import java.util.List;
 
@@ -20,8 +21,8 @@ public class DashboardActivity extends AppCompatActivity implements DashboardVie
     @BindView(R.id.dashboard_recycler_view)
     protected RecyclerView dashboardRecyclerView;
 
-    private DashboardAdapter dashboardAdapter;
     private DashboardPresenter dashboardPresenter;
+    private DashboardAdapter dashboardAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +30,10 @@ public class DashboardActivity extends AppCompatActivity implements DashboardVie
         setContentView(R.layout.activity_dashboard);
         ButterKnife.bind(this);
 
-        dashboardAdapter = new DashboardAdapter();
         dashboardPresenter = new DashboardPresenter();
+        dashboardAdapter = new DashboardAdapter();
+
+        dashboardAdapter.setOnItemSelectedListener(this::onDashboardItemSelected);
 
         final GridLayoutManager layoutManager
                 = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
@@ -56,5 +59,25 @@ public class DashboardActivity extends AppCompatActivity implements DashboardVie
     public void showDashboard(List<DashboardItem> items) {
         dashboardAdapter.setData(items);
         dashboardAdapter.notifyDataSetChanged();
+    }
+
+    private void onDashboardItemSelected(DashboardItem item) {
+        switch (item) {
+            case TRAINING:
+                startActivity(TrainingActivity.getIntent(this));
+                break;
+            case EXAM:
+                // TODO
+                break;
+            case ABOUT_US:
+                // TODO
+                break;
+            case RATE_US:
+                // TODO
+                break;
+            default:
+                String message = "Dashboard item type is not handled: " + item;
+                throw new UnsupportedOperationException(message);
+        }
     }
 }
