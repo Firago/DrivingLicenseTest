@@ -1,5 +1,8 @@
 package com.dfirago.dlt.dashboard;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
@@ -67,17 +70,25 @@ public class DashboardActivity extends AppCompatActivity implements DashboardVie
                 view -> startActivity(TrainingActivity.getIntent(this))));
         dashboardItems.add(new DashboardItem(getString(R.string.dashboard_item_exam_title),
                 R.drawable.ic_assignment_white_48dp, "#3E51B1",
-                view -> startActivity(TrainingActivity.getIntent(this))));
+                view -> {/* TODO */}));
         dashboardItems.add(new DashboardItem(getString(R.string.dashboard_item_about_us_title),
                 R.drawable.ic_help_outline_white_48dp, "#673BB7",
-                view -> startActivity(TrainingActivity.getIntent(this))));
+                view -> {/* TODO */}));
         dashboardItems.add(new DashboardItem(getString(R.string.dashboard_item_rate_us_title),
                 R.drawable.ic_thumb_up_white_48dp, "#4BAA50",
-                view -> startActivity(TrainingActivity.getIntent(this))));
+                view -> startApplicationRatingActivity()));
     }
 
     public void showDashboard() {
         dashboardAdapter.setData(dashboardItems);
         dashboardAdapter.notifyDataSetChanged();
+    }
+
+    private void startApplicationRatingActivity() {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getPackageName())));
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + getPackageName())));
+        }
     }
 }
