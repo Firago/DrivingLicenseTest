@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Driving License Test</string>
+    <string name="dashboard_item_training_title">Nauka</string>
+    <string name="dashboard_item_exam_title">Egzamin</string>
+    <string name="dashboard_item_about_us_title">O nas</string>
+    <string name="dashboard_item_rate_us_title">Polub nas</string>
 </resources>

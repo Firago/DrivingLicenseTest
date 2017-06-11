@@ -25,8 +25,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Item
 
     private final List<DashboardItem> data = new ArrayList<>();
 
-    private OnItemSelectedListener onItemSelectedListener;
-
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
@@ -37,7 +35,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Item
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
         DashboardItem item = data.get(position);
-        holder.cardView.setOnClickListener(view -> onItemSelectedListener.onItemSelected(item));
+        holder.cardView.setOnClickListener(item.getOnItemClickListener());
         holder.cardView.setCardBackgroundColor(Color.parseColor(item.getColor()));
         holder.titleView.setText(item.getTitle());
         holder.iconView.setImageResource(item.getIconResource());
@@ -66,13 +64,5 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Item
             super(view);
             ButterKnife.bind(this, view);
         }
-    }
-
-    public interface OnItemSelectedListener {
-        void onItemSelected(DashboardItem item);
-    }
-
-    public void setOnItemSelectedListener(OnItemSelectedListener onItemSelectedListener) {
-        this.onItemSelectedListener = onItemSelectedListener;
     }
 }

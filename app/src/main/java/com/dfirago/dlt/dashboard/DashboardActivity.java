@@ -11,6 +11,7 @@ import com.dfirago.dlt.dashboard.adapters.DashboardAdapter;
 import com.dfirago.dlt.dashboard.model.DashboardItem;
 import com.dfirago.dlt.training.TrainingActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -24,6 +25,8 @@ public class DashboardActivity extends AppCompatActivity implements DashboardVie
     private DashboardPresenter dashboardPresenter;
     private DashboardAdapter dashboardAdapter;
 
+    private List<DashboardItem> dashboardItems = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,20 +36,20 @@ public class DashboardActivity extends AppCompatActivity implements DashboardVie
         dashboardPresenter = new DashboardPresenter();
         dashboardAdapter = new DashboardAdapter();
 
-        dashboardAdapter.setOnItemSelectedListener(this::onDashboardItemSelected);
-
         final GridLayoutManager layoutManager
                 = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
 
         dashboardRecyclerView.setAdapter(dashboardAdapter);
         dashboardRecyclerView.setLayoutManager(layoutManager);
+
+        initDashboard();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         dashboardPresenter.attachView(this);
-        dashboardPresenter.loadDashboard();
+        showDashboard();
     }
 
     @Override
@@ -55,29 +58,26 @@ public class DashboardActivity extends AppCompatActivity implements DashboardVie
         super.onPause();
     }
 
-    @Override
-    public void showDashboard(List<DashboardItem> items) {
-        dashboardAdapter.setData(items);
-        dashboardAdapter.notifyDataSetChanged();
+    private void initDashboard() {
+
+        dashboardItems.clear();
+
+        dashboardItems.add(new DashboardItem(getString(R.string.dashboard_item_training_title),
+                R.drawable.ic_school_white_48dp, "#09A9FF",
+                view -> startActivity(TrainingActivity.getIntent(this))));
+        dashboardItems.add(new DashboardItem(getString(R.string.dashboard_item_exam_title),
+                R.drawable.ic_assignment_white_48dp, "#3E51B1",
+                view -> startActivity(TrainingActivity.getIntent(this))));
+        dashboardItems.add(new DashboardItem(getString(R.string.dashboard_item_about_us_title),
+                R.drawable.ic_help_outline_white_48dp, "#673BB7",
+                view -> startActivity(TrainingActivity.getIntent(this))));
+        dashboardItems.add(new DashboardItem(getString(R.string.dashboard_item_rate_us_title),
+                R.drawable.ic_thumb_up_white_48dp, "#4BAA50",
+                view -> startActivity(TrainingActivity.getIntent(this))));
     }
 
-    private void onDashboardItemSelected(DashboardItem item) {
-        switch (item) {
-            case TRAINING:
-                startActivity(TrainingActivity.getIntent(this));
-                break;
-            case EXAM:
-                // TODO
-                break;
-            case ABOUT_US:
-                // TODO
-                break;
-            case RATE_US:
-                // TODO
-                break;
-            default:
-                String message = "Dashboard item type is not handled: " + item;
-                throw new UnsupportedOperationException(message);
-        }
+    public void showDashboard() {
+        dashboardAdapter.setData(dashboardItems);
+        dashboardAdapter.notifyDataSetChanged();
     }
 }
