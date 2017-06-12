@@ -13,8 +13,8 @@ import com.dfirago.dlt.R;
 import com.dfirago.dlt.dashboard.adapters.DashboardAdapter;
 import com.dfirago.dlt.dashboard.model.DashboardItem;
 import com.dfirago.dlt.training.TrainingActivity;
+import com.dfirago.dlt.utils.Constants;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -28,31 +28,26 @@ public class DashboardActivity extends AppCompatActivity implements DashboardVie
     private DashboardPresenter dashboardPresenter;
     private DashboardAdapter dashboardAdapter;
 
-    private List<DashboardItem> dashboardItems = new ArrayList<>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         ButterKnife.bind(this);
-
         dashboardPresenter = new DashboardPresenter();
         dashboardAdapter = new DashboardAdapter();
-
-        final GridLayoutManager layoutManager
-                = new GridLayoutManager(this, 2, LinearLayoutManager.VERTICAL, false);
-
+        dashboardAdapter.getItemClicks()
+                .subscribe(dashboardPresenter::onItemClicked);
         dashboardRecyclerView.setAdapter(dashboardAdapter);
-        dashboardRecyclerView.setLayoutManager(layoutManager);
-
-        initDashboard();
+        dashboardRecyclerView.setLayoutManager(new GridLayoutManager(
+                this, Constants.DASHBOARD_SPAN, LinearLayoutManager.VERTICAL, false));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         dashboardPresenter.attachView(this);
-        showDashboard();
+        dashboardPresenter.loadDashboard();
     }
 
     @Override
@@ -61,34 +56,35 @@ public class DashboardActivity extends AppCompatActivity implements DashboardVie
         super.onPause();
     }
 
-    private void initDashboard() {
-
-        dashboardItems.clear();
-
-        dashboardItems.add(new DashboardItem(getString(R.string.dashboard_item_training_title),
-                R.drawable.ic_school_white_48dp, "#09A9FF",
-                view -> startActivity(TrainingActivity.getIntent(this))));
-        dashboardItems.add(new DashboardItem(getString(R.string.dashboard_item_exam_title),
-                R.drawable.ic_assignment_white_48dp, "#3E51B1",
-                view -> {/* TODO */}));
-        dashboardItems.add(new DashboardItem(getString(R.string.dashboard_item_about_us_title),
-                R.drawable.ic_help_outline_white_48dp, "#673BB7",
-                view -> {/* TODO */}));
-        dashboardItems.add(new DashboardItem(getString(R.string.dashboard_item_rate_us_title),
-                R.drawable.ic_thumb_up_white_48dp, "#4BAA50",
-                view -> startApplicationRatingActivity()));
-    }
-
-    public void showDashboard() {
+    @Override
+    public void showDashboard(List<DashboardItem> dashboardItems) {
         dashboardAdapter.setData(dashboardItems);
         dashboardAdapter.notifyDataSetChanged();
     }
 
-    private void startApplicationRatingActivity() {
+    @Override
+    public void onTrainingItemClicked() {
+        startActivity(TrainingActivity.getIntent(this));
+    }
+
+    @Override
+    public void onExamItemClicked() {
+        startActivity(TrainingActivity.getIntent(this)); // TODO
+    }
+
+    @Override
+    public void onAboutItemClicked() {
+        startActivity(TrainingActivity.getIntent(this)); // TODO
+    }
+
+    @Override
+    public void onRateItemClicked() {
         try {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getPackageName())));
+            Uri uri = Uri.parse("market://details?id=" + getPackageName());
+            startActivity(new Intent(Intent.ACTION_VIEW, uri));
         } catch (ActivityNotFoundException e) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + getPackageName())));
+            Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=" + getPackageName());
+            startActivity(new Intent(Intent.ACTION_VIEW, uri));
         }
     }
 }

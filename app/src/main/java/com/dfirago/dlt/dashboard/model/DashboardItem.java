@@ -1,23 +1,24 @@
 package com.dfirago.dlt.dashboard.model;
 
-import android.view.View;
-
 /**
  * Created by Dmytro Firago on 11/06/2017.
  */
 public class DashboardItem {
 
+    private ItemType itemType;
     private String title;
     private int iconResource;
     private String color;
-    private View.OnClickListener onClickListener;
 
-    public DashboardItem(String title, int iconResource,
-                         String color, View.OnClickListener onClickListener) {
+    public DashboardItem(ItemType itemType, String title, int iconResource, String color) {
+        this.itemType = itemType;
         this.title = title;
         this.iconResource = iconResource;
         this.color = color;
-        this.onClickListener = onClickListener;
+    }
+
+    public ItemType getItemType() {
+        return itemType;
     }
 
     public String getTitle() {
@@ -30,9 +31,5 @@ public class DashboardItem {
 
     public String getColor() {
         return color;
-    }
-
-    public View.OnClickListener getOnItemClickListener() {
-        return onClickListener;
     }
 }

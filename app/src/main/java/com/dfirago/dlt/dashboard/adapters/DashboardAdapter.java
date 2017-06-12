@@ -17,6 +17,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
+import io.reactivex.subjects.PublishSubject;
 
 /**
  * Created by Dmytro Firago on 10/06/2017.
@@ -24,6 +26,8 @@ import butterknife.ButterKnife;
 public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.ItemViewHolder> {
 
     private final List<DashboardItem> data = new ArrayList<>();
+
+    private final PublishSubject<DashboardItem> onClickSubject = PublishSubject.create();
 
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -35,7 +39,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Item
     @Override
     public void onBindViewHolder(ItemViewHolder holder, int position) {
         DashboardItem item = data.get(position);
-        holder.cardView.setOnClickListener(item.getOnItemClickListener());
+        holder.cardView.setOnClickListener(v -> onClickSubject.onNext(item));
         holder.cardView.setCardBackgroundColor(Color.parseColor(item.getColor()));
         holder.titleView.setText(item.getTitle());
         holder.iconView.setImageResource(item.getIconResource());
@@ -51,12 +55,18 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Item
         this.data.addAll(data);
     }
 
+    public Observable<DashboardItem> getItemClicks() {
+        return onClickSubject.share();
+    }
+
     static class ItemViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.grid_item_card_view)
         CardView cardView;
+
         @BindView(R.id.grid_item_title)
         TextView titleView;
+
         @BindView(R.id.grid_item_icon)
         ImageView iconView;
 
