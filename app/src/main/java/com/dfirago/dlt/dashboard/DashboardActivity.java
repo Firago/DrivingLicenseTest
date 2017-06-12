@@ -30,7 +30,6 @@ public class DashboardActivity extends AppCompatActivity implements DashboardVie
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         ButterKnife.bind(this);
@@ -57,9 +56,14 @@ public class DashboardActivity extends AppCompatActivity implements DashboardVie
     }
 
     @Override
-    public void showDashboard(List<DashboardItem> dashboardItems) {
-        dashboardAdapter.setData(dashboardItems);
+    public void showItems(List<DashboardItem> items) {
+        dashboardAdapter.setData(items);
         dashboardAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onCategoryItemClicked() {
+        dashboardPresenter.loadCategoryOptions();
     }
 
     @Override
@@ -69,11 +73,6 @@ public class DashboardActivity extends AppCompatActivity implements DashboardVie
 
     @Override
     public void onExamItemClicked() {
-        startActivity(TrainingActivity.getIntent(this)); // TODO
-    }
-
-    @Override
-    public void onAboutItemClicked() {
         startActivity(TrainingActivity.getIntent(this)); // TODO
     }
 

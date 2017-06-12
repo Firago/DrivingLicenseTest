@@ -19,28 +19,41 @@ public class DashboardPresenter extends BasePresenter<DashboardView> {
     }
 
     public void loadDashboard() {
-        final List<DashboardItem> items = new ArrayList<>();
-        items.add(new DashboardItem(ItemType.TRAINING, "Nauka", R.drawable.ic_school_white_48dp, "#09A9FF"));
-        items.add(new DashboardItem(ItemType.EXAM, "Egzamin", R.drawable.ic_assignment_white_48dp, "#3E51B1"));
-        items.add(new DashboardItem(ItemType.ABOUT, "O nas", R.drawable.ic_help_outline_white_48dp, "#673BB7"));
-        items.add(new DashboardItem(ItemType.RATE, "Polub nas", R.drawable.ic_thumb_up_white_48dp, "#4BAA50"));
-        view().showDashboard(items);
+        List<DashboardItem> items = new ArrayList<>();
+        items.add(new DashboardItem(ItemType.CATEGORY_A, "Kategoria A", R.drawable.ic_motorcycle_white_48dp, "#09A9FF"));
+        items.add(new DashboardItem(ItemType.CATEGORY_B, "Kategoria B", R.drawable.ic_directions_car_white_48dp, "#3E51B1"));
+        items.add(new DashboardItem(ItemType.CATEGORY_B, "Kategoria C", R.drawable.ic_local_shipping_white_48dp, "#673BB7"));
+        items.add(new DashboardItem(ItemType.CATEGORY_B, "Kategoria D", R.drawable.ic_directions_bus_white_48dp, "#4BAA50"));
+        items.add(new DashboardItem(ItemType.CATEGORY_B, "Kategoria T", R.drawable.ic_help_outline_white_48dp, "#F94336")); // TODO icon
+        items.add(new DashboardItem(ItemType.RATE, "Polub nas", R.drawable.ic_thumb_up_white_48dp, "#0A9B88"));
+        view().showItems(items);
     }
 
     public void onItemClicked(DashboardItem item) {
         switch (item.getItemType()) {
+            case CATEGORY_A:
+            case CATEGORY_B:
+            case CATEGORY_C:
+            case CATEGORY_D:
+            case CATEGORY_T:
+                view().onCategoryItemClicked();
+                break;
             case TRAINING:
                 view().onTrainingItemClicked();
                 break;
             case EXAM:
                 view().onExamItemClicked();
                 break;
-            case ABOUT:
-                view().onAboutItemClicked();
-                break;
             case RATE:
                 view().onRateItemClicked();
                 break;
         }
+    }
+
+    public void loadCategoryOptions() {
+        List<DashboardItem> items = new ArrayList<>();
+        items.add(new DashboardItem(ItemType.TRAINING, "Nauka", R.drawable.ic_school_white_48dp, "#09A9FF"));
+        items.add(new DashboardItem(ItemType.EXAM, "Egzamin", R.drawable.ic_assignment_white_48dp, "#3E51B1"));
+        view().showItems(items);
     }
 }

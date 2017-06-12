@@ -9,13 +9,13 @@ import java.util.List;
  */
 public interface DashboardView {
 
-    void showDashboard(List<DashboardItem> dashboardItems);
+    void showItems(List<DashboardItem> items);
+
+    void onCategoryItemClicked();
 
     void onTrainingItemClicked();
 
     void onExamItemClicked();
-
-    void onAboutItemClicked();
 
     void onRateItemClicked();
 }
