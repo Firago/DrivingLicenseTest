@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.dfirago.dlt.R;
 import com.dfirago.dlt.dashboard.adapters.DashboardAdapter;
+import com.dfirago.dlt.dashboard.data.DashboardRepository;
 import com.dfirago.dlt.dashboard.model.DashboardItem;
 import com.dfirago.dlt.training.TrainingActivity;
 import com.dfirago.dlt.utils.Constants;
@@ -33,7 +34,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         ButterKnife.bind(this);
-        dashboardPresenter = new DashboardPresenter();
+        dashboardPresenter = new DashboardPresenter(new DashboardRepository());
         dashboardAdapter = new DashboardAdapter();
         dashboardAdapter.getItemClicks()
                 .subscribe(dashboardPresenter::onItemClicked);
