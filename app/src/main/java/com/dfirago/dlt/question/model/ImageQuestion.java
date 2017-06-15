@@ -1,4 +1,4 @@
-package com.dfirago.dlt.training.model;
+package com.dfirago.dlt.question.model;
 
 import java.util.List;
 
