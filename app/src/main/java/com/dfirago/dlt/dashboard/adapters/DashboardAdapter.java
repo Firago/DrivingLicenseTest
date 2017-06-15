@@ -32,7 +32,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Item
     @Override
     public ItemViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.grid_item_dashboard, parent, false);
+        View view = layoutInflater.inflate(R.layout.list_item_dashboard, parent, false);
         return new ItemViewHolder(view);
     }
 
@@ -61,13 +61,13 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.Item
 
     static class ItemViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.grid_item_card_view)
+        @BindView(R.id.dashboard_item_card_view)
         CardView cardView;
 
-        @BindView(R.id.grid_item_title)
+        @BindView(R.id.dashboard_item_title)
         TextView titleView;
 
-        @BindView(R.id.grid_item_icon)
+        @BindView(R.id.dashboard_item_icon)
         ImageView iconView;
 
         ItemViewHolder(View view) {
