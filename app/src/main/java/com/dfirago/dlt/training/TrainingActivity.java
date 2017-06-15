@@ -7,8 +7,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.dfirago.dlt.R;
-import com.dfirago.dlt.training.model.Option;
-import com.dfirago.dlt.training.model.SimpleQuestion;
+import com.dfirago.dlt.question.QuestionFragment;
+import com.dfirago.dlt.question.SimpleQuestionFragment;
+import com.dfirago.dlt.question.model.Option;
+import com.dfirago.dlt.question.model.SimpleQuestion;
 
 import java.util.Arrays;
 

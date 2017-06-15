@@ -1,4 +1,4 @@
-package com.dfirago.dlt.training.adapters;
+package com.dfirago.dlt.question.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ToggleButton;
 
 import com.dfirago.dlt.R;
-import com.dfirago.dlt.training.model.Option;
+import com.dfirago.dlt.question.model.Option;
 
 import java.util.ArrayList;
 import java.util.List;

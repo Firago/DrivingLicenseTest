@@ -1,6 +1,6 @@
-package com.dfirago.dlt.training;
+package com.dfirago.dlt.question;
 
-import com.dfirago.dlt.training.model.ImageQuestion;
+import com.dfirago.dlt.question.model.ImageQuestion;
 
 /**
  * Created by Dmytro Firago on 14/06/2017.

@@ -1,4 +1,4 @@
-package com.dfirago.dlt.training;
+package com.dfirago.dlt.question;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dfirago.dlt.R;
-import com.dfirago.dlt.training.adapters.OptionsAdapter;
-import com.dfirago.dlt.training.model.Option;
-import com.dfirago.dlt.training.model.SimpleQuestion;
+import com.dfirago.dlt.question.adapters.OptionsAdapter;
+import com.dfirago.dlt.question.model.Option;
+import com.dfirago.dlt.question.model.SimpleQuestion;
 
 import java.util.List;
 
