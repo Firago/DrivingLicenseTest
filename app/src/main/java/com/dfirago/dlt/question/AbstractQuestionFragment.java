@@ -7,7 +7,7 @@ import android.support.v4.app.Fragment;
 import com.dfirago.dlt.question.model.AbstractQuestion;
 import com.google.gson.Gson;
 
-public abstract class QuestionFragment<T extends AbstractQuestion> extends Fragment {
+public abstract class AbstractQuestionFragment<T extends AbstractQuestion> extends Fragment {
 
     protected static final String QUESTION_PARAM = "question";
 

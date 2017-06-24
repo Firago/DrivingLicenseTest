@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class SimpleQuestion extends AbstractQuestion {
 
-    public SimpleQuestion(String question, List<Option> options) {
+    public SimpleQuestion(String question, List<ResponseOption> options) {
         super(question, options);
     }
 }

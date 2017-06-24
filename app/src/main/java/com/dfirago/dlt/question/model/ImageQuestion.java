@@ -9,7 +9,7 @@ public class ImageQuestion extends AbstractQuestion {
 
     private int imageResId;
 
-    public ImageQuestion(String question, List<Option> options, int imageResId) {
+    public ImageQuestion(String question, List<ResponseOption> options, int imageResId) {
         super(question, options);
         this.imageResId = imageResId;
     }

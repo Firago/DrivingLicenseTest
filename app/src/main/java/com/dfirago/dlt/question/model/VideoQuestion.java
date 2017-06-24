@@ -9,7 +9,7 @@ public class VideoQuestion extends AbstractQuestion {
 
     private String videoPath;
 
-    public VideoQuestion(String question, List<Option> options, String videoPath) {
+    public VideoQuestion(String question, List<ResponseOption> options, String videoPath) {
         super(question, options);
         this.videoPath = videoPath;
     }

@@ -3,12 +3,12 @@ package com.dfirago.dlt.question.model;
 /**
  * Created by Dmytro Firago on 14/06/2017.
  */
-public class Option {
+public class ResponseOption {
 
     private String value;
     private boolean correct;
 
-    public Option(String value, boolean correct) {
+    public ResponseOption(String value, boolean correct) {
         this.value = value;
         this.correct = correct;
     }

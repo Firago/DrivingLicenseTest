@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 
 import com.dfirago.dlt.R;
-import com.dfirago.dlt.question.model.Option;
+import com.dfirago.dlt.question.model.ResponseOption;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
  */
 public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionViewHolder> {
 
-    private final List<Option> options = new ArrayList<>();
+    private final List<ResponseOption> options = new ArrayList<>();
 
     private RadioButton selectedOption;
 
@@ -33,7 +33,7 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionVi
 
     @Override
     public void onBindViewHolder(OptionViewHolder holder, int position) {
-        Option option = options.get(position);
+        ResponseOption option = options.get(position);
         holder.optionView.setText(option.getValue());
         holder.optionView.setOnClickListener(view -> {
             if (selectedOption == null) {               // nothing is selected
@@ -55,7 +55,7 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionVi
         return options.size();
     }
 
-    public void setData(List<Option> data) {
+    public void setData(List<ResponseOption> data) {
         options.clear();
         options.addAll(data);
     }

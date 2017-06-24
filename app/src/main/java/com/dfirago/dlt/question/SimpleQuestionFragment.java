@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.dfirago.dlt.R;
 import com.dfirago.dlt.question.adapters.OptionsAdapter;
-import com.dfirago.dlt.question.model.Option;
+import com.dfirago.dlt.question.model.ResponseOption;
 import com.dfirago.dlt.question.model.SimpleQuestion;
 
 import java.util.List;
@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Dmytro Firago on 13/06/2017.
  */
-public class SimpleQuestionFragment extends QuestionFragment<SimpleQuestion> {
+public class SimpleQuestionFragment extends AbstractQuestionFragment<SimpleQuestion> {
 
     @BindView(R.id.question_value)
     protected TextView questionValueView;
@@ -53,7 +53,7 @@ public class SimpleQuestionFragment extends QuestionFragment<SimpleQuestion> {
         return view;
     }
 
-    private void showOptions(List<Option> options) {
+    private void showOptions(List<ResponseOption> options) {
         optionsAdapter.setData(options);
         optionsAdapter.notifyDataSetChanged();
     }

@@ -7,9 +7,9 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.dfirago.dlt.R;
-import com.dfirago.dlt.question.QuestionFragment;
+import com.dfirago.dlt.question.AbstractQuestionFragment;
 import com.dfirago.dlt.question.SimpleQuestionFragment;
-import com.dfirago.dlt.question.model.Option;
+import com.dfirago.dlt.question.model.ResponseOption;
 import com.dfirago.dlt.question.model.SimpleQuestion;
 
 import java.util.Arrays;
@@ -20,7 +20,7 @@ import butterknife.ButterKnife;
  * Created by Dmytro Firago on 11/06/2017.
  */
 public class TrainingActivity extends AppCompatActivity
-        implements TrainingView, QuestionFragment.OnFragmentInteractionListener {
+        implements TrainingView, AbstractQuestionFragment.OnFragmentInteractionListener {
 
     private TrainingPresenter trainingPresenter;
 
@@ -40,8 +40,8 @@ public class TrainingActivity extends AppCompatActivity
                 .add(R.id.question_container, SimpleQuestionFragment
                         .newInstance(new SimpleQuestion("Do you want to kakamaliaka?",
                                 Arrays.asList(
-                                        new Option("biak", true),
-                                        new Option("biak!", false)
+                                        new ResponseOption("biak", true),
+                                        new ResponseOption("biak!", false)
                                 ))
                         )
                 ).commit();

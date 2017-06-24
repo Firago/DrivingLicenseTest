@@ -8,9 +8,9 @@ import java.util.List;
 public abstract class AbstractQuestion {
 
     private String value;
-    private List<Option> options;
+    private List<ResponseOption> options;
 
-    public AbstractQuestion(String value, List<Option> options) {
+    public AbstractQuestion(String value, List<ResponseOption> options) {
         this.value = value;
         this.options = options;
     }
@@ -23,11 +23,11 @@ public abstract class AbstractQuestion {
         this.value = value;
     }
 
-    public List<Option> getOptions() {
+    public List<ResponseOption> getOptions() {
         return options;
     }
 
-    public void setOptions(List<Option> options) {
+    public void setOptions(List<ResponseOption> options) {
         this.options = options;
     }
 }
