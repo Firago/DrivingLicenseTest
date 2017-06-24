@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ToggleButton;
+import android.widget.RadioButton;
 
 import com.dfirago.dlt.R;
 import com.dfirago.dlt.question.model.Option;
@@ -22,6 +22,8 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionVi
 
     private final List<Option> options = new ArrayList<>();
 
+    private RadioButton selectedOption;
+
     @Override
     public OptionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
@@ -32,7 +34,20 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionVi
     @Override
     public void onBindViewHolder(OptionViewHolder holder, int position) {
         Option option = options.get(position);
-        holder.optionValueView.setText(option.getValue());
+        holder.optionView.setText(option.getValue());
+        holder.optionView.setOnClickListener(view -> {
+            if (selectedOption == null) {               // nothing is selected
+                selectedOption = (RadioButton) view;
+                selectedOption.setChecked(true);
+            } else if (selectedOption.equals(view)) {   // selected item clicked
+                selectedOption.setChecked(false);
+                selectedOption = null;
+            } else {                                    // other than selected item clicked
+                selectedOption.setChecked(false);
+                selectedOption = (RadioButton) view;
+                selectedOption.setChecked(true);
+            }
+        });
     }
 
     @Override
@@ -48,7 +63,7 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionVi
     static class OptionViewHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.option_value)
-        ToggleButton optionValueView;
+        RadioButton optionView;
 
         OptionViewHolder(View view) {
             super(view);

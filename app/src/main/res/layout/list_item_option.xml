@@ -5,9 +5,9 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <ToggleButton
+    <RadioButton
         android:id="@+id/option_value"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
