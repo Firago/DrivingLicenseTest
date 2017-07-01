@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Driving License Test</string>
+    <string name="category_a_label">Kategoria A</string>
+    <string name="category_b_label">Kategoria B</string>
+    <string name="category_c_label">Kategoria C</string>
+    <string name="category_d_label">Kategoria D</string>
+    <string name="category_t_label">Kategoria T</string>
+    <string name="rate_app_label">Polub nas</string>
 </resources>

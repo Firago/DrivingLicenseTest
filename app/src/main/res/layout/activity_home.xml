@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dfirago.dlt.home.DashboardActivity"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="81dp">
+
+    <!--  Category A -->
+    <RelativeLayout
+        android:id="@+id/item_category_a"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/item_category_c"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/item_category_b"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/button_category_a"
+            android:layout_width="@dimen/dashboard_item_button_size"
+            android:layout_height="@dimen/dashboard_item_button_size"
+            android:background="@drawable/round_button"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_motorcycle_white_48dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button_category_a"
+            android:layout_centerHorizontal="true"
+            android:padding="6dp"
+            android:text="@string/category_a_label"
+            android:textSize="@dimen/dashboard_item_label_text_size" />
+
+    </RelativeLayout>
+
+    <!--  Category B -->
+    <RelativeLayout
+        android:id="@+id/item_category_b"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/item_category_d"
+        app:layout_constraintLeft_toRightOf="@+id/item_category_a"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/button_category_b"
+            android:layout_width="@dimen/dashboard_item_button_size"
+            android:layout_height="@dimen/dashboard_item_button_size"
+            android:background="@drawable/round_button"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_directions_car_white_48dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button_category_b"
+            android:layout_centerHorizontal="true"
+            android:padding="6dp"
+            android:text="@string/category_b_label"
+            android:textSize="@dimen/dashboard_item_label_text_size" />
+
+    </RelativeLayout>
+
+    <!--  Category C -->
+    <RelativeLayout
+        android:id="@+id/item_category_c"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/item_category_t"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/item_category_d"
+        app:layout_constraintTop_toBottomOf="@+id/item_category_a">
+
+        <ImageButton
+            android:id="@+id/button_category_c"
+            android:layout_width="@dimen/dashboard_item_button_size"
+            android:layout_height="@dimen/dashboard_item_button_size"
+            android:background="@drawable/round_button"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_local_shipping_white_48dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button_category_c"
+            android:layout_centerHorizontal="true"
+            android:padding="6dp"
+            android:text="@string/category_c_label"
+            android:textSize="@dimen/dashboard_item_label_text_size" />
+
+    </RelativeLayout>
+
+    <!--  Category D -->
+    <RelativeLayout
+        android:id="@+id/item_category_d"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/item_rate_app"
+        app:layout_constraintLeft_toRightOf="@+id/item_category_c"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_category_b">
+
+        <ImageButton
+            android:id="@+id/button_category_d"
+            android:layout_width="@dimen/dashboard_item_button_size"
+            android:layout_height="@dimen/dashboard_item_button_size"
+            android:background="@drawable/round_button"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_directions_bus_white_48dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button_category_d"
+            android:layout_centerHorizontal="true"
+            android:padding="6dp"
+            android:text="@string/category_d_label"
+            android:textSize="@dimen/dashboard_item_label_text_size" />
+
+    </RelativeLayout>
+
+    <!--  Category T -->
+    <RelativeLayout
+        android:id="@+id/item_category_t"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/item_rate_app"
+        app:layout_constraintTop_toBottomOf="@+id/item_category_c">
+
+        <ImageButton
+            android:id="@+id/button_category_t"
+            android:layout_width="@dimen/dashboard_item_button_size"
+            android:layout_height="@dimen/dashboard_item_button_size"
+            android:background="@drawable/round_button"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_help_outline_white_48dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button_category_t"
+            android:layout_centerHorizontal="true"
+            android:padding="6dp"
+            android:text="@string/category_t_label"
+            android:textSize="@dimen/dashboard_item_label_text_size" />
+
+    </RelativeLayout>
+
+    <!--  Rate app -->
+    <RelativeLayout
+        android:id="@+id/item_rate_app"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/item_category_t"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/item_category_d">
+
+        <ImageButton
+            android:id="@+id/button_rate_app"
+            android:layout_width="@dimen/dashboard_item_button_size"
+            android:layout_height="@dimen/dashboard_item_button_size"
+            android:background="@drawable/round_button"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_thumb_up_white_48dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/button_rate_app"
+            android:layout_centerHorizontal="true"
+            android:padding="6dp"
+            android:text="@string/rate_app_label"
+            android:textSize="@dimen/dashboard_item_label_text_size" />
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
