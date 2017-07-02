@@ -28,6 +28,9 @@ public class DashboardActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_dashboard);
         ButterKnife.bind(this);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(
+                R.anim.slide_in_right, R.anim.fade_out,
+                R.anim.slide_in_left, R.anim.fade_out);
         transaction.add(R.id.dashboard_container, DashboardFragment.newInstance());
         transaction.commit();
     }
@@ -35,6 +38,9 @@ public class DashboardActivity extends AppCompatActivity implements
     @Override
     public void onCategorySelected(Category category) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(
+                R.anim.slide_in_right, R.anim.fade_out,
+                R.anim.slide_in_left, R.anim.fade_out);
         transaction.replace(R.id.dashboard_container, CategoryFragment.newInstance(category));
         transaction.addToBackStack(null);
         transaction.commit();
