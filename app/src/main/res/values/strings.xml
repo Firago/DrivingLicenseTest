@@ -6,4 +6,6 @@
     <string name="category_d_label">Kategoria D</string>
     <string name="category_t_label">Kategoria T</string>
     <string name="rate_app_label">Polub nas</string>
+    <string name="training_label">Nauka</string>
+    <string name="assignment_label">Egzamin</string>
 </resources>

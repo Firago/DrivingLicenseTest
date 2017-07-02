@@ -1,0 +1,10 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:bottom="@dimen/dashboard_item_circle_bottom"
+        android:left="@dimen/dashboard_item_circle_left"
+        android:right="@dimen/dashboard_item_circle_right">
+        <shape android:shape="oval">
+            <solid android:color="@color/colorPrimary" />
+        </shape>
+    </item>
+</layer-list>

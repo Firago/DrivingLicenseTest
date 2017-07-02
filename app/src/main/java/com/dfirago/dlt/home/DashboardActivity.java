@@ -22,17 +22,17 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
     @OnClick({
-            R.id.button_category_a,
-            R.id.button_category_b,
-            R.id.button_category_c,
-            R.id.button_category_d,
-            R.id.button_category_t
+            R.id.item_category_a,
+            R.id.item_category_b,
+            R.id.item_category_c,
+            R.id.item_category_d,
+            R.id.item_category_t
     })
     public void onCategoryItemClicked() {
         startActivity(CategoryActivity.getIntent(this));
     }
 
-    @OnClick(R.id.button_rate_app)
+    @OnClick(R.id.item_rate_app)
     public void onRateItemClicked() {
         try {
             Uri uri = Uri.parse("market://details?id=" + getPackageName());

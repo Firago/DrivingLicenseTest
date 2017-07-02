@@ -12,7 +12,8 @@
         <item name="android:layout_width">@dimen/dashboard_item_total_width</item>
         <item name="android:layout_height">@dimen/dashboard_item_total_height</item>
         <item name="android:gravity">bottom|center</item>
-        <item name="android:background">@drawable/round_button</item>
+        <item name="android:paddingTop">@dimen/dashboard_item_icon_padding_top</item>
+        <item name="android:background">@drawable/dashboard_item_selector</item>
         <item name="android:textSize">@dimen/dashboard_item_label_text_size</item>
     </style>
 
