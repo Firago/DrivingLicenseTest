@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
@@ -27,23 +29,12 @@ public class DashboardActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         ButterKnife.bind(this);
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(
-                R.anim.slide_in_right, R.anim.fade_out,
-                R.anim.slide_in_left, R.anim.fade_out);
-        transaction.add(R.id.dashboard_container, DashboardFragment.newInstance());
-        transaction.commit();
+        addOrReplaceFragment(R.id.dashboard_container, DashboardFragment.newInstance());
     }
 
     @Override
     public void onCategorySelected(Category category) {
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(
-                R.anim.slide_in_right, R.anim.fade_out,
-                R.anim.slide_in_left, R.anim.fade_out);
-        transaction.replace(R.id.dashboard_container, CategoryFragment.newInstance(category));
-        transaction.addToBackStack(null);
-        transaction.commit();
+        addOrReplaceFragment(R.id.dashboard_container, CategoryFragment.newInstance(category));
     }
 
     @Override
@@ -60,5 +51,20 @@ public class DashboardActivity extends AppCompatActivity implements
     @Override
     public void onTestSelected(Category category, TestMode testMode) {
         startActivity(TrainingActivity.getIntent(this)); // TODO
+    }
+
+    private void addOrReplaceFragment(int containerViewId, Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(R.anim.slide_in_right,
+                R.anim.fade_out, R.anim.slide_in_left, R.anim.fade_out);
+        Fragment existingFragment = fragmentManager.findFragmentById(containerViewId);
+        if (existingFragment == null) {
+            transaction.add(containerViewId, fragment);
+        } else {
+            transaction.replace(containerViewId, fragment);
+            transaction.addToBackStack(null);
+        }
+        transaction.commit();
     }
 }
