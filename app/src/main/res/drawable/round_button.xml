@@ -1,22 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <item android:state_pressed="true">
-        <shape android:shape="oval">
-            <solid android:color="@color/colorAccent" />
-        </shape>
-    </item>
-
-    <item android:state_focused="true">
-        <shape android:shape="oval">
-            <solid android:color="@color/colorPrimary" />
-        </shape>
-    </item>
-
-    <item>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:bottom="@dimen/dashboard_item_circle_bottom"
+        android:left="@dimen/dashboard_item_circle_left"
+        android:right="@dimen/dashboard_item_circle_right">
         <shape android:shape="oval">
             <solid android:color="@color/colorPrimaryDark" />
+            <!-- this will move the icon down -->
+            <padding android:top="@dimen/dashboard_item_icon_padding_top" />
         </shape>
     </item>
-
-</selector>
+</layer-list>

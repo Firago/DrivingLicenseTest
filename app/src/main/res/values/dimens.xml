@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="dashboard_item_size">90dp</dimen>
-    <dimen name="dashboard_item_button_size">90dp</dimen>
-    <dimen name="dashboard_item_label_text_size">16sp</dimen>
+    <dimen name="dashboard_item_total_width">110dp</dimen>
+    <dimen name="dashboard_item_total_height">110dp</dimen>
+    <dimen name="dashboard_item_icon_padding_top">22dp</dimen>
+    <dimen name="dashboard_item_circle_bottom">22dp</dimen>
+    <dimen name="dashboard_item_circle_left">11dp</dimen>
+    <dimen name="dashboard_item_circle_right">11dp</dimen>
+    <dimen name="dashboard_item_label_text_size">14sp</dimen>
 </resources>
