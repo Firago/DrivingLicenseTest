@@ -14,15 +14,15 @@
         android:text="@string/training_label"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/item_assignment"
+        app:layout_constraintRight_toLeftOf="@+id/item_exam"
         app:layout_constraintTop_toTopOf="parent" />
 
     <!--  Assignment -->
     <Button
-        android:id="@+id/item_assignment"
+        android:id="@+id/item_exam"
         style="@style/DashboardItem"
         android:drawableTop="@drawable/ic_assignment_white_48dp"
-        android:text="@string/assignment_label"
+        android:text="@string/exam_label"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/item_training"
         app:layout_constraintRight_toRightOf="parent"

@@ -14,7 +14,7 @@ import com.dfirago.dlt.R;
 import com.dfirago.dlt.common.CategoryType;
 import com.dfirago.dlt.dashboard.fragment.CategoryFragment;
 import com.dfirago.dlt.dashboard.fragment.DashboardFragment;
-import com.dfirago.dlt.dashboard.model.TestMode;
+import com.dfirago.dlt.common.TestMode;
 import com.dfirago.dlt.training.TrainingActivity;
 
 import butterknife.ButterKnife;

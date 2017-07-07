@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 
 import com.dfirago.dlt.R;
 import com.dfirago.dlt.common.CategoryType;
-import com.dfirago.dlt.dashboard.model.TestMode;
+import com.dfirago.dlt.common.TestMode;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -18,9 +18,9 @@ public class CategoryFragment extends Fragment {
 
     private static final String ARG_CATEGORY_TYPE = "category_type";
 
-    private CategoryType mCategory;
+    private CategoryType category;
 
-    private OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener interactionListener;
 
     public static CategoryFragment newInstance(CategoryType category) {
         CategoryFragment fragment = new CategoryFragment();
@@ -35,7 +35,7 @@ public class CategoryFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             String categoryType = getArguments().getString(ARG_CATEGORY_TYPE);
-            mCategory = CategoryType.valueOf(categoryType);
+            category = CategoryType.valueOf(categoryType);
         }
     }
 
@@ -51,7 +51,7 @@ public class CategoryFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+            interactionListener = (OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -61,17 +61,17 @@ public class CategoryFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        interactionListener = null;
     }
 
     @OnClick(R.id.item_training)
     public void onTrainingItemClicked(View view) {
-        mListener.onTestSelected(mCategory, TestMode.TRAINING);
+        interactionListener.onTestSelected(category, TestMode.TRAINING);
     }
 
-    @OnClick(R.id.item_assignment)
-    public void onAssignmentItemClicked(View view) {
-        mListener.onTestSelected(mCategory, TestMode.ASSIGNMENT);
+    @OnClick(R.id.item_exam)
+    public void onExamItemClicked(View view) {
+        interactionListener.onTestSelected(category, TestMode.EXAM);
     }
 
     public interface OnFragmentInteractionListener {
