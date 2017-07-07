@@ -1,4 +1,4 @@
-package com.dfirago.dlt.question.adapters;
+package com.dfirago.dlt.question.common.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 
 import com.dfirago.dlt.R;
-import com.dfirago.dlt.question.model.ResponseOption;
+import com.dfirago.dlt.question.common.model.ResponseOption;
 
 import java.util.ArrayList;
 import java.util.List;

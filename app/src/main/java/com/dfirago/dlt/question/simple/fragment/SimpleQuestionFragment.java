@@ -1,4 +1,4 @@
-package com.dfirago.dlt.question;
+package com.dfirago.dlt.question.simple.fragment;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,9 +9,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dfirago.dlt.R;
-import com.dfirago.dlt.question.adapters.OptionsAdapter;
-import com.dfirago.dlt.question.model.ResponseOption;
-import com.dfirago.dlt.question.model.SimpleQuestion;
+import com.dfirago.dlt.question.common.adapter.OptionsAdapter;
+import com.dfirago.dlt.question.common.fragment.AbstractQuestionFragment;
+import com.dfirago.dlt.question.common.model.ResponseOption;
+import com.dfirago.dlt.question.simple.model.SimpleQuestion;
 
 import java.util.List;
 
@@ -30,14 +31,6 @@ public class SimpleQuestionFragment extends AbstractQuestionFragment<SimpleQuest
     protected RecyclerView optionsRecyclerView;
 
     private OptionsAdapter optionsAdapter;
-
-    public static SimpleQuestionFragment newInstance(SimpleQuestion question) {
-        SimpleQuestionFragment fragment = new SimpleQuestionFragment();
-        Bundle args = new Bundle();
-        args.putString(QUESTION_PARAM, gsonMapper.toJson(question));
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

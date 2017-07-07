@@ -1,4 +1,4 @@
-package com.dfirago.dlt.question.model;
+package com.dfirago.dlt.question.common.model;
 
 /**
  * Created by Dmytro Firago on 14/06/2017.

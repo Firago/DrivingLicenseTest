@@ -1,4 +1,4 @@
-package com.dfirago.dlt.dashboard;
+package com.dfirago.dlt.dashboard.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dfirago.dlt.R;
-import com.dfirago.dlt.dashboard.model.Category;
+import com.dfirago.dlt.common.CategoryType;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -48,27 +48,27 @@ public class DashboardFragment extends Fragment {
 
     @OnClick(R.id.item_category_a)
     public void onCategoryAItemClicked(View view) {
-        mListener.onCategorySelected(Category.A);
+        mListener.onCategorySelected(CategoryType.A);
     }
 
     @OnClick(R.id.item_category_b)
     public void onCategoryBItemClicked(View view) {
-        mListener.onCategorySelected(Category.B);
+        mListener.onCategorySelected(CategoryType.B);
     }
 
     @OnClick(R.id.item_category_c)
     public void onCategoryCItemClicked(View view) {
-        mListener.onCategorySelected(Category.C);
+        mListener.onCategorySelected(CategoryType.C);
     }
 
     @OnClick(R.id.item_category_d)
     public void onCategoryDItemClicked(View view) {
-        mListener.onCategorySelected(Category.D);
+        mListener.onCategorySelected(CategoryType.D);
     }
 
     @OnClick(R.id.item_category_t)
     public void onCategoryTItemClicked(View view) {
-        mListener.onCategorySelected(Category.T);
+        mListener.onCategorySelected(CategoryType.T);
     }
 
     @OnClick(R.id.item_rate_app)
@@ -77,7 +77,7 @@ public class DashboardFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void onCategorySelected(Category category);
+        void onCategorySelected(CategoryType category);
         void onRateAppSelected();
     }
 }

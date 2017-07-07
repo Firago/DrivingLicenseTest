@@ -1,4 +1,4 @@
-package com.dfirago.dlt.dashboard;
+package com.dfirago.dlt.dashboard.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dfirago.dlt.R;
-import com.dfirago.dlt.dashboard.model.Category;
+import com.dfirago.dlt.common.CategoryType;
 import com.dfirago.dlt.dashboard.model.TestMode;
 
 import butterknife.ButterKnife;
@@ -18,11 +18,11 @@ public class CategoryFragment extends Fragment {
 
     private static final String ARG_CATEGORY_TYPE = "category_type";
 
-    private Category mCategory;
+    private CategoryType mCategory;
 
     private OnFragmentInteractionListener mListener;
 
-    public static CategoryFragment newInstance(Category category) {
+    public static CategoryFragment newInstance(CategoryType category) {
         CategoryFragment fragment = new CategoryFragment();
         Bundle args = new Bundle();
         args.putString(ARG_CATEGORY_TYPE, category.name());
@@ -35,7 +35,7 @@ public class CategoryFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             String categoryType = getArguments().getString(ARG_CATEGORY_TYPE);
-            mCategory = Category.valueOf(categoryType);
+            mCategory = CategoryType.valueOf(categoryType);
         }
     }
 
@@ -75,6 +75,6 @@ public class CategoryFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        void onTestSelected(Category category, TestMode testMode);
+        void onTestSelected(CategoryType category, TestMode testMode);
     }
 }

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.dfirago.dlt.question.SimpleQuestionFragment">
+    tools:context="com.dfirago.dlt.question.simple.fragment.SimpleQuestionFragment">
 
     <TextView
         android:id="@+id/question_value"

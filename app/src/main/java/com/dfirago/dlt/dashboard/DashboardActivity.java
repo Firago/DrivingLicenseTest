@@ -11,7 +11,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
 import com.dfirago.dlt.R;
-import com.dfirago.dlt.dashboard.model.Category;
+import com.dfirago.dlt.common.CategoryType;
+import com.dfirago.dlt.dashboard.fragment.CategoryFragment;
+import com.dfirago.dlt.dashboard.fragment.DashboardFragment;
 import com.dfirago.dlt.dashboard.model.TestMode;
 import com.dfirago.dlt.training.TrainingActivity;
 
@@ -33,7 +35,7 @@ public class DashboardActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onCategorySelected(Category category) {
+    public void onCategorySelected(CategoryType category) {
         addOrReplaceFragment(R.id.dashboard_container, CategoryFragment.newInstance(category));
     }
 
@@ -49,7 +51,7 @@ public class DashboardActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onTestSelected(Category category, TestMode testMode) {
+    public void onTestSelected(CategoryType category, TestMode testMode) {
         startActivity(TrainingActivity.getIntent(this)); // TODO
     }
 
