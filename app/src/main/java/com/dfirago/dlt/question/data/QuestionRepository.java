@@ -1,8 +1,8 @@
-package com.dfirago.dlt.question.common.data;
+package com.dfirago.dlt.question.data;
 
 import android.content.res.AssetManager;
 
-import com.dfirago.dlt.question.common.model.AbstractQuestion;
+import com.dfirago.dlt.question.model.AbstractQuestion;
 import com.dfirago.dlt.utils.QuestionGsonMapperFactory;
 import com.google.gson.Gson;
 

@@ -1,8 +1,8 @@
 package com.dfirago.dlt.exam;
 
 import com.dfirago.dlt.BasePresenter;
-import com.dfirago.dlt.question.common.data.QuestionRepository;
-import com.dfirago.dlt.question.common.model.AbstractQuestion;
+import com.dfirago.dlt.question.data.QuestionRepository;
+import com.dfirago.dlt.question.model.AbstractQuestion;
 
 import java.util.List;
 

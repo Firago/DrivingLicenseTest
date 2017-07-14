@@ -1,7 +1,7 @@
-package com.dfirago.dlt.question.image.fragment;
+package com.dfirago.dlt.question.fragment.factory;
 
-import com.dfirago.dlt.question.common.fragment.AbstractQuestionFragmentFactory;
-import com.dfirago.dlt.question.common.model.AbstractQuestion;
+import com.dfirago.dlt.question.model.AbstractQuestion;
+import com.dfirago.dlt.question.fragment.ImageQuestionFragment;
 
 /**
  * Created by Dmytro Firago on 07/07/2017.

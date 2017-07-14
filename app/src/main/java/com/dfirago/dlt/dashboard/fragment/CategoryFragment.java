@@ -66,15 +66,15 @@ public class CategoryFragment extends Fragment {
 
     @OnClick(R.id.item_training)
     public void onTrainingItemClicked(View view) {
-        interactionListener.onTestSelected(category, TestMode.TRAINING);
+        interactionListener.onModeSelected(category, TestMode.TRAINING);
     }
 
     @OnClick(R.id.item_exam)
     public void onExamItemClicked(View view) {
-        interactionListener.onTestSelected(category, TestMode.EXAM);
+        interactionListener.onModeSelected(category, TestMode.EXAM);
     }
 
     public interface OnFragmentInteractionListener {
-        void onTestSelected(CategoryType category, TestMode testMode);
+        void onModeSelected(CategoryType category, TestMode testMode);
     }
 }

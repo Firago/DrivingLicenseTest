@@ -1,6 +1,6 @@
 package com.dfirago.dlt.exam;
 
-import com.dfirago.dlt.question.common.model.AbstractQuestion;
+import com.dfirago.dlt.question.model.AbstractQuestion;
 
 /**
  * Created by Dmytro Firago on 11/06/2017.

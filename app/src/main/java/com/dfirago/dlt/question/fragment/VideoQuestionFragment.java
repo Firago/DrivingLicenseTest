@@ -1,7 +1,6 @@
-package com.dfirago.dlt.question.video.fragment;
+package com.dfirago.dlt.question.fragment;
 
-import com.dfirago.dlt.question.common.fragment.AbstractQuestionFragment;
-import com.dfirago.dlt.question.video.model.VideoQuestion;
+import com.dfirago.dlt.question.model.VideoQuestion;
 
 /**
  * Created by Dmytro Firago on 07/07/2017.

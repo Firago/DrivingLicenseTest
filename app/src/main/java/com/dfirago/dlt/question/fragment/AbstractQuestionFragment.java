@@ -1,10 +1,10 @@
-package com.dfirago.dlt.question.common.fragment;
+package com.dfirago.dlt.question.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
-import com.dfirago.dlt.question.common.model.AbstractQuestion;
+import com.dfirago.dlt.question.model.AbstractQuestion;
 import com.google.gson.Gson;
 
 public abstract class AbstractQuestionFragment<T extends AbstractQuestion> extends Fragment {

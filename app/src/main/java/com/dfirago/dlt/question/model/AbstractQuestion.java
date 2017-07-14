@@ -1,4 +1,4 @@
-package com.dfirago.dlt.question.common.model;
+package com.dfirago.dlt.question.model;
 
 import com.dfirago.dlt.common.CategoryType;
 

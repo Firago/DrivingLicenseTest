@@ -1,8 +1,9 @@
-package com.dfirago.dlt.question.common.fragment;
+package com.dfirago.dlt.question.fragment.factory;
 
 import android.os.Bundle;
 
-import com.dfirago.dlt.question.common.model.AbstractQuestion;
+import com.dfirago.dlt.question.model.AbstractQuestion;
+import com.dfirago.dlt.question.fragment.AbstractQuestionFragment;
 import com.dfirago.dlt.utils.QuestionGsonMapperFactory;
 import com.google.gson.Gson;
 

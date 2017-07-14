@@ -1,9 +1,9 @@
 package com.dfirago.dlt.utils;
 
-import com.dfirago.dlt.question.common.model.AbstractQuestion;
-import com.dfirago.dlt.question.image.model.ImageQuestion;
-import com.dfirago.dlt.question.simple.model.SimpleQuestion;
-import com.dfirago.dlt.question.video.model.VideoQuestion;
+import com.dfirago.dlt.question.model.AbstractQuestion;
+import com.dfirago.dlt.question.model.ImageQuestion;
+import com.dfirago.dlt.question.model.SimpleQuestion;
+import com.dfirago.dlt.question.model.VideoQuestion;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;

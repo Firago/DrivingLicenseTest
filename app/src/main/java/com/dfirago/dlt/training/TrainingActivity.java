@@ -8,16 +8,16 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.dfirago.dlt.R;
-import com.dfirago.dlt.question.common.data.QuestionRepository;
-import com.dfirago.dlt.question.common.fragment.AbstractQuestionFragment;
-import com.dfirago.dlt.question.common.fragment.GenericQuestionFragmentFactory;
-import com.dfirago.dlt.question.common.model.AbstractQuestion;
-import com.dfirago.dlt.question.image.fragment.ImageQuestionFragmentFactory;
-import com.dfirago.dlt.question.image.model.ImageQuestion;
-import com.dfirago.dlt.question.simple.fragment.SimpleQuestionFragmentFactory;
-import com.dfirago.dlt.question.simple.model.SimpleQuestion;
-import com.dfirago.dlt.question.video.fragment.VideoQuestionFragmentFactory;
-import com.dfirago.dlt.question.video.model.VideoQuestion;
+import com.dfirago.dlt.question.data.QuestionRepository;
+import com.dfirago.dlt.question.fragment.AbstractQuestionFragment;
+import com.dfirago.dlt.question.fragment.factory.GenericQuestionFragmentFactory;
+import com.dfirago.dlt.question.model.AbstractQuestion;
+import com.dfirago.dlt.question.fragment.factory.ImageQuestionFragmentFactory;
+import com.dfirago.dlt.question.model.ImageQuestion;
+import com.dfirago.dlt.question.fragment.factory.SimpleQuestionFragmentFactory;
+import com.dfirago.dlt.question.model.SimpleQuestion;
+import com.dfirago.dlt.question.fragment.factory.VideoQuestionFragmentFactory;
+import com.dfirago.dlt.question.model.VideoQuestion;
 
 import butterknife.ButterKnife;
 

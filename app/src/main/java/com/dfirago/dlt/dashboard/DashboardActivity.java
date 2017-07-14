@@ -51,7 +51,7 @@ public class DashboardActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onTestSelected(CategoryType category, TestMode testMode) {
+    public void onModeSelected(CategoryType category, TestMode testMode) {
         startActivity(TrainingActivity.getIntent(this)); // TODO
     }
 
