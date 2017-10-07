@@ -1,5 +1,6 @@
 package com.dfirago.dlt.dagger;
 
+import com.dfirago.dlt.common.database.QuestionRepository;
 import com.dfirago.dlt.common.model.AbstractQuestion;
 import com.dfirago.dlt.common.model.ImageQuestion;
 import com.dfirago.dlt.common.model.SimpleQuestion;
@@ -12,7 +13,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 
-import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -37,8 +37,7 @@ public class QuestionModule {
 
     @Provides
     @Singleton
-    @Named("questionsGsonMapper")
-    Gson provideQuestionGsonMapper() {
+    Gson provideGson() {
 
         RuntimeTypeAdapterFactory<AbstractQuestion> abstractQuestionAdapterFactory = RuntimeTypeAdapterFactory
                 .of(AbstractQuestion.class)
@@ -50,5 +49,11 @@ public class QuestionModule {
                 .registerTypeAdapterFactory(abstractQuestionAdapterFactory);
 
         return gsonBuilder.create();
+    }
+
+    @Provides
+    @Singleton
+    QuestionRepository provideQuestionRepository() {
+        return new QuestionRepository();
     }
 }

@@ -4,11 +4,11 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 
-import com.dfirago.dlt.fragment.factory.GenericQuestionFragmentFactory;
 import com.dfirago.dlt.common.model.Category;
-import com.dfirago.dlt.common.model.TestMode;
+import com.dfirago.dlt.fragment.factory.GenericQuestionFragmentFactory;
 import com.dfirago.dlt.screen.category.CategoryFragment;
 import com.dfirago.dlt.screen.dashboard.DashboardFragment;
+import com.dfirago.dlt.screen.exam.ExamFragment;
 import com.dfirago.dlt.screen.training.TrainingFragment;
 
 import javax.inject.Inject;
@@ -20,7 +20,6 @@ public class NavigationManager {
 
     @Inject
     FragmentOrchestrator fragmentOrchestrator;
-
     @Inject
     GenericQuestionFragmentFactory questionFragmentFactory;
 
@@ -34,12 +33,12 @@ public class NavigationManager {
 
     public void showDashboardScreen() {
         DashboardFragment dashboardFragment = DashboardFragment.newInstance();
-        fragmentOrchestrator.setContent(dashboardFragment);
+        fragmentOrchestrator.showFragment(dashboardFragment);
     }
 
     public void showCategoryScreen(Category category) {
         CategoryFragment categoryFragment = CategoryFragment.newInstance(category);
-        fragmentOrchestrator.setContent(categoryFragment);
+        fragmentOrchestrator.showFragment(categoryFragment);
     }
 
     public void showRateApplicationScreen(String packageName) {
@@ -52,8 +51,13 @@ public class NavigationManager {
         }
     }
 
-    public void showTrainingScreen(Category category, TestMode testMode) {
-        TrainingFragment trainingFragment = TrainingFragment.newInstance(category, testMode);
-        fragmentOrchestrator.setContent(trainingFragment);
+    public void showTrainingScreen(Category category) {
+        TrainingFragment trainingFragment = TrainingFragment.newInstance(category);
+        fragmentOrchestrator.showFragment(trainingFragment);
+    }
+
+    public void showExamScreen(Category category) {
+        ExamFragment examFragment = ExamFragment.newInstance(category);
+        fragmentOrchestrator.showFragment(examFragment);
     }
 }

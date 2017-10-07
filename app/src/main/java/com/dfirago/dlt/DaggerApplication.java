@@ -18,7 +18,6 @@ public class DaggerApplication extends Application implements HasActivityInjecto
 
     @Inject
     DispatchingAndroidInjector<Activity> activityInjector;
-
     @Inject
     DispatchingAndroidInjector<Fragment> fragmentInjector;
 

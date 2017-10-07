@@ -8,11 +8,9 @@ import android.support.v4.app.Fragment;
  */
 public interface FragmentOrchestrator {
 
-    void setHeader(Fragment fragment);
+    void showFragment(int id, Fragment fragment);
 
-    void setContent(Fragment fragment);
-
-    void setFooter(Fragment fragment);
+    void showFragment(Fragment fragment);
 
     void startActivity(Intent intent);
 }

@@ -37,18 +37,17 @@ public class MainActivity extends FragmentActivity implements FragmentOrchestrat
     }
 
     @Override
-    public void setHeader(Fragment fragment) {
-        replace(R.id.header_container, fragment);
+    public void showFragment(int containerViewId, Fragment fragment) {
+        if (getSupportFragmentManager().findFragmentById(containerViewId) != null) {
+            replace(containerViewId, fragment);
+        } else {
+            showFragment(fragment);
+        }
     }
 
     @Override
-    public void setContent(Fragment fragment) {
+    public void showFragment(Fragment fragment) {
         replace(R.id.content_container, fragment);
-    }
-
-    @Override
-    public void setFooter(Fragment fragment) {
-        replace(R.id.footer_container, fragment);
     }
 
     private void replace(int containerViewId, Fragment fragment) {

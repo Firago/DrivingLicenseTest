@@ -15,7 +15,10 @@ public class CategoryPresenter extends BasePresenter<CategoryView> {
     }
 
     public void onModeSelected(Category category, TestMode testMode) {
-        // TODO TestConfig and TestBuilder
-        view().showTrainingScreen(category, testMode);
+        if (testMode == TestMode.TRAINING) {
+            view().showTrainingScreen(category);
+        } else if (testMode == TestMode.EXAM) {
+            view().showExamScreen(category);
+        }
     }
 }

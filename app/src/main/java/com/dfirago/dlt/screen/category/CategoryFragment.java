@@ -15,6 +15,7 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import dagger.android.support.AndroidSupportInjection;
 
 public class CategoryFragment extends Fragment implements CategoryView {
 
@@ -24,7 +25,6 @@ public class CategoryFragment extends Fragment implements CategoryView {
 
     @Inject
     NavigationManager navigationManager;
-
     @Inject
     CategoryPresenter categoryPresenter;
 
@@ -38,6 +38,7 @@ public class CategoryFragment extends Fragment implements CategoryView {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        AndroidSupportInjection.inject(this);
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             String categoryArg = getArguments().getString(ARG_CATEGORY);
@@ -67,17 +68,22 @@ public class CategoryFragment extends Fragment implements CategoryView {
     }
 
     @OnClick(R.id.item_training)
-    public void onTrainingItemClicked(View view) {
+    public void onTrainingItemClicked() {
         categoryPresenter.onModeSelected(category, TestMode.TRAINING);
     }
 
     @OnClick(R.id.item_exam)
-    public void onExamItemClicked(View view) {
+    public void onExamItemClicked() {
         categoryPresenter.onModeSelected(category, TestMode.EXAM);
     }
 
     @Override
-    public void showTrainingScreen(Category category, TestMode testMode) {
-        navigationManager.showTrainingScreen(category, testMode);
+    public void showTrainingScreen(Category category) {
+        navigationManager.showTrainingScreen(category);
+    }
+
+    @Override
+    public void showExamScreen(Category category) {
+        navigationManager.showExamScreen(category);
     }
 }

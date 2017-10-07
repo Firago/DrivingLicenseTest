@@ -4,7 +4,10 @@ import android.app.Application;
 import android.content.res.AssetManager;
 
 import com.dfirago.dlt.MainActivity;
+import com.dfirago.dlt.screen.category.CategoryFragment;
 import com.dfirago.dlt.screen.dashboard.DashboardFragment;
+import com.dfirago.dlt.screen.exam.ExamFragment;
+import com.dfirago.dlt.screen.training.TrainingFragment;
 
 import javax.inject.Singleton;
 
@@ -37,8 +40,17 @@ public abstract class ApplicationModule {
     }
 
     @ContributesAndroidInjector
-    abstract MainActivity contributeAcitivityInjector();
+    abstract MainActivity contributeMainActivity();
 
     @ContributesAndroidInjector
-    abstract DashboardFragment contributeFragmentInjector();
+    abstract DashboardFragment contributeDashboardFragment();
+
+    @ContributesAndroidInjector
+    abstract CategoryFragment contributeCategoryFragment();
+
+    @ContributesAndroidInjector
+    abstract TrainingFragment contributeTrainingFragment();
+
+    @ContributesAndroidInjector
+    abstract ExamFragment contributeExamFragment();
 }

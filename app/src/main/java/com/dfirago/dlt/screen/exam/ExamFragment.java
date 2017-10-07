@@ -1,4 +1,4 @@
-package com.dfirago.dlt.screen.training;
+package com.dfirago.dlt.screen.exam;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,19 +17,19 @@ import butterknife.ButterKnife;
 import dagger.android.support.AndroidSupportInjection;
 
 /**
- * Created by Dmytro Firago on 11/06/2017.
+ * Created by firag on 10/7/2017.
  */
-public class TrainingFragment extends Fragment implements TrainingView {
+public class ExamFragment extends Fragment implements ExamView {
 
     private static final String CATEGORY_PARAM = "category";
 
     @Inject
     NavigationManager navigationManager;
     @Inject
-    TrainingPresenter trainingPresenter;
+    ExamPresenter examPresenter;
 
-    public static TrainingFragment newInstance(Category category) {
-        TrainingFragment fragment = new TrainingFragment();
+    public static ExamFragment newInstance(Category category) {
+        ExamFragment fragment = new ExamFragment();
         Bundle args = new Bundle();
         args.putString(CATEGORY_PARAM, category.name());
         fragment.setArguments(args);
@@ -43,7 +43,7 @@ public class TrainingFragment extends Fragment implements TrainingView {
         if (getArguments() != null) {
             String categoryArg = getArguments().getString(CATEGORY_PARAM);
             Category category = Category.valueOf(categoryArg);
-            trainingPresenter.shuffleQuestions(category);
+            examPresenter.loadQuestions(category);
         }
     }
 
@@ -57,12 +57,12 @@ public class TrainingFragment extends Fragment implements TrainingView {
     @Override
     public void onResume() {
         super.onResume();
-        trainingPresenter.attachView(this);
+        examPresenter.attachView(this);
     }
 
     @Override
     public void onPause() {
-        trainingPresenter.detachView();
+        examPresenter.detachView();
         super.onPause();
     }
 

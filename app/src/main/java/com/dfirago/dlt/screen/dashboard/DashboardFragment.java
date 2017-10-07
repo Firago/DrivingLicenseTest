@@ -21,7 +21,6 @@ public class DashboardFragment extends Fragment implements DashboardView {
 
     @Inject
     NavigationManager navigationManager;
-
     @Inject
     DashboardPresenter dashboardPresenter;
 
@@ -55,27 +54,27 @@ public class DashboardFragment extends Fragment implements DashboardView {
     }
 
     @OnClick(R.id.item_category_a)
-    public void chooseCategory_A(View view) {
+    public void chooseCategory_A() {
         dashboardPresenter.onCategorySelected(Category.A);
     }
 
     @OnClick(R.id.item_category_b)
-    public void chooseCategory_B(View view) {
+    public void chooseCategory_B() {
         dashboardPresenter.onCategorySelected(Category.B);
     }
 
     @OnClick(R.id.item_category_c)
-    public void chooseCategory_C(View view) {
+    public void chooseCategory_C() {
         dashboardPresenter.onCategorySelected(Category.C);
     }
 
     @OnClick(R.id.item_category_d)
-    public void chooseCategory_D(View view) {
+    public void chooseCategory_D() {
         dashboardPresenter.onCategorySelected(Category.D);
     }
 
     @OnClick(R.id.item_category_t)
-    public void chooseCategory_T(View view) {
+    public void chooseCategory_T() {
         dashboardPresenter.onCategorySelected(Category.T);
     }
 
