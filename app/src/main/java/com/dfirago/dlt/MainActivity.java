@@ -5,16 +5,21 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
 import com.dfirago.dlt.navigation.FragmentOrchestrator;
-import com.dfirago.dlt.navigation.NavigationManager;
+import com.dfirago.dlt.navigation.impl.NavigationManagerImpl;
 
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
+import dagger.android.AndroidInjector;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.support.HasSupportFragmentInjector;
 
-public class MainActivity extends FragmentActivity implements FragmentOrchestrator {
+public class MainActivity extends FragmentActivity implements HasSupportFragmentInjector, FragmentOrchestrator {
 
     @Inject
-    NavigationManager navigationManager;
+    DispatchingAndroidInjector<Fragment> fragmentInjector;
+    @Inject
+    NavigationManagerImpl navigationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,14 +31,7 @@ public class MainActivity extends FragmentActivity implements FragmentOrchestrat
     @Override
     protected void onResume() {
         super.onResume();
-        navigationManager.attach(this);
         navigationManager.showDashboardScreen();
-    }
-
-    @Override
-    protected void onDestroy() {
-        navigationManager.detach();
-        super.onDestroy();
     }
 
     @Override
@@ -59,5 +57,10 @@ public class MainActivity extends FragmentActivity implements FragmentOrchestrat
                 .replace(containerViewId, fragment)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    @Override
+    public AndroidInjector<Fragment> supportFragmentInjector() {
+        return fragmentInjector;
     }
 }

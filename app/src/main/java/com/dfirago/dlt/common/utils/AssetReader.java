@@ -16,8 +16,12 @@ import javax.inject.Inject;
  */
 public class AssetReader {
 
+    private AssetManager assetManager;
+
     @Inject
-    AssetManager assetManager;
+    public AssetReader(AssetManager assetManager) {
+        this.assetManager = assetManager;
+    }
 
     public Drawable readDrawable(String fileName) {
         try {
