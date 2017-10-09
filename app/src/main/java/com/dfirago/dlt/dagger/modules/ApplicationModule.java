@@ -12,10 +12,10 @@ import com.dfirago.dlt.common.model.SimpleQuestion;
 import com.dfirago.dlt.common.model.VideoQuestion;
 import com.dfirago.dlt.common.utils.AssetReader;
 import com.dfirago.dlt.dagger.scopes.ActivityScope;
-import com.dfirago.dlt.fragments.questions.factory.QuestionFragmentFactory;
-import com.dfirago.dlt.fragments.questions.factory.ImageQuestionFragmentFactory;
-import com.dfirago.dlt.fragments.questions.factory.SimpleQuestionFragmentFactory;
-import com.dfirago.dlt.fragments.questions.factory.VideoQuestionFragmentFactory;
+import com.dfirago.dlt.common.widget.utils.QuestionViewFactory;
+import com.dfirago.dlt.common.widget.builders.ImageQuestionViewBuilder;
+import com.dfirago.dlt.common.widget.builders.SimpleQuestionViewBuilder;
+import com.dfirago.dlt.common.widget.builders.VideoQuestionViewBuilder;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
@@ -48,11 +48,11 @@ public abstract class ApplicationModule {
 
     @Singleton
     @Provides
-    static QuestionFragmentFactory questionFragmentFactory(Gson gson) {
-        return QuestionFragmentFactory.builder()
-                .registerMapping(SimpleQuestion.class, new SimpleQuestionFragmentFactory(gson))
-                .registerMapping(ImageQuestion.class, new ImageQuestionFragmentFactory(gson))
-                .registerMapping(VideoQuestion.class, new VideoQuestionFragmentFactory(gson))
+    static QuestionViewFactory questionViewFactory(AssetReader assetReader) {
+        return QuestionViewFactory.builder()
+                .registerMapping(SimpleQuestion.class, new SimpleQuestionViewBuilder())
+                .registerMapping(ImageQuestion.class, new ImageQuestionViewBuilder(assetReader))
+                .registerMapping(VideoQuestion.class, new VideoQuestionViewBuilder(assetReader))
                 .build();
     }
 

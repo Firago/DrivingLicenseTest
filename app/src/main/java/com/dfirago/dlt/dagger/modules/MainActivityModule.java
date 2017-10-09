@@ -7,9 +7,6 @@ import com.dfirago.dlt.fragments.CategoryFragment;
 import com.dfirago.dlt.fragments.DashboardFragment;
 import com.dfirago.dlt.fragments.ExamFragment;
 import com.dfirago.dlt.fragments.TrainingFragment;
-import com.dfirago.dlt.fragments.questions.ImageQuestionFragment;
-import com.dfirago.dlt.fragments.questions.SimpleQuestionFragment;
-import com.dfirago.dlt.fragments.questions.VideoQuestionFragment;
 import com.dfirago.dlt.navigation.FragmentOrchestrator;
 import com.dfirago.dlt.navigation.NavigationManager;
 import com.dfirago.dlt.navigation.impl.NavigationManagerImpl;
@@ -47,16 +44,4 @@ public interface MainActivityModule {
     @FragmentScope
     @ContributesAndroidInjector(modules = {ExamFragmentModule.class})
     ExamFragment examFragment();
-
-    @FragmentScope
-    @ContributesAndroidInjector
-    SimpleQuestionFragment simpleQuestionFragment();
-
-    @FragmentScope
-    @ContributesAndroidInjector
-    ImageQuestionFragment imageQuestionFragment();
-
-    @FragmentScope
-    @ContributesAndroidInjector
-    VideoQuestionFragment videoQuestionFragment();
 }
