@@ -1,10 +1,6 @@
 package com.dfirago.dlt.common.widget;
 
 import android.content.Context;
-import android.os.Build;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.util.AttributeSet;
 import android.view.View;
 
 import com.dfirago.dlt.R;
@@ -20,22 +16,10 @@ public class VideoQuestionView extends AbstractQuestionView {
         super(context);
     }
 
-    public VideoQuestionView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    public VideoQuestionView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    public VideoQuestionView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-    }
-
     @Override
     protected void inflateView() {
         View.inflate(getContext(), R.layout.view_video_question, this);
+        this.onFinishInflate();
     }
 
     @Override

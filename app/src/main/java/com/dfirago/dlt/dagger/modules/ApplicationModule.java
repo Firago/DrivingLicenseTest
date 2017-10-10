@@ -11,11 +11,12 @@ import com.dfirago.dlt.common.model.ImageQuestion;
 import com.dfirago.dlt.common.model.SimpleQuestion;
 import com.dfirago.dlt.common.model.VideoQuestion;
 import com.dfirago.dlt.common.utils.AssetReader;
-import com.dfirago.dlt.dagger.scopes.ActivityScope;
-import com.dfirago.dlt.common.widget.utils.QuestionViewFactory;
+import com.dfirago.dlt.common.utils.ColorProvider;
 import com.dfirago.dlt.common.widget.builders.ImageQuestionViewBuilder;
 import com.dfirago.dlt.common.widget.builders.SimpleQuestionViewBuilder;
 import com.dfirago.dlt.common.widget.builders.VideoQuestionViewBuilder;
+import com.dfirago.dlt.common.widget.utils.QuestionViewFactory;
+import com.dfirago.dlt.dagger.scopes.ActivityScope;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
@@ -44,6 +45,12 @@ public abstract class ApplicationModule {
     @Provides
     static AssetReader assetReader(AssetManager assetManager) {
         return new AssetReader(assetManager);
+    }
+
+    @Singleton
+    @Provides
+    static ColorProvider colorProvider(Application application) {
+        return new ColorProvider(application);
     }
 
     @Singleton

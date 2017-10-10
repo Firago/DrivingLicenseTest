@@ -1,5 +1,6 @@
 package com.dfirago.dlt.common.widget.utils;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +11,11 @@ import android.widget.RadioButton;
 import com.dfirago.dlt.R;
 import com.dfirago.dlt.common.model.ResponseOption;
 
+import org.apache.commons.collections4.BidiMap;
+import org.apache.commons.collections4.bidimap.DualHashBidiMap;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,9 +26,10 @@ import butterknife.ButterKnife;
 public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionViewHolder> {
 
     private final List<ResponseOption> options = new ArrayList<>();
+    private final BidiMap<ResponseOption, CompoundButton> optionViewMap = new DualHashBidiMap<>();
 
-    private RadioButton selectedOption;
-    private OnResponseOptionStateChangeListener optionStateChangeListener = (responseOption, isChecked) -> {
+    private RadioButton selectedOptionView;
+    private OnOptionSelectionChangeListener optionSelectionChangeListener = (option, isChecked) -> {
         // dummy implementation to avoid null-check
     };
 
@@ -36,12 +40,14 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionVi
         return new OptionViewHolder(view);
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @Override
     public void onBindViewHolder(OptionViewHolder holder, int position) {
         ResponseOption responseOption = options.get(position);
         holder.optionView.setText(responseOption.getValue());
         holder.optionView.setOnCheckedChangeListener(new OnResponseOptionCheckedListener());
         holder.optionView.setOnClickListener(new OnResponseOptionClickListener());
+        optionViewMap.put(responseOption, holder.optionView);
     }
 
     /**
@@ -51,13 +57,8 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionVi
 
         @Override
         public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            String optionValue = buttonView.getText().toString();
-            Optional<ResponseOption> selectionChangedOption = options.stream()
-                    .filter(option -> optionValue.equals(option.getValue()))
-                    .findFirst();
-            if (selectionChangedOption.isPresent()) {
-                optionStateChangeListener.onResponseOptionStateChanged(selectionChangedOption.get(), isChecked);
-            }
+            ResponseOption option = optionViewMap.inverseBidiMap().get(buttonView);
+            optionSelectionChangeListener.onOptionSelectionChange(option, isChecked);
         }
     }
 
@@ -68,16 +69,16 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionVi
 
         @Override
         public void onClick(View view) {
-            if (selectedOption == null) {               // nothing is selected
-                selectedOption = (RadioButton) view;
-                selectedOption.setChecked(true);
-            } else if (selectedOption.equals(view)) {   // selected item clicked
-                selectedOption.setChecked(false);
-                selectedOption = null;
-            } else {                                    // other than selected item clicked
-                selectedOption.setChecked(false);
-                selectedOption = (RadioButton) view;
-                selectedOption.setChecked(true);
+            if (selectedOptionView == null) {               // nothing is selected
+                selectedOptionView = (RadioButton) view;
+                selectedOptionView.setChecked(true);
+            } else if (selectedOptionView.equals(view)) {   // selected item clicked
+                selectedOptionView.setChecked(false);
+                selectedOptionView = null;
+            } else {                                        // other than selected item clicked
+                selectedOptionView.setChecked(false);
+                selectedOptionView = (RadioButton) view;
+                selectedOptionView.setChecked(true);
             }
         }
     }
@@ -85,11 +86,6 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionVi
     @Override
     public int getItemCount() {
         return options.size();
-    }
-
-    public void setData(List<ResponseOption> data) {
-        options.clear();
-        options.addAll(data);
     }
 
     static class OptionViewHolder extends RecyclerView.ViewHolder {
@@ -103,7 +99,32 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionVi
         }
     }
 
-    public void setOptionStateChangeListener(OnResponseOptionStateChangeListener optionStateChangeListener) {
-        this.optionStateChangeListener = optionStateChangeListener;
+    public void setData(List<ResponseOption> data) {
+        options.clear();
+        optionViewMap.clear();
+        options.addAll(data);
+    }
+
+    public void setOptionSelectionChangeListener(OnOptionSelectionChangeListener optionViewStateChangeListener) {
+        this.optionSelectionChangeListener = optionViewStateChangeListener;
+    }
+
+    public void highlight(ResponseOption responseOption) {
+        CompoundButton optionView = optionViewMap.get(responseOption);
+        if (optionView != null) {
+            int highlightColor = responseOption.isCorrect() ? Color.GREEN : Color.RED;
+            optionView.setBackgroundColor(highlightColor);
+        }
+    }
+
+    public void unhighlight(ResponseOption responseOption) {
+        CompoundButton optionView = optionViewMap.get(responseOption);
+        if (optionView != null) {
+            optionView.setBackgroundColor(0);
+        }
+    }
+
+    public void showCorrectAnswer() {
+        options.stream().filter(ResponseOption::isCorrect).forEach(this::highlight);
     }
 }
