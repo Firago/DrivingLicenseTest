@@ -69,7 +69,7 @@ public class ExamFragment extends BaseFragment implements ExamView {
 
     @Override
     public void showQuestion(AbstractQuestion question) {
-        AbstractQuestionView view = questionViewFactory.createView(getContext(), question);
+        AbstractQuestionView view = questionViewFactory.createView(question);
         ViewGroupUtils.replaceView(questionViewContainer, view);
     }
 }

@@ -1,6 +1,5 @@
 package com.dfirago.dlt.common.widget.utils;
 
-import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +9,15 @@ import android.widget.RadioButton;
 
 import com.dfirago.dlt.R;
 import com.dfirago.dlt.common.model.ResponseOption;
+import com.dfirago.dlt.common.utils.ColorProvider;
 
 import org.apache.commons.collections4.BidiMap;
 import org.apache.commons.collections4.bidimap.DualHashBidiMap;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +34,13 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionVi
     private OnOptionSelectionChangeListener optionSelectionChangeListener = (option, isChecked) -> {
         // dummy implementation to avoid null-check
     };
+
+    private ColorProvider colorProvider;
+
+    @Inject
+    public OptionsAdapter(ColorProvider colorProvider) {
+        this.colorProvider = colorProvider;
+    }
 
     @Override
     public OptionViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -112,8 +121,9 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionVi
     public void highlight(ResponseOption responseOption) {
         CompoundButton optionView = optionViewMap.get(responseOption);
         if (optionView != null) {
-            int highlightColor = responseOption.isCorrect() ? Color.GREEN : Color.RED;
-            optionView.setBackgroundColor(highlightColor);
+            optionView.setBackgroundColor(responseOption.isCorrect() ?
+                    colorProvider.getColor(R.color.colorOptionCorrect) :
+                    colorProvider.getColor(R.color.colorOptionWrong));
         }
     }
 

@@ -1,12 +1,9 @@
 package com.dfirago.dlt.common.widget.utils;
 
-import android.content.Context;
-
 import com.dfirago.dlt.common.model.AbstractQuestion;
 import com.dfirago.dlt.common.widget.AbstractQuestionView;
-import com.dfirago.dlt.common.widget.builders.QuestionViewBuilder;
+import com.dfirago.dlt.common.widget.builders.AbstractQuestionViewBuilder;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -14,38 +11,18 @@ import java.util.Map;
  */
 public class QuestionViewFactory {
 
-    private final Map<Class<? extends AbstractQuestion>, QuestionViewBuilder> viewMapping;
+    private final Map<Class<? extends AbstractQuestion>, AbstractQuestionViewBuilder> viewMapping;
 
-    public QuestionViewFactory(Map<Class<? extends AbstractQuestion>, QuestionViewBuilder> viewMapping) {
+    public QuestionViewFactory(Map<Class<? extends AbstractQuestion>, AbstractQuestionViewBuilder> viewMapping) {
         this.viewMapping = viewMapping;
     }
 
-    public static QuestionViewFactoryBuilder builder() {
-        return new QuestionViewFactoryBuilder();
-    }
-
-    public AbstractQuestionView createView(Context context, AbstractQuestion question) {
+    public AbstractQuestionView createView(AbstractQuestion question) {
         Class<? extends AbstractQuestion> questionClass = question.getClass();
-        QuestionViewBuilder viewFactory = viewMapping.get(questionClass);
+        AbstractQuestionViewBuilder viewFactory = viewMapping.get(questionClass);
         if (viewFactory == null) {
             throw new IllegalArgumentException("Mapping not found for question type: " + questionClass.getName());
         }
-        return viewFactory.buildView(context, question);
-    }
-
-    public static class QuestionViewFactoryBuilder {
-
-        private final Map<Class<? extends AbstractQuestion>,
-                QuestionViewBuilder> factoryMapping = new HashMap<>();
-
-        public QuestionViewFactoryBuilder registerMapping(
-                Class<? extends AbstractQuestion> key, QuestionViewBuilder value) {
-            factoryMapping.put(key, value);
-            return QuestionViewFactoryBuilder.this;
-        }
-
-        public QuestionViewFactory build() {
-            return new QuestionViewFactory(factoryMapping);
-        }
+        return viewFactory.buildView(question);
     }
 }

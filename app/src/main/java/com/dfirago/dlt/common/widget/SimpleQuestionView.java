@@ -4,14 +4,18 @@ import android.content.Context;
 import android.view.View;
 
 import com.dfirago.dlt.R;
+import com.dfirago.dlt.common.widget.utils.OptionsAdapter;
+
+import javax.inject.Inject;
 
 /**
  * Created by Dmytro Firago (firago94@gmail.com) on 10/8/2017.
  */
 public class SimpleQuestionView extends AbstractQuestionView {
 
-    public SimpleQuestionView(Context context) {
-        super(context);
+    @Inject
+    public SimpleQuestionView(Context context, OptionsAdapter optionsAdapter) {
+        super(context, optionsAdapter);
     }
 
     @Override

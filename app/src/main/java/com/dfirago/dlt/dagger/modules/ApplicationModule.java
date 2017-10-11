@@ -1,6 +1,7 @@
 package com.dfirago.dlt.dagger.modules;
 
 import android.app.Application;
+import android.content.Context;
 import android.content.res.AssetManager;
 
 import com.dfirago.dlt.MainActivity;
@@ -12,10 +13,6 @@ import com.dfirago.dlt.common.model.SimpleQuestion;
 import com.dfirago.dlt.common.model.VideoQuestion;
 import com.dfirago.dlt.common.utils.AssetReader;
 import com.dfirago.dlt.common.utils.ColorProvider;
-import com.dfirago.dlt.common.widget.builders.ImageQuestionViewBuilder;
-import com.dfirago.dlt.common.widget.builders.SimpleQuestionViewBuilder;
-import com.dfirago.dlt.common.widget.builders.VideoQuestionViewBuilder;
-import com.dfirago.dlt.common.widget.utils.QuestionViewFactory;
 import com.dfirago.dlt.dagger.scopes.ActivityScope;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -37,6 +34,12 @@ public abstract class ApplicationModule {
 
     @Singleton
     @Provides
+    static Context context(Application application) {
+        return application.getApplicationContext();
+    }
+
+    @Singleton
+    @Provides
     static AssetManager assetManager(Application application) {
         return application.getAssets();
     }
@@ -51,16 +54,6 @@ public abstract class ApplicationModule {
     @Provides
     static ColorProvider colorProvider(Application application) {
         return new ColorProvider(application);
-    }
-
-    @Singleton
-    @Provides
-    static QuestionViewFactory questionViewFactory(AssetReader assetReader) {
-        return QuestionViewFactory.builder()
-                .registerMapping(SimpleQuestion.class, new SimpleQuestionViewBuilder())
-                .registerMapping(ImageQuestion.class, new ImageQuestionViewBuilder(assetReader))
-                .registerMapping(VideoQuestion.class, new VideoQuestionViewBuilder(assetReader))
-                .build();
     }
 
     @Singleton

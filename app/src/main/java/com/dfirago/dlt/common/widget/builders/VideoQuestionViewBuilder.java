@@ -1,30 +1,34 @@
 package com.dfirago.dlt.common.widget.builders;
 
-import android.content.Context;
-
 import com.dfirago.dlt.common.model.AbstractQuestion;
 import com.dfirago.dlt.common.model.VideoQuestion;
 import com.dfirago.dlt.common.utils.AssetReader;
+import com.dfirago.dlt.common.widget.AbstractQuestionView;
 import com.dfirago.dlt.common.widget.VideoQuestionView;
 
+import java.util.Map;
+
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 /**
  * Created by Dmytro Firago on 07/07/2017.
  */
-public class VideoQuestionViewBuilder implements QuestionViewBuilder<VideoQuestionView> {
+public class VideoQuestionViewBuilder extends AbstractQuestionViewBuilder<VideoQuestionView> {
 
     private AssetReader assetReader;
 
     @Inject
-    public VideoQuestionViewBuilder(AssetReader assetReader) {
+    protected VideoQuestionViewBuilder(AssetReader assetReader,
+                                       Map<Class<? extends AbstractQuestion>, Provider<AbstractQuestionView>> questionViewProviders) {
+        super(questionViewProviders);
         this.assetReader = assetReader;
     }
 
     @Override
-    public VideoQuestionView buildView(Context context, AbstractQuestion question) {
+    public VideoQuestionView buildView(AbstractQuestion question) {
         VideoQuestion videoQuestion = (VideoQuestion) question;
-        VideoQuestionView view = new VideoQuestionView(context);
+        VideoQuestionView view = super.buildView(question);
         // TODO how to pass video?
 //        Video video = assetReader.readDrawable(videoQuestion.getVideo());
 //        view.setVideo(video);

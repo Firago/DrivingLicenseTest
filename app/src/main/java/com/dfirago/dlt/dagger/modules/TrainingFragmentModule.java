@@ -9,7 +9,7 @@ import dagger.Module;
 /**
  * Created by Dmytro Firago (firago94@gmail.com) on 10/7/2017.
  */
-@Module
+@Module(includes = QuestionViewModule.class)
 public interface TrainingFragmentModule {
 
     @Binds

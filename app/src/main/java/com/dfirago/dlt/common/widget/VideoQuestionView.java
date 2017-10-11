@@ -4,6 +4,9 @@ import android.content.Context;
 import android.view.View;
 
 import com.dfirago.dlt.R;
+import com.dfirago.dlt.common.widget.utils.OptionsAdapter;
+
+import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 
@@ -12,8 +15,9 @@ import butterknife.ButterKnife;
  */
 public class VideoQuestionView extends AbstractQuestionView {
 
-    public VideoQuestionView(Context context) {
-        super(context);
+    @Inject
+    public VideoQuestionView(Context context, OptionsAdapter optionsAdapter) {
+        super(context, optionsAdapter);
     }
 
     @Override

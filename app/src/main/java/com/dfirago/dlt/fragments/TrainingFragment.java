@@ -69,7 +69,7 @@ public class TrainingFragment extends BaseFragment implements TrainingView {
 
     @Override
     public void showQuestion(AbstractQuestion question) {
-        AbstractQuestionView view = questionViewFactory.createView(getContext(), question);
+        AbstractQuestionView view = questionViewFactory.createView(question);
         // TODO remove logic from the view
         view.setOptionSelectionChangeListener((option, isChecked) -> {
             if (isChecked) {
