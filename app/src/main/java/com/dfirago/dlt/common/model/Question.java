@@ -3,16 +3,26 @@ package com.dfirago.dlt.common.model;
 import java.util.List;
 
 /**
- * Created by Dmytro Firago on 13/06/2017.
+ * Created by Dmytro Firago (firago94@gmail.com) on 10/12/2017.
  */
-public abstract class AbstractQuestion {
+public class Question {
 
+    private QuestionType type;
     private String value;
     private List<ResponseOption> options;
-    private QuestionType questionType;
+    private QuestionComplexity complexity;
     private List<Category> categories;
     private String comment;
     private int points;
+    private String media;
+
+    public QuestionType getType() {
+        return type;
+    }
+
+    public void setType(QuestionType type) {
+        this.type = type;
+    }
 
     public String getValue() {
         return value;
@@ -30,12 +40,12 @@ public abstract class AbstractQuestion {
         this.options = options;
     }
 
-    public QuestionType getQuestionType() {
-        return questionType;
+    public QuestionComplexity getComplexity() {
+        return complexity;
     }
 
-    public void setQuestionType(QuestionType questionType) {
-        this.questionType = questionType;
+    public void setComplexity(QuestionComplexity complexity) {
+        this.complexity = complexity;
     }
 
     public List<Category> getCategories() {
@@ -60,5 +70,13 @@ public abstract class AbstractQuestion {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    public String getMedia() {
+        return media;
+    }
+
+    public void setMedia(String media) {
+        this.media = media;
     }
 }

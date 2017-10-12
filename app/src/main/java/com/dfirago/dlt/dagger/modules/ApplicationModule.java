@@ -7,16 +7,11 @@ import android.content.res.AssetManager;
 import com.dfirago.dlt.MainActivity;
 import com.dfirago.dlt.common.database.QuestionRepository;
 import com.dfirago.dlt.common.database.impl.QuestionRepositoryImpl;
-import com.dfirago.dlt.common.model.AbstractQuestion;
-import com.dfirago.dlt.common.model.ImageQuestion;
-import com.dfirago.dlt.common.model.SimpleQuestion;
-import com.dfirago.dlt.common.model.VideoQuestion;
 import com.dfirago.dlt.common.utils.AssetReader;
 import com.dfirago.dlt.common.utils.ColorProvider;
 import com.dfirago.dlt.dagger.scopes.ActivityScope;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 
 import javax.inject.Singleton;
 
@@ -59,14 +54,7 @@ public abstract class ApplicationModule {
     @Singleton
     @Provides
     static Gson provideGson() {
-        return new GsonBuilder()
-                .registerTypeAdapterFactory(
-                        RuntimeTypeAdapterFactory
-                                .of(AbstractQuestion.class)
-                                .registerSubtype(SimpleQuestion.class)
-                                .registerSubtype(ImageQuestion.class)
-                                .registerSubtype(VideoQuestion.class))
-                .create();
+        return new GsonBuilder().create();
     }
 
     @Singleton

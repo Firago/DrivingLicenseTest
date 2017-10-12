@@ -2,8 +2,8 @@ package com.dfirago.dlt.common.widget.builders;
 
 import android.graphics.drawable.Drawable;
 
-import com.dfirago.dlt.common.model.AbstractQuestion;
-import com.dfirago.dlt.common.model.ImageQuestion;
+import com.dfirago.dlt.common.model.Question;
+import com.dfirago.dlt.common.model.QuestionType;
 import com.dfirago.dlt.common.utils.AssetReader;
 import com.dfirago.dlt.common.widget.AbstractQuestionView;
 import com.dfirago.dlt.common.widget.ImageQuestionView;
@@ -21,20 +21,18 @@ public class ImageQuestionViewBuilder extends AbstractQuestionViewBuilder<ImageQ
     private AssetReader assetReader;
 
     @Inject
-    protected ImageQuestionViewBuilder(AssetReader assetReader,
-                                       Map<Class<? extends AbstractQuestion>, Provider<AbstractQuestionView>> questionViewProviders) {
+    protected ImageQuestionViewBuilder(AssetReader assetReader, Map<QuestionType, Provider<AbstractQuestionView>> questionViewProviders) {
         super(questionViewProviders);
         this.assetReader = assetReader;
     }
 
     @Override
-    public ImageQuestionView buildView(AbstractQuestion question) {
-        ImageQuestion imageQuestion = (ImageQuestion) question;
+    public ImageQuestionView buildView(Question question) {
         ImageQuestionView view = super.buildView(question);
-        Drawable drawable = assetReader.readDrawable(imageQuestion.getImage());
+        Drawable drawable = assetReader.readDrawable(question.getMedia());
         view.setQuestionImage(drawable);
-        view.setQuestionValue(imageQuestion.getValue());
-        view.setOptions(imageQuestion.getOptions());
+        view.setQuestionValue(question.getValue());
+        view.setOptions(question.getOptions());
         return view;
     }
 }

@@ -1,8 +1,8 @@
 package com.dfirago.dlt.common.database.impl;
 
 import com.dfirago.dlt.common.database.QuestionRepository;
-import com.dfirago.dlt.common.model.AbstractQuestion;
 import com.dfirago.dlt.common.model.Category;
+import com.dfirago.dlt.common.model.Question;
 import com.dfirago.dlt.common.utils.AssetReader;
 import com.google.gson.Gson;
 
@@ -14,11 +14,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 /**
- * Created by Dmytro Firago on 07/07/2017.
+ * Created by Dmytro Firago (firago94@gmail.com) on 10/12/2017.
  */
 public class QuestionRepositoryImpl implements QuestionRepository {
 
-    private final List<AbstractQuestion> questions;
+    private final List<Question> questions;
 
     private AssetReader assetReader;
     private Gson gson;
@@ -30,15 +30,15 @@ public class QuestionRepositoryImpl implements QuestionRepository {
         this.questions = loadQuestions();
     }
 
-    private List<AbstractQuestion> loadQuestions() {
+    private List<Question> loadQuestions() {
         String questionsJson = assetReader.readText("questions.json");
-        return Arrays.asList(gson.fromJson(questionsJson, AbstractQuestion[].class));
+        return Arrays.asList(gson.fromJson(questionsJson, Question[].class));
     }
 
     @Override
-    public List<AbstractQuestion> loadQuestions(Category category) {
-        List<AbstractQuestion> result = new ArrayList<>();
-        for (AbstractQuestion question : questions) {
+    public List<Question> loadQuestions(Category category) {
+        List<Question> result = new ArrayList<>();
+        for (Question question : questions) {
             List<Category> categories = question.getCategories();
             if (categories.contains(category)) {
                 result.add(question);
@@ -48,9 +48,9 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     }
 
     @Override
-    public List<AbstractQuestion> shuffleQuestions(Category category) {
+    public List<Question> shuffleQuestions(Category category) {
         // TODO real shuffle and SelectionConfig
-        List<AbstractQuestion> questions = loadQuestions(category);
+        List<Question> questions = loadQuestions(category);
         Collections.shuffle(questions);
         return questions.subList(0, 32);
     }

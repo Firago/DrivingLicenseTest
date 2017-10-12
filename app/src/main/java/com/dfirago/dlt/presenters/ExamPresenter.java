@@ -1,8 +1,8 @@
 package com.dfirago.dlt.presenters;
 
-import com.dfirago.dlt.common.database.impl.QuestionRepositoryImpl;
-import com.dfirago.dlt.common.model.AbstractQuestion;
+import com.dfirago.dlt.common.database.QuestionRepository;
 import com.dfirago.dlt.common.model.Category;
+import com.dfirago.dlt.common.model.Question;
 import com.dfirago.dlt.views.ExamView;
 
 import java.util.List;
@@ -14,14 +14,14 @@ import javax.inject.Inject;
  */
 public class ExamPresenter {
 
-    private List<AbstractQuestion> questions;
+    private List<Question> questions;
     private int currentQuestionPos = 0;
 
     private ExamView view;
-    private QuestionRepositoryImpl questionRepository;
+    private QuestionRepository questionRepository;
 
     @Inject
-    public ExamPresenter(ExamView view, QuestionRepositoryImpl questionRepository) {
+    public ExamPresenter(ExamView view, QuestionRepository questionRepository) {
         this.view = view;
         this.questionRepository = questionRepository;
     }

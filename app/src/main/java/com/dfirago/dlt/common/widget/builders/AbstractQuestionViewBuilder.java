@@ -1,6 +1,7 @@
 package com.dfirago.dlt.common.widget.builders;
 
-import com.dfirago.dlt.common.model.AbstractQuestion;
+import com.dfirago.dlt.common.model.Question;
+import com.dfirago.dlt.common.model.QuestionType;
 import com.dfirago.dlt.common.widget.AbstractQuestionView;
 
 import java.util.Map;
@@ -12,15 +13,15 @@ import javax.inject.Provider;
  */
 public abstract class AbstractQuestionViewBuilder<T extends AbstractQuestionView> {
 
-    private Map<Class<? extends AbstractQuestion>, Provider<AbstractQuestionView>> questionViewProviders;
+    private Map<QuestionType, Provider<AbstractQuestionView>> questionViewProviders;
 
-    protected AbstractQuestionViewBuilder(Map<Class<? extends AbstractQuestion>, Provider<AbstractQuestionView>> questionViewProviders) {
+    protected AbstractQuestionViewBuilder(Map<QuestionType, Provider<AbstractQuestionView>> questionViewProviders) {
         this.questionViewProviders = questionViewProviders;
     }
 
     @SuppressWarnings("unchecked")
-    public T buildView(AbstractQuestion question) {
-        Provider<AbstractQuestionView> provider = questionViewProviders.get(question.getClass());
+    public T buildView(Question question) {
+        Provider<AbstractQuestionView> provider = questionViewProviders.get(question.getType());
         return (T) provider.get();
     }
 }

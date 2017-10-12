@@ -1,8 +1,8 @@
 package com.dfirago.dlt.common.model;
 
 /**
- * Created by Dmytro Firago on 07/07/2017.
+ * Created by Dmytro Firago (firago94@gmail.com) on 10/12/2017.
  */
 public enum QuestionType {
-    BASIC, ADVANCED
+    SIMPLE, IMAGE, VIDEO
 }

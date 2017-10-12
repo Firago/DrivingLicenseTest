@@ -7,11 +7,11 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.dfirago.dlt.R;
-import com.dfirago.dlt.common.model.AbstractQuestion;
 import com.dfirago.dlt.common.model.Category;
+import com.dfirago.dlt.common.model.Question;
 import com.dfirago.dlt.common.utils.ViewGroupUtils;
 import com.dfirago.dlt.common.widget.AbstractQuestionView;
-import com.dfirago.dlt.common.widget.utils.QuestionViewFactory;
+import com.dfirago.dlt.common.widget.factories.QuestionViewFactory;
 import com.dfirago.dlt.presenters.TrainingPresenter;
 import com.dfirago.dlt.views.TrainingView;
 
@@ -68,7 +68,7 @@ public class TrainingFragment extends BaseFragment implements TrainingView {
     }
 
     @Override
-    public void showQuestion(AbstractQuestion question) {
+    public void showQuestion(Question question) {
         AbstractQuestionView view = questionViewFactory.createView(question);
         // TODO remove logic from the view
         view.setOptionSelectionChangeListener((option, isChecked) -> {

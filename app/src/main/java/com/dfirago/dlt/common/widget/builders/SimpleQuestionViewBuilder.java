@@ -1,7 +1,7 @@
 package com.dfirago.dlt.common.widget.builders;
 
-import com.dfirago.dlt.common.model.AbstractQuestion;
-import com.dfirago.dlt.common.model.SimpleQuestion;
+import com.dfirago.dlt.common.model.Question;
+import com.dfirago.dlt.common.model.QuestionType;
 import com.dfirago.dlt.common.widget.AbstractQuestionView;
 import com.dfirago.dlt.common.widget.SimpleQuestionView;
 
@@ -16,16 +16,15 @@ import javax.inject.Provider;
 public class SimpleQuestionViewBuilder extends AbstractQuestionViewBuilder<SimpleQuestionView> {
 
     @Inject
-    protected SimpleQuestionViewBuilder(Map<Class<? extends AbstractQuestion>, Provider<AbstractQuestionView>> questionViewProviders) {
+    protected SimpleQuestionViewBuilder(Map<QuestionType, Provider<AbstractQuestionView>> questionViewProviders) {
         super(questionViewProviders);
     }
 
     @Override
-    public SimpleQuestionView buildView(AbstractQuestion question) {
-        SimpleQuestion simpleQuestion = (SimpleQuestion) question;
+    public SimpleQuestionView buildView(Question question) {
         SimpleQuestionView view = super.buildView(question);
-        view.setQuestionValue(simpleQuestion.getValue());
-        view.setOptions(simpleQuestion.getOptions());
+        view.setQuestionValue(question.getValue());
+        view.setOptions(question.getOptions());
         return view;
     }
 }

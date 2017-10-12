@@ -1,6 +1,6 @@
 package com.dfirago.dlt.dagger.mappings;
 
-import com.dfirago.dlt.common.model.AbstractQuestion;
+import com.dfirago.dlt.common.model.QuestionType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -16,5 +16,5 @@ import dagger.MapKey;
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface QuestionViewBuilderKey {
-    Class<? extends AbstractQuestion> value();
+    QuestionType value();
 }
