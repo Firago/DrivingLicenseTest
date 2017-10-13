@@ -36,7 +36,7 @@ public class MainActivity extends FragmentActivity implements HasSupportFragment
 
     @Override
     public void showFragment(int containerViewId, Fragment fragment) {
-        if (getSupportFragmentManager().findFragmentById(containerViewId) != null) {
+        if (findViewById(containerViewId) != null) {
             replace(containerViewId, fragment);
         } else {
             showFragment(fragment);
