@@ -2,6 +2,7 @@ package com.dfirago.drivinglicensetest.presenters;
 
 import com.dfirago.drivinglicensetest.common.model.CategoryType;
 import com.dfirago.drivinglicensetest.common.model.TestMode;
+import com.dfirago.drivinglicensetest.dagger.scopes.FragmentScope;
 import com.dfirago.drivinglicensetest.views.CategoryView;
 
 import javax.inject.Inject;
@@ -9,6 +10,7 @@ import javax.inject.Inject;
 /**
  * Created by Dmytro Firago on 15/07/2017.
  */
+@FragmentScope
 public class CategoryPresenter {
 
     private CategoryView view;

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.dfirago.drivinglicensetest.common.model.CategoryType;
 import com.dfirago.drivinglicensetest.common.setup.SetupExecutionHelper;
+import com.dfirago.drivinglicensetest.dagger.scopes.FragmentScope;
 import com.dfirago.drivinglicensetest.views.DashboardView;
 
 import javax.inject.Inject;
@@ -14,6 +15,7 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * Created by Dmytro Firago on 14/07/2017.
  */
+@FragmentScope
 public class DashboardPresenter {
 
     private static final String TAG = "DashboardPresenter";

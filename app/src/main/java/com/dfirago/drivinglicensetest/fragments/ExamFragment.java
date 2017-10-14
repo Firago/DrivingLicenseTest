@@ -29,7 +29,7 @@ public class ExamFragment extends BaseFragment implements ExamView {
 
     private CategoryType categoryType;
 
-    @BindView(R.id.question_view_container)
+    @BindView(R.id.question_container)
     LinearLayout questionViewContainer;
 
     @Inject

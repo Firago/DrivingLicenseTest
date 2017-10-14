@@ -134,6 +134,12 @@ public class OptionsAdapter extends RecyclerView.Adapter<OptionsAdapter.OptionVi
         }
     }
 
+    public void unhighlightAll() {
+        for (CompoundButton optionView : optionViewMap.values()) {
+            optionView.setBackgroundColor(0);
+        }
+    }
+
     public void showCorrectAnswer() {
         options.stream().filter(ResponseOption::isCorrect).forEach(this::highlight);
     }

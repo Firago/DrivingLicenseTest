@@ -67,6 +67,10 @@ public abstract class AbstractQuestionView extends LinearLayout {
         optionsAdapter.unhighlight(responseOption);
     }
 
+    public void unhighlightAll() {
+        optionsAdapter.unhighlightAll();
+    }
+
     public void showCorrectAnswer() {
         optionsAdapter.showCorrectAnswer();
     }

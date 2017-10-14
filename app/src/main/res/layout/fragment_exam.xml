@@ -6,7 +6,7 @@
     tools:context="com.dfirago.drivinglicensetest.fragments.TrainingFragment">
 
     <LinearLayout
-        android:id="@+id/question_view_container"
+        android:id="@+id/question_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical" />

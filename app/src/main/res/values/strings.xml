@@ -8,4 +8,7 @@
     <string name="rate_app_label">Polub nas</string>
     <string name="training_label">Nauka</string>
     <string name="exam_label">Egzamin</string>
+    <string name="previous_question">Previous question</string>
+    <string name="show_answer">Show answer</string>
+    <string name="next_question">Next question</string>
 </resources>
