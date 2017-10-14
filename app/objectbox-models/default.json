@@ -1,0 +1,105 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:4418544080594387802",
+      "lastPropertyId": "2:2018191597180670674",
+      "name": "Category",
+      "properties": [
+        {
+          "id": "1:3195289235352012682",
+          "name": "id"
+        },
+        {
+          "id": "2:2018191597180670674",
+          "name": "categoryType"
+        }
+      ],
+      "relations": [
+        {
+          "id": "1:1265407838847860278",
+          "name": "questions"
+        }
+      ]
+    },
+    {
+      "id": "2:6013368815085441342",
+      "lastPropertyId": "7:9057160848756225043",
+      "name": "Question",
+      "properties": [
+        {
+          "id": "1:1106055653102269523",
+          "name": "id"
+        },
+        {
+          "id": "2:4620741085452729509",
+          "name": "type"
+        },
+        {
+          "id": "3:8461055560629044576",
+          "name": "value"
+        },
+        {
+          "id": "4:7753711259401452508",
+          "name": "group"
+        },
+        {
+          "id": "5:6196682655882377345",
+          "name": "comment"
+        },
+        {
+          "id": "6:7975127326615328743",
+          "name": "points"
+        },
+        {
+          "id": "7:9057160848756225043",
+          "name": "media"
+        }
+      ],
+      "relations": [
+        {
+          "id": "2:5184404948280021272",
+          "name": "categories"
+        }
+      ]
+    },
+    {
+      "id": "3:8501631430225489655",
+      "lastPropertyId": "4:7700656232733333239",
+      "name": "ResponseOption",
+      "properties": [
+        {
+          "id": "1:8330219895206970277",
+          "name": "id"
+        },
+        {
+          "id": "2:8498661747185953790",
+          "name": "value"
+        },
+        {
+          "id": "3:2770314441049072971",
+          "name": "correct"
+        },
+        {
+          "id": "4:7700656232733333239",
+          "indexId": "1:542500266984941897",
+          "name": "questionId"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "3:8501631430225489655",
+  "lastIndexId": "1:542500266984941897",
+  "lastRelationId": "2:5184404948280021272",
+  "lastSequenceId": "0:0",
+  "modelVersion": 4,
+  "modelVersionParserMinimum": 4,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [],
+  "retiredRelationUids": [],
+  "version": 1
+}

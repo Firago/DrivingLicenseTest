@@ -1,0 +1,28 @@
+package com.dfirago.drivinglicensetest.presenters;
+
+import com.dfirago.drivinglicensetest.common.model.CategoryType;
+import com.dfirago.drivinglicensetest.common.model.TestMode;
+import com.dfirago.drivinglicensetest.views.CategoryView;
+
+import javax.inject.Inject;
+
+/**
+ * Created by Dmytro Firago on 15/07/2017.
+ */
+public class CategoryPresenter {
+
+    private CategoryView view;
+
+    @Inject
+    public CategoryPresenter(CategoryView view) {
+        this.view = view;
+    }
+
+    public void onModeSelected(CategoryType categoryType, TestMode testMode) {
+        if (testMode == TestMode.TRAINING) {
+            view.showTrainingScreen(categoryType);
+        } else if (testMode == TestMode.EXAM) {
+            view.showExamScreen(categoryType);
+        }
+    }
+}

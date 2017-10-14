@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.dfirago.dlt.fragments.TrainingFragment">
+    tools:context="com.dfirago.drivinglicensetest.fragments.TrainingFragment">
 
     <LinearLayout
         android:id="@+id/question_view_container"
