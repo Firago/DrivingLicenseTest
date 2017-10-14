@@ -1,6 +1,6 @@
 package com.dfirago.drivinglicensetest.presenters;
 
-import com.dfirago.drivinglicensetest.common.database.QuestionRepository;
+import com.dfirago.drivinglicensetest.common.database.QuestionDao;
 import com.dfirago.drivinglicensetest.common.model.CategoryType;
 import com.dfirago.drivinglicensetest.common.model.Question;
 import com.dfirago.drivinglicensetest.views.TrainingView;
@@ -18,16 +18,16 @@ public class TrainingPresenter {
     private int currentQuestionPos = 0;
 
     private TrainingView view;
-    private QuestionRepository questionRepository;
+    private QuestionDao questionDao;
 
     @Inject
-    public TrainingPresenter(TrainingView view, QuestionRepository questionRepository) {
+    public TrainingPresenter(TrainingView view, QuestionDao questionDao) {
         this.view = view;
-        this.questionRepository = questionRepository;
+        this.questionDao = questionDao;
     }
 
     public void startTraining(CategoryType categoryType) {
-        questions = questionRepository.shuffleQuestions(categoryType);
+        questions = questionDao.shuffleQuestions(categoryType);
         view.showQuestion(questions.get(currentQuestionPos));
     }
 }

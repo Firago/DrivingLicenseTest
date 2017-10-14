@@ -17,5 +17,5 @@ public interface DashboardView {
 
     void onSetupSuccess();
 
-    void onSetupError();
+    void onSetupError(Throwable t);
 }

@@ -89,9 +89,29 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "4:4111147126257260549",
+      "lastPropertyId": "3:8373451413068364936",
+      "name": "ConfigurationEntry",
+      "properties": [
+        {
+          "id": "1:2287162233632599502",
+          "name": "id"
+        },
+        {
+          "id": "2:7392692669718063132",
+          "name": "key"
+        },
+        {
+          "id": "3:8373451413068364936",
+          "name": "value"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "3:8501631430225489655",
+  "lastEntityId": "4:4111147126257260549",
   "lastIndexId": "1:542500266984941897",
   "lastRelationId": "2:5184404948280021272",
   "lastSequenceId": "0:0",

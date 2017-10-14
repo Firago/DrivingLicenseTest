@@ -44,7 +44,41 @@ public class DashboardFragment extends BaseFragment implements DashboardView {
     @Override
     public void onResume() {
         super.onResume();
-        dashboardPresenter.startSetup();
+        dashboardPresenter.performSetupIfNeeded();
+    }
+
+    @Override
+    public void showCategoryScreen(CategoryType categoryType) {
+        navigationManager.showCategoryScreen(categoryType);
+    }
+
+    @Override
+    public void showRateApplicationScreen() {
+        String packageName = getActivity().getPackageName();
+        navigationManager.showRateApplicationScreen(packageName);
+    }
+
+    @Override
+    public void onSetupStarted() {
+        Log.i(TAG, "Setup process started");
+        progressDialog = ProgressDialog.show(getActivity(), "Loading", "Setting up the application");
+    }
+
+    @Override
+    public void onSetupFinished() {
+        Log.i(TAG, "Setup process finished");
+        progressDialog.dismiss();
+    }
+
+    @Override
+    public void onSetupSuccess() {
+        Toast.makeText(getActivity(), "Setup completed successfully", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSetupError(Throwable t) {
+        Log.e(TAG, "Setup failed", t);
+        Toast.makeText(getActivity(), "Failed to setup application", Toast.LENGTH_LONG).show();
     }
 
     @OnClick(R.id.item_category_a)
@@ -77,36 +111,4 @@ public class DashboardFragment extends BaseFragment implements DashboardView {
         dashboardPresenter.onRateApplicationSelected();
     }
 
-    @Override
-    public void showCategoryScreen(CategoryType categoryType) {
-        navigationManager.showCategoryScreen(categoryType);
-    }
-
-    @Override
-    public void showRateApplicationScreen() {
-        String packageName = getActivity().getPackageName();
-        navigationManager.showRateApplicationScreen(packageName);
-    }
-
-    @Override
-    public void onSetupStarted() {
-        Log.i(TAG, "Setup process started");
-        progressDialog = ProgressDialog.show(getActivity(), "Loading", "Setting up the application");
-    }
-
-    @Override
-    public void onSetupFinished() {
-        Log.i(TAG, "Setup process finished");
-        progressDialog.dismiss();
-    }
-
-    @Override
-    public void onSetupSuccess() {
-        Toast.makeText(getActivity(), "Setup completed successfully", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onSetupError() {
-        Toast.makeText(getActivity(), "Failed to setup application", Toast.LENGTH_LONG).show();
-    }
 }

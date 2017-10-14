@@ -1,14 +1,13 @@
 package com.dfirago.drivinglicensetest.presenters;
 
-import com.dfirago.drivinglicensetest.common.model.CategoryType;
-import com.dfirago.drivinglicensetest.common.setup.SetupExecutor;
-import com.dfirago.drivinglicensetest.views.DashboardView;
+import android.util.Log;
 
-import java.util.Set;
+import com.dfirago.drivinglicensetest.common.model.CategoryType;
+import com.dfirago.drivinglicensetest.common.setup.SetupExecutionHelper;
+import com.dfirago.drivinglicensetest.views.DashboardView;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
@@ -17,13 +16,15 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class DashboardPresenter {
 
+    private static final String TAG = "DashboardPresenter";
+
     private DashboardView view;
-    private Set<SetupExecutor> setupExecutors;
+    private SetupExecutionHelper setupExecutionHelper;
 
     @Inject
-    public DashboardPresenter(DashboardView view, Set<SetupExecutor> setupExecutors) {
+    public DashboardPresenter(DashboardView view, SetupExecutionHelper setupExecutionHelper) {
         this.view = view;
-        this.setupExecutors = setupExecutors;
+        this.setupExecutionHelper = setupExecutionHelper;
     }
 
     public void onCategorySelected(CategoryType categoryType) {
@@ -34,21 +35,24 @@ public class DashboardPresenter {
         view.showRateApplicationScreen();
     }
 
-    public void startSetup() {
-        Observable.fromIterable(setupExecutors)
-                .map(SetupExecutor::execute)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe(disposable -> view.onSetupStarted())
-                .subscribe(
-                        success -> {
-                            view.onSetupFinished();
-                            view.onSetupSuccess();
-                        },
-                        error -> {
-                            view.onSetupFinished();
-                            view.onSetupError();
-                        }
-                );
+    public void performSetupIfNeeded() {
+        Log.d(TAG, "Verifying if setup is needed");
+        boolean setupNeeded = setupExecutionHelper.isSetupNeeded();
+        Log.d(TAG, "Setup needed flag: " + setupNeeded);
+        if (setupNeeded) {
+            setupExecutionHelper.executeSetup()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doOnSubscribe(disposable -> view.onSetupStarted())
+                    .doOnComplete(() -> {
+                        view.onSetupFinished();
+                        view.onSetupSuccess();
+                    })
+                    .doOnError(throwable -> {
+                        view.onSetupFinished();
+                        view.onSetupError(throwable);
+                    })
+                    .subscribe();
+        }
     }
 }

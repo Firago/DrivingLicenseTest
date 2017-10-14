@@ -1,10 +1,16 @@
 package com.dfirago.drivinglicensetest.common.setup;
 
+import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.dfirago.drivinglicensetest.common.database.CategoryDao;
+import com.dfirago.drivinglicensetest.common.database.ConfigurationDao;
+import com.dfirago.drivinglicensetest.common.database.QuestionDao;
 import com.dfirago.drivinglicensetest.common.database.utils.CategoryProvider;
 import com.dfirago.drivinglicensetest.common.model.Category;
 import com.dfirago.drivinglicensetest.common.model.CategoryType;
+import com.dfirago.drivinglicensetest.common.model.ConfigurationEntry;
+import com.dfirago.drivinglicensetest.common.model.ConfigurationKey;
 import com.dfirago.drivinglicensetest.common.model.Question;
 import com.dfirago.drivinglicensetest.common.model.QuestionGroup;
 import com.dfirago.drivinglicensetest.common.model.QuestionType;
@@ -12,14 +18,12 @@ import com.dfirago.drivinglicensetest.common.model.ResponseOption;
 import com.dfirago.drivinglicensetest.common.utils.AssetReader;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Map;
 
 import javax.inject.Inject;
-
-import io.objectbox.Box;
-import io.objectbox.BoxStore;
 
 /**
  * Created by Dmytro Firago (firago94@gmail.com) on 10/13/2017.
@@ -28,67 +32,85 @@ public class DatabaseSetupExecutor implements SetupExecutor {
 
     private final static String TAG = "DatabaseSetupExecutor";
 
-    private BoxStore boxStore;
+    private final Map<CategoryType, Category> categoryMap = CategoryProvider.forTypes(CategoryType.values());
+
+    private ConfigurationDao configurationDao;
+    private QuestionDao questionDao;
+    private CategoryDao categoryDao;
     private AssetReader assetReader;
 
     @Inject
-    public DatabaseSetupExecutor(BoxStore boxStore, AssetReader assetReader) {
-        this.boxStore = boxStore;
+    public DatabaseSetupExecutor(ConfigurationDao configurationDao, QuestionDao questionDao,
+                                 CategoryDao categoryDao, AssetReader assetReader) {
+        this.configurationDao = configurationDao;
+        this.questionDao = questionDao;
+        this.categoryDao = categoryDao;
         this.assetReader = assetReader;
     }
 
     @Override
-    public Object execute() throws Exception {
+    public boolean execute() throws Exception {
+        Log.d(TAG, "Checking if database needs to be populated based on DATABASE_READY flag");
+        ConfigurationEntry databaseReadyEntry = configurationDao
+                .findByKey(ConfigurationKey.DATABASE_READY, true);
+        Log.d(TAG, "DATABASE_READY flag is set to " + databaseReadyEntry.getValue());
+        if (Boolean.valueOf(databaseReadyEntry.getValue()).equals(Boolean.FALSE)) {
+            populateDatabase();
+            databaseReadyEntry.setValue(String.valueOf(true));
+            configurationDao.put(databaseReadyEntry);
+            return true;
+        }
+        return false;
+    }
 
+    private void populateDatabase() throws JSONException {
         Log.d(TAG, "Populating database - START");
-
-        Box<Category> categoryBox = boxStore.boxFor(Category.class);
-        Box<Question> questionBox = boxStore.boxFor(Question.class);
-
-        categoryBox.removeAll();
-        questionBox.removeAll();
-
-        String questionsJson = assetReader.readText("questions.json");
-        JSONArray questions = new JSONArray(questionsJson);
-
+        questionDao.removeAll();
+        categoryDao.removeAll();
+        JSONArray questions = readQuestions();
         Log.d(TAG, "Total number of questions: " + questions.length());
-
-        Map<CategoryType, Category> categoryMap = CategoryProvider.forTypes(CategoryType.values());
-
         for (int i = 0; i < questions.length(); i++) {
-
             Log.d(TAG, "Processing question: " + (i + 1));
-
             JSONObject questionObject = questions.getJSONObject(i);
-            Question question = new Question();
-            question.setValue(questionObject.getString("value"));
-            question.setMedia(questionObject.optString("media"));
-            question.setGroup(QuestionGroup.valueOf(questionObject.getString("group")));
-            question.setComment(questionObject.optString("comment"));
-            question.setPoints(questionObject.getInt("points"));
-            question.setType(QuestionType.valueOf(questionObject.getString("type")));
+            Question question = parseQuestion(questionObject);
+            questionDao.put(question);
+        }
+        Log.d(TAG, "Populating database - FINISH");
+    }
 
-            JSONArray categories = questionObject.getJSONArray("categories");
-            for (int j = 0; j < categories.length(); j++) {
-                String category = categories.getString(j);
-                CategoryType categoryType = CategoryType.valueOf(category);
-                question.getCategories().add(categoryMap.get(categoryType));
-            }
+    @NonNull
+    private Question parseQuestion(JSONObject questionObject) throws JSONException {
 
-            JSONArray options = questionObject.getJSONArray("options");
-            for (int j = 0; j < options.length(); j++) {
-                JSONObject optionObject = options.getJSONObject(j);
-                ResponseOption responseOption = new ResponseOption();
-                responseOption.setValue(optionObject.getString("value"));
-                responseOption.setCorrect(optionObject.getBoolean("correct"));
-                question.getOptions().add(responseOption);
-            }
+        Question question = new Question();
+        question.setValue(questionObject.getString("value"));
+        question.setMedia(questionObject.optString("media"));
+        question.setGroup(QuestionGroup.valueOf(questionObject.getString("group")));
+        question.setComment(questionObject.optString("comment"));
+        question.setPoints(questionObject.getInt("points"));
+        question.setType(QuestionType.valueOf(questionObject.getString("type")));
+        JSONArray categories = questionObject.getJSONArray("categories");
 
-            questionBox.put(question);
+        for (int j = 0; j < categories.length(); j++) {
+            String category = categories.getString(j);
+            CategoryType categoryType = CategoryType.valueOf(category);
+            question.getCategories().add(categoryMap.get(categoryType));
         }
 
-        Log.d(TAG, "Populating database - FINISH");
+        JSONArray options = questionObject.getJSONArray("options");
+        for (int j = 0; j < options.length(); j++) {
+            JSONObject optionObject = options.getJSONObject(j);
+            ResponseOption responseOption = new ResponseOption();
+            responseOption.setValue(optionObject.getString("value"));
+            responseOption.setCorrect(optionObject.getBoolean("correct"));
+            question.getOptions().add(responseOption);
+        }
 
-        return new Object();
+        return question;
+    }
+
+    @NonNull
+    private JSONArray readQuestions() throws JSONException {
+        String questionsJson = assetReader.readText("questions.json");
+        return new JSONArray(questionsJson);
     }
 }

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
+import com.dfirago.drivinglicensetest.common.database.ConfigurationDao;
 import com.dfirago.drivinglicensetest.navigation.FragmentOrchestrator;
 import com.dfirago.drivinglicensetest.navigation.impl.NavigationManagerImpl;
 
@@ -20,6 +21,8 @@ public class MainActivity extends FragmentActivity implements HasSupportFragment
     DispatchingAndroidInjector<Fragment> fragmentInjector;
     @Inject
     NavigationManagerImpl navigationManager;
+    @Inject
+    ConfigurationDao configurationDao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

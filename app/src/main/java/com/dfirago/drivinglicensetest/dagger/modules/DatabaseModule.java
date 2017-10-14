@@ -2,8 +2,12 @@ package com.dfirago.drivinglicensetest.dagger.modules;
 
 import android.content.Context;
 
-import com.dfirago.drivinglicensetest.common.database.QuestionRepository;
-import com.dfirago.drivinglicensetest.common.database.impl.QuestionRepositoryImpl;
+import com.dfirago.drivinglicensetest.common.database.CategoryDao;
+import com.dfirago.drivinglicensetest.common.database.ConfigurationDao;
+import com.dfirago.drivinglicensetest.common.database.QuestionDao;
+import com.dfirago.drivinglicensetest.common.database.impl.CategoryDaoImpl;
+import com.dfirago.drivinglicensetest.common.database.impl.ConfigurationDaoImpl;
+import com.dfirago.drivinglicensetest.common.database.impl.QuestionDaoImpl;
 import com.dfirago.drivinglicensetest.common.model.MyObjectBox;
 
 import javax.inject.Singleton;
@@ -27,5 +31,13 @@ public abstract class DatabaseModule {
 
     @Singleton
     @Binds
-    abstract QuestionRepository questionRepository(QuestionRepositoryImpl questionRepository);
+    abstract ConfigurationDao configurationDao(ConfigurationDaoImpl configurationDao);
+
+    @Singleton
+    @Binds
+    abstract QuestionDao questionDao(QuestionDaoImpl questionDao);
+
+    @Singleton
+    @Binds
+    abstract CategoryDao categoryDao(CategoryDaoImpl categoryDao);
 }
