@@ -4,13 +4,13 @@ apply plugin: 'io.objectbox'
 
 android {
 
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.2"
 
     defaultConfig {
         applicationId "com.dfirago.drivinglicensetest"
         minSdkVersion 19
-        targetSdkVersion 25
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -34,7 +34,7 @@ android {
 
 }
 
-def SUPPORT_VERSION = "25.3.1"
+def SUPPORT_VERSION = "26.1.0"
 
 dependencies {
 
