@@ -20,6 +20,8 @@ public class TrainingOptionSelectionChangeListener implements OnOptionSelectionC
         if (isChecked) {
             questionView.unhighlightAll();
             questionView.highlight(option);
+        } else {
+            questionView.unhighlight(option);
         }
     }
 }
