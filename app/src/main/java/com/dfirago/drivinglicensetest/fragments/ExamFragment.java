@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.dfirago.drivinglicensetest.R;
 import com.dfirago.drivinglicensetest.common.model.CategoryType;
@@ -12,6 +11,7 @@ import com.dfirago.drivinglicensetest.common.model.Question;
 import com.dfirago.drivinglicensetest.common.utils.ViewGroupUtils;
 import com.dfirago.drivinglicensetest.common.widget.AbstractQuestionView;
 import com.dfirago.drivinglicensetest.common.widget.factories.QuestionViewFactory;
+import com.dfirago.drivinglicensetest.fragments.listeners.TrainingOptionSelectionChangeListener;
 import com.dfirago.drivinglicensetest.presenters.ExamPresenter;
 import com.dfirago.drivinglicensetest.views.ExamView;
 
@@ -28,9 +28,14 @@ public class ExamFragment extends BaseFragment implements ExamView {
     private static final String CATEGORY_PARAM = "categoryType";
 
     private CategoryType categoryType;
+    private AbstractQuestionView currentQuestionView;
 
+    @BindView(R.id.header_container)
+    View headerContainer;
     @BindView(R.id.question_container)
-    LinearLayout questionViewContainer;
+    View questionContainer;
+    @BindView(R.id.footer_container)
+    View footerContainer;
 
     @Inject
     ExamPresenter examPresenter;
@@ -69,7 +74,11 @@ public class ExamFragment extends BaseFragment implements ExamView {
 
     @Override
     public void showQuestion(Question question) {
-        AbstractQuestionView view = questionViewFactory.createView(question);
-        ViewGroupUtils.replaceView(questionViewContainer, view);
+        currentQuestionView = questionViewFactory
+                .createView(question, questionContainer.getLayoutParams());
+        currentQuestionView.setOptionSelectionChangeListener(
+                new TrainingOptionSelectionChangeListener(currentQuestionView));
+        ViewGroupUtils.replaceView(questionContainer, currentQuestionView);
+        questionContainer = currentQuestionView;
     }
 }

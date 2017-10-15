@@ -1,6 +1,7 @@
 package com.dfirago.drivinglicensetest.common.widget.builders;
 
 import android.graphics.drawable.Drawable;
+import android.view.ViewGroup;
 
 import com.dfirago.drivinglicensetest.common.model.Question;
 import com.dfirago.drivinglicensetest.common.model.QuestionType;
@@ -27,8 +28,8 @@ public class ImageQuestionViewBuilder extends AbstractQuestionViewBuilder<ImageQ
     }
 
     @Override
-    public ImageQuestionView buildView(Question question) {
-        ImageQuestionView view = super.buildView(question);
+    public ImageQuestionView buildView(Question question, ViewGroup.LayoutParams layoutParams) {
+        ImageQuestionView view = super.buildView(question, layoutParams);
         Drawable drawable = assetReader.readDrawable(question.getMedia());
         view.setQuestionImage(drawable);
         view.setQuestionValue(question.getValue());

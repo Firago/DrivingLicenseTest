@@ -1,5 +1,7 @@
 package com.dfirago.drivinglicensetest.common.widget.builders;
 
+import android.view.ViewGroup;
+
 import com.dfirago.drivinglicensetest.common.model.Question;
 import com.dfirago.drivinglicensetest.common.model.QuestionType;
 import com.dfirago.drivinglicensetest.common.widget.AbstractQuestionView;
@@ -21,8 +23,8 @@ public class SimpleQuestionViewBuilder extends AbstractQuestionViewBuilder<Simpl
     }
 
     @Override
-    public SimpleQuestionView buildView(Question question) {
-        SimpleQuestionView view = super.buildView(question);
+    public SimpleQuestionView buildView(Question question, ViewGroup.LayoutParams layoutParams) {
+        SimpleQuestionView view = super.buildView(question, layoutParams);
         view.setQuestionValue(question.getValue());
         view.setOptions(question.getOptions());
         return view;

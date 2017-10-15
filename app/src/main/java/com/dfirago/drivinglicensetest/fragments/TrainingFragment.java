@@ -4,16 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.dfirago.drivinglicensetest.R;
 import com.dfirago.drivinglicensetest.common.model.CategoryType;
 import com.dfirago.drivinglicensetest.common.model.Question;
 import com.dfirago.drivinglicensetest.common.model.ResponseOption;
-import com.dfirago.drivinglicensetest.common.model.TestMode;
 import com.dfirago.drivinglicensetest.common.utils.ViewGroupUtils;
-import com.dfirago.drivinglicensetest.common.widget.AbstractFooterView;
 import com.dfirago.drivinglicensetest.common.widget.AbstractQuestionView;
-import com.dfirago.drivinglicensetest.common.widget.factories.FooterViewFactory;
 import com.dfirago.drivinglicensetest.common.widget.factories.QuestionViewFactory;
 import com.dfirago.drivinglicensetest.fragments.listeners.TrainingOptionSelectionChangeListener;
 import com.dfirago.drivinglicensetest.presenters.TrainingPresenter;
@@ -23,6 +21,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Dmytro Firago on 11/06/2017.
@@ -34,19 +33,19 @@ public class TrainingFragment extends BaseFragment implements TrainingView {
     private CategoryType categoryType;
     private AbstractQuestionView currentQuestionView;
 
-    @BindView(R.id.header_container)
-    View headerContainer;
     @BindView(R.id.question_container)
     View questionContainer;
-    @BindView(R.id.footer_container)
-    View footerContainer;
+    @BindView(R.id.questions_current)
+    TextView currentQuestionNumberView;
+    @BindView(R.id.questions_total)
+    TextView totalQuestionNumberView;
+    @BindView(R.id.question_points)
+    TextView questionPointsView;
 
     @Inject
     TrainingPresenter trainingPresenter;
     @Inject
     QuestionViewFactory questionViewFactory;
-    @Inject
-    FooterViewFactory footerViewFactory;
 
     public static TrainingFragment newInstance(CategoryType categoryType) {
         TrainingFragment fragment = new TrainingFragment();
@@ -79,23 +78,14 @@ public class TrainingFragment extends BaseFragment implements TrainingView {
     }
 
     @Override
-    public void showHeader() {
-
-    }
-
-    @Override
     public void showQuestion(Question question) {
-        currentQuestionView = questionViewFactory.createView(question);
+        currentQuestionView = questionViewFactory
+                .createView(question, questionContainer.getLayoutParams());
         currentQuestionView.setOptionSelectionChangeListener(
                 new TrainingOptionSelectionChangeListener(currentQuestionView));
         ViewGroupUtils.replaceView(questionContainer, currentQuestionView);
         questionContainer = currentQuestionView;
-    }
-
-    @Override
-    public void showFooter() {
-        AbstractFooterView footerView = footerViewFactory.createView(TestMode.TRAINING);
-        ViewGroupUtils.replaceView(footerContainer, footerView);
+        questionPointsView.setText(String.valueOf(question.getPoints()));
     }
 
     @Override
@@ -106,5 +96,26 @@ public class TrainingFragment extends BaseFragment implements TrainingView {
                 break;
             }
         }
+    }
+
+    @Override
+    public void updateQuestionNumber(int current, int total) {
+        currentQuestionNumberView.setText(String.valueOf(current));
+        totalQuestionNumberView.setText(String.valueOf(total));
+    }
+
+    @OnClick(R.id.button_previous)
+    public void onPreviousClicked() {
+        trainingPresenter.onPreviousClicked();
+    }
+
+    @OnClick(R.id.button_hint)
+    public void onHintClicked() {
+        trainingPresenter.onHintClicked();
+    }
+
+    @OnClick(R.id.button_next)
+    public void onNextClicked() {
+        trainingPresenter.onNextClicked();
     }
 }

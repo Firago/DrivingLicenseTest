@@ -1,5 +1,7 @@
 package com.dfirago.drivinglicensetest.common.widget.builders;
 
+import android.view.ViewGroup;
+
 import com.dfirago.drivinglicensetest.common.model.Question;
 import com.dfirago.drivinglicensetest.common.model.QuestionType;
 import com.dfirago.drivinglicensetest.common.widget.AbstractQuestionView;
@@ -20,8 +22,10 @@ public abstract class AbstractQuestionViewBuilder<T extends AbstractQuestionView
     }
 
     @SuppressWarnings("unchecked")
-    public T buildView(Question question) {
+    public T buildView(Question question, ViewGroup.LayoutParams params) {
         Provider<AbstractQuestionView> provider = questionViewProviders.get(question.getType());
-        return (T) provider.get();
+        T view = (T) provider.get();
+        view.setLayoutParams(params);
+        return view;
     }
 }

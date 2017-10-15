@@ -1,5 +1,7 @@
 package com.dfirago.drivinglicensetest.common.widget.builders;
 
+import android.view.ViewGroup;
+
 import com.dfirago.drivinglicensetest.common.model.Question;
 import com.dfirago.drivinglicensetest.common.model.QuestionType;
 import com.dfirago.drivinglicensetest.common.utils.AssetReader;
@@ -25,8 +27,8 @@ public class VideoQuestionViewBuilder extends AbstractQuestionViewBuilder<VideoQ
     }
 
     @Override
-    public VideoQuestionView buildView(Question question) {
-        VideoQuestionView view = super.buildView(question);
+    public VideoQuestionView buildView(Question question, ViewGroup.LayoutParams layoutParams) {
+        VideoQuestionView view = super.buildView(question, layoutParams);
         // TODO how to pass video?
 //        Video video = assetReader.readDrawable(videoQuestion.getVideo());
 //        view.setVideo(video);

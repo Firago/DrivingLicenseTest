@@ -7,11 +7,9 @@ import com.dfirago.drivinglicensetest.common.model.Question;
  */
 public interface TrainingView {
 
-    void showHeader();
-
     void showQuestion(Question question);
 
-    void showFooter();
-
     void showAnswer(Question question);
+
+    void updateQuestionNumber(int current, int total);
 }
