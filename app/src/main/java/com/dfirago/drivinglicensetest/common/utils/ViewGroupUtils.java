@@ -20,6 +20,7 @@ public class ViewGroupUtils {
     }
 
     public static void replaceView(View currentView, View newView) {
+        newView.setLayoutParams(currentView.getLayoutParams());
         ViewGroup parent = getParent(currentView);
         if (parent != null) {
             final int index = parent.indexOfChild(currentView);
