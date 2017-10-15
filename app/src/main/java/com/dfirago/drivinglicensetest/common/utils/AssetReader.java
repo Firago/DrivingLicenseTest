@@ -1,7 +1,9 @@
 package com.dfirago.drivinglicensetest.common.utils;
 
+import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 
 import org.apache.commons.io.IOUtils;
 
@@ -16,6 +18,8 @@ import javax.inject.Inject;
  */
 public class AssetReader {
 
+    private static final String TAG = "AssetReader";
+
     private AssetManager assetManager;
 
     @Inject
@@ -28,6 +32,7 @@ public class AssetReader {
             InputStream is = assetManager.open("images/" + fileName);
             return Drawable.createFromStream(is, null);
         } catch (IOException e) {
+            Log.e(TAG, "Failed to load drawable " + fileName, e);
             return null;
         }
     }
@@ -37,6 +42,16 @@ public class AssetReader {
             InputStream is = assetManager.open(fileName);
             return IOUtils.toString(is, StandardCharsets.UTF_8);
         } catch (IOException e) {
+            Log.e(TAG, "Failed to load text file " + fileName, e);
+            return null;
+        }
+    }
+
+    public AssetFileDescriptor readVideo(String fileName) {
+        try {
+            return assetManager.openFd("videos/" + fileName);
+        } catch (IOException e) {
+            Log.e(TAG, "Failed to load video file descriptor " + fileName, e);
             return null;
         }
     }
