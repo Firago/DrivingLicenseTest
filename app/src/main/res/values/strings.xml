@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Driving License Test</string>
+    <string name="app_name">Testy na prawo jazdy</string>
     <string name="category_a_label">Kategoria A</string>
     <string name="category_b_label">Kategoria B</string>
     <string name="category_c_label">Kategoria C</string>
@@ -8,8 +8,8 @@
     <string name="rate_app_label">Polub nas</string>
     <string name="training_label">Nauka</string>
     <string name="exam_label">Egzamin</string>
-    <string name="previous_question">Previous question</string>
-    <string name="show_answer">Show answer</string>
-    <string name="next_question">Next question</string>
+    <string name="previous_question">Poprzednie pytanie</string>
+    <string name="show_answer">Poprawna odpowiedź</string>
+    <string name="next_question">Następnie pytanie</string>
     <string name="question_number_delimiter">/</string>
 </resources>
