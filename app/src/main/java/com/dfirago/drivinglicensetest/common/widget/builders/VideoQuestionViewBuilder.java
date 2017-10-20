@@ -3,9 +3,9 @@ package com.dfirago.drivinglicensetest.common.widget.builders;
 import android.content.res.AssetFileDescriptor;
 import android.view.ViewGroup;
 
+import com.dfirago.drivinglicensetest.common.expansion.ExpansionFileProvider;
 import com.dfirago.drivinglicensetest.common.model.Question;
 import com.dfirago.drivinglicensetest.common.model.QuestionType;
-import com.dfirago.drivinglicensetest.common.utils.AssetReader;
 import com.dfirago.drivinglicensetest.common.widget.AbstractQuestionView;
 import com.dfirago.drivinglicensetest.common.widget.VideoQuestionView;
 
@@ -19,20 +19,18 @@ import javax.inject.Provider;
  */
 public class VideoQuestionViewBuilder extends AbstractQuestionViewBuilder<VideoQuestionView> {
 
-    private AssetReader assetReader;
+    private ExpansionFileProvider expansionFileProvider;
 
     @Inject
-    protected VideoQuestionViewBuilder(AssetReader assetReader, Map<QuestionType, Provider<AbstractQuestionView>> questionViewProviders) {
+    protected VideoQuestionViewBuilder(Map<QuestionType, Provider<AbstractQuestionView>> questionViewProviders, ExpansionFileProvider expansionFileProvider) {
         super(questionViewProviders);
-        this.assetReader = assetReader;
+        this.expansionFileProvider = expansionFileProvider;
     }
 
     @Override
     public VideoQuestionView buildView(Question question, ViewGroup.LayoutParams layoutParams) {
         VideoQuestionView view = super.buildView(question, layoutParams);
-        // TODO real files from expansion file
-//        AssetFileDescriptor afd = assetReader.readVideo(question.getMedia());
-        AssetFileDescriptor afd = assetReader.readVideo("dummy_video.mp4");
+        AssetFileDescriptor afd = expansionFileProvider.getAssetFileDescriptor(question.getMedia());
         view.setQuestionVideo(afd);
         view.setQuestionValue(question.getValue());
         view.setOptions(question.getOptions());

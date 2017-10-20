@@ -11,7 +11,7 @@ android {
         applicationId "com.dfirago.drivinglicensetest"
         minSdkVersion 19
         targetSdkVersion 26
-        versionCode 1
+        versionCode 2
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -76,5 +76,8 @@ dependencies {
     // Tests
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-all:1.10.19'
+
+    // Better expansion file reader
+    compile 'com.github.bolein.better-apk-expansion:zip_file:5.0.2'
 
 }
