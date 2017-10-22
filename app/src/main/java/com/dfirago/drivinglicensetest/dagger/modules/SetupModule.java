@@ -1,6 +1,6 @@
 package com.dfirago.drivinglicensetest.dagger.modules;
 
-import com.dfirago.drivinglicensetest.common.database.ConfigurationDao;
+import com.dfirago.drivinglicensetest.common.database.ConfigurationService;
 import com.dfirago.drivinglicensetest.common.setup.DatabaseSetupExecutor;
 import com.dfirago.drivinglicensetest.common.setup.ExpansionSetupExecutor;
 import com.dfirago.drivinglicensetest.common.setup.SetupExecutor;
@@ -33,8 +33,8 @@ public abstract class SetupModule {
 
     @Singleton
     @Provides
-    static SetupExecutionHelper setupExecutionHelper(ConfigurationDao configurationDao,
+    static SetupExecutionHelper setupExecutionHelper(ConfigurationService configurationService,
                                                      Set<SetupExecutor> setupExecutors) {
-        return new SetupExecutionHelper(configurationDao, setupExecutors);
+        return new SetupExecutionHelper(configurationService, setupExecutors);
     }
 }

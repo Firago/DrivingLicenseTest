@@ -29,9 +29,8 @@ public abstract class AbstractQuestionView extends LinearLayout {
 
     private OptionsAdapter optionsAdapter;
 
-    public AbstractQuestionView(Context context, OptionsAdapter optionsAdapter) {
+    public AbstractQuestionView(Context context) {
         super(context);
-        this.optionsAdapter = optionsAdapter;
         inflateView();
     }
 
@@ -41,6 +40,7 @@ public abstract class AbstractQuestionView extends LinearLayout {
     protected void onFinishInflate() {
         super.onFinishInflate();
         ButterKnife.bind(this);
+        optionsAdapter = new OptionsAdapter();
         responseOptionsView.setAdapter(optionsAdapter);
         responseOptionsView.setLayoutManager(
                 new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
@@ -59,19 +59,15 @@ public abstract class AbstractQuestionView extends LinearLayout {
         optionsAdapter.setOptionSelectionChangeListener(listener);
     }
 
-    public void highlight(ResponseOption responseOption) {
-        optionsAdapter.highlight(responseOption);
+    public void validate(ResponseOption responseOption) {
+        optionsAdapter.validate(responseOption);
     }
 
-    public void unhighlight(ResponseOption responseOption) {
-        optionsAdapter.unhighlight(responseOption);
+    public void reset(ResponseOption responseOption) {
+        optionsAdapter.reset(responseOption);
     }
 
-    public void unhighlightAll() {
-        optionsAdapter.unhighlightAll();
-    }
-
-    public void showCorrectAnswer() {
-        optionsAdapter.showCorrectAnswer();
+    public void showAnswer() {
+        optionsAdapter.showAnswer();
     }
 }

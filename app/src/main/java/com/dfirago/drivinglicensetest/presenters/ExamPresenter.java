@@ -1,6 +1,6 @@
 package com.dfirago.drivinglicensetest.presenters;
 
-import com.dfirago.drivinglicensetest.common.database.QuestionDao;
+import com.dfirago.drivinglicensetest.common.database.QuestionService;
 import com.dfirago.drivinglicensetest.common.model.CategoryType;
 import com.dfirago.drivinglicensetest.common.model.Question;
 import com.dfirago.drivinglicensetest.dagger.scopes.FragmentScope;
@@ -20,16 +20,16 @@ public class ExamPresenter {
     private int currentQuestionPos = 0;
 
     private ExamView view;
-    private QuestionDao questionDao;
+    private QuestionService questionService;
 
     @Inject
-    public ExamPresenter(ExamView view, QuestionDao questionDao) {
+    public ExamPresenter(ExamView view, QuestionService questionService) {
         this.view = view;
-        this.questionDao = questionDao;
+        this.questionService = questionService;
     }
 
     public void loadQuestions(CategoryType categoryType) {
-        questions = questionDao.shuffleQuestions(categoryType);
+        questions = questionService.shuffleQuestions(categoryType);
         view.showQuestion(questions.get(currentQuestionPos));
     }
 }

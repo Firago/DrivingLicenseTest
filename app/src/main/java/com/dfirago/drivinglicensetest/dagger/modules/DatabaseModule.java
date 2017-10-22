@@ -2,12 +2,12 @@ package com.dfirago.drivinglicensetest.dagger.modules;
 
 import android.content.Context;
 
-import com.dfirago.drivinglicensetest.common.database.CategoryDao;
-import com.dfirago.drivinglicensetest.common.database.ConfigurationDao;
-import com.dfirago.drivinglicensetest.common.database.QuestionDao;
-import com.dfirago.drivinglicensetest.common.database.impl.CategoryDaoImpl;
-import com.dfirago.drivinglicensetest.common.database.impl.ConfigurationDaoImpl;
-import com.dfirago.drivinglicensetest.common.database.impl.QuestionDaoImpl;
+import com.dfirago.drivinglicensetest.common.database.CategoryService;
+import com.dfirago.drivinglicensetest.common.database.ConfigurationService;
+import com.dfirago.drivinglicensetest.common.database.QuestionService;
+import com.dfirago.drivinglicensetest.common.database.impl.CategoryServiceImpl;
+import com.dfirago.drivinglicensetest.common.database.impl.ConfigurationServiceImpl;
+import com.dfirago.drivinglicensetest.common.database.impl.QuestionServiceImpl;
 import com.dfirago.drivinglicensetest.common.model.MyObjectBox;
 
 import javax.inject.Singleton;
@@ -31,13 +31,13 @@ public abstract class DatabaseModule {
 
     @Singleton
     @Binds
-    abstract ConfigurationDao configurationDao(ConfigurationDaoImpl configurationDao);
+    abstract ConfigurationService configurationService(ConfigurationServiceImpl configurationService);
 
     @Singleton
     @Binds
-    abstract QuestionDao questionDao(QuestionDaoImpl questionDao);
+    abstract QuestionService questionService(QuestionServiceImpl questionService);
 
     @Singleton
     @Binds
-    abstract CategoryDao categoryDao(CategoryDaoImpl categoryDao);
+    abstract CategoryService categoryService(CategoryServiceImpl categoryService);
 }

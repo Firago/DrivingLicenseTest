@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.dfirago.drivinglicensetest.R;
-import com.dfirago.drivinglicensetest.common.widget.utils.OptionsAdapter;
 
 import javax.inject.Inject;
 
@@ -22,8 +21,8 @@ public class ImageQuestionView extends AbstractQuestionView {
     ImageView questionImageView;
 
     @Inject
-    public ImageQuestionView(Context context, OptionsAdapter optionsAdapter) {
-        super(context, optionsAdapter);
+    public ImageQuestionView(Context context) {
+        super(context);
     }
 
     @Override

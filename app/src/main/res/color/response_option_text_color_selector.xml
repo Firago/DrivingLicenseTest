@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        app:state_validated="true"
+        app:state_correct="true"
+        android:color="@android:color/white" />
+    <item
+        app:state_validated="true"
+        app:state_correct="false"
+        android:color="@android:color/white" />
+
+    <item
+        android:state_checked="true"
+        app:state_validated="false"
+        android:color="@android:color/black" />
+
+    <item
+        android:state_checked="false"
+        app:state_validated="false"
+        android:color="@android:color/black" />
+
+</selector>

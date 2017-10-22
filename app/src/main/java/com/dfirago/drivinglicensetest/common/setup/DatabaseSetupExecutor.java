@@ -3,9 +3,9 @@ package com.dfirago.drivinglicensetest.common.setup;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.dfirago.drivinglicensetest.common.database.CategoryDao;
-import com.dfirago.drivinglicensetest.common.database.ConfigurationDao;
-import com.dfirago.drivinglicensetest.common.database.QuestionDao;
+import com.dfirago.drivinglicensetest.common.database.CategoryService;
+import com.dfirago.drivinglicensetest.common.database.ConfigurationService;
+import com.dfirago.drivinglicensetest.common.database.QuestionService;
 import com.dfirago.drivinglicensetest.common.database.utils.CategoryProvider;
 import com.dfirago.drivinglicensetest.common.model.Category;
 import com.dfirago.drivinglicensetest.common.model.CategoryType;
@@ -34,30 +34,30 @@ public class DatabaseSetupExecutor implements SetupExecutor {
 
     private final Map<CategoryType, Category> categoryMap = CategoryProvider.forTypes(CategoryType.values());
 
-    private ConfigurationDao configurationDao;
-    private QuestionDao questionDao;
-    private CategoryDao categoryDao;
+    private ConfigurationService configurationService;
+    private QuestionService questionService;
+    private CategoryService categoryService;
     private AssetReader assetReader;
 
     @Inject
-    public DatabaseSetupExecutor(ConfigurationDao configurationDao, QuestionDao questionDao,
-                                 CategoryDao categoryDao, AssetReader assetReader) {
-        this.configurationDao = configurationDao;
-        this.questionDao = questionDao;
-        this.categoryDao = categoryDao;
+    public DatabaseSetupExecutor(ConfigurationService configurationService, QuestionService questionService,
+                                 CategoryService categoryService, AssetReader assetReader) {
+        this.configurationService = configurationService;
+        this.questionService = questionService;
+        this.categoryService = categoryService;
         this.assetReader = assetReader;
     }
 
     @Override
     public boolean execute() throws Exception {
         Log.d(TAG, "Checking if database needs to be populated based on DATABASE_READY flag");
-        ConfigurationEntry databaseReadyEntry = configurationDao
+        ConfigurationEntry databaseReadyEntry = configurationService
                 .findByKey(ConfigurationKey.DATABASE_READY, true);
         Log.d(TAG, "DATABASE_READY flag is set to " + databaseReadyEntry.getValue());
         if (Boolean.valueOf(databaseReadyEntry.getValue()).equals(Boolean.FALSE)) {
             populateDatabase();
             databaseReadyEntry.setValue(String.valueOf(true));
-            configurationDao.put(databaseReadyEntry);
+            configurationService.put(databaseReadyEntry);
             return true;
         }
         return false;
@@ -65,15 +65,15 @@ public class DatabaseSetupExecutor implements SetupExecutor {
 
     private void populateDatabase() throws JSONException {
         Log.d(TAG, "Populating database - START");
-        questionDao.removeAll();
-        categoryDao.removeAll();
+        questionService.removeAll();
+        categoryService.removeAll();
         JSONArray questions = readQuestions();
         Log.d(TAG, "Total number of questions: " + questions.length());
         for (int i = 0; i < questions.length(); i++) {
             Log.d(TAG, "Processing question: " + (i + 1));
             JSONObject questionObject = questions.getJSONObject(i);
             Question question = parseQuestion(questionObject);
-            questionDao.put(question);
+            questionService.put(question);
         }
         Log.d(TAG, "Populating database - FINISH");
     }

@@ -1,6 +1,6 @@
 package com.dfirago.drivinglicensetest.common.database.impl;
 
-import com.dfirago.drivinglicensetest.common.database.CategoryDao;
+import com.dfirago.drivinglicensetest.common.database.CategoryService;
 import com.dfirago.drivinglicensetest.common.model.Category;
 
 import javax.inject.Inject;
@@ -11,12 +11,12 @@ import io.objectbox.BoxStore;
 /**
  * Created by Dmytro Firago (firago94@gmail.com) on 10/14/2017.
  */
-public class CategoryDaoImpl implements CategoryDao {
+public class CategoryServiceImpl implements CategoryService {
 
     private Box<Category> categoryBox;
 
     @Inject
-    public CategoryDaoImpl(BoxStore boxStore) {
+    public CategoryServiceImpl(BoxStore boxStore) {
         this.categoryBox = boxStore.boxFor(Category.class);
     }
 

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.View;
 
 import com.dfirago.drivinglicensetest.R;
-import com.dfirago.drivinglicensetest.common.widget.utils.OptionsAdapter;
 
 import javax.inject.Inject;
 
@@ -14,8 +13,8 @@ import javax.inject.Inject;
 public class SimpleQuestionView extends AbstractQuestionView {
 
     @Inject
-    public SimpleQuestionView(Context context, OptionsAdapter optionsAdapter) {
-        super(context, optionsAdapter);
+    public SimpleQuestionView(Context context) {
+        super(context);
     }
 
     @Override

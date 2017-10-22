@@ -1,7 +1,6 @@
 package com.dfirago.drivinglicensetest.dagger.modules;
 
 import com.dfirago.drivinglicensetest.common.model.QuestionType;
-import com.dfirago.drivinglicensetest.common.utils.ColorProvider;
 import com.dfirago.drivinglicensetest.common.widget.AbstractQuestionView;
 import com.dfirago.drivinglicensetest.common.widget.ImageQuestionView;
 import com.dfirago.drivinglicensetest.common.widget.SimpleQuestionView;
@@ -11,7 +10,6 @@ import com.dfirago.drivinglicensetest.common.widget.builders.ImageQuestionViewBu
 import com.dfirago.drivinglicensetest.common.widget.builders.SimpleQuestionViewBuilder;
 import com.dfirago.drivinglicensetest.common.widget.builders.VideoQuestionViewBuilder;
 import com.dfirago.drivinglicensetest.common.widget.factories.QuestionViewFactory;
-import com.dfirago.drivinglicensetest.common.widget.utils.OptionsAdapter;
 import com.dfirago.drivinglicensetest.dagger.mappings.QuestionViewBuilderKey;
 import com.dfirago.drivinglicensetest.dagger.mappings.QuestionViewKey;
 
@@ -61,10 +59,5 @@ public abstract class QuestionViewModule {
     @Provides
     static QuestionViewFactory questionViewFactory(Map<QuestionType, AbstractQuestionViewBuilder> viewBuilderMap) {
         return new QuestionViewFactory(viewBuilderMap);
-    }
-
-    @Provides
-    static OptionsAdapter optionsAdapter(ColorProvider colorProvider) {
-        return new OptionsAdapter(colorProvider);
     }
 }

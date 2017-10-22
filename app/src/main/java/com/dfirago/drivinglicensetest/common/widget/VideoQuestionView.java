@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.dfirago.drivinglicensetest.R;
-import com.dfirago.drivinglicensetest.common.widget.utils.OptionsAdapter;
 
 import javax.inject.Inject;
 
@@ -33,8 +32,8 @@ public class VideoQuestionView extends AbstractQuestionView {
     TextureView textureView;
 
     @Inject
-    public VideoQuestionView(Context context, OptionsAdapter optionsAdapter) {
-        super(context, optionsAdapter);
+    public VideoQuestionView(Context context) {
+        super(context);
     }
 
     @Override

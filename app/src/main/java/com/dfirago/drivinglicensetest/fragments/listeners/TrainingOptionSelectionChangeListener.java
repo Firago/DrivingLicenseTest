@@ -18,10 +18,9 @@ public class TrainingOptionSelectionChangeListener implements OnOptionSelectionC
     @Override
     public void onOptionSelectionChange(ResponseOption option, boolean isChecked) {
         if (isChecked) {
-            questionView.unhighlightAll();
-            questionView.highlight(option);
+            questionView.validate(option);
         } else {
-            questionView.unhighlight(option);
+            questionView.reset(option);
         }
     }
 }

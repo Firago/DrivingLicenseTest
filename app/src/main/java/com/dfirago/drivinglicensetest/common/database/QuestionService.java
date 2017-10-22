@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Dmytro Firago (firago94@gmail.com) on 10/7/2017.
  */
-public interface QuestionDao {
+public interface QuestionService {
 
     void removeAll();
     

@@ -2,7 +2,7 @@ package com.dfirago.drivinglicensetest.presenters;
 
 import android.util.Log;
 
-import com.dfirago.drivinglicensetest.common.database.QuestionDao;
+import com.dfirago.drivinglicensetest.common.database.QuestionService;
 import com.dfirago.drivinglicensetest.common.model.CategoryType;
 import com.dfirago.drivinglicensetest.common.model.Question;
 import com.dfirago.drivinglicensetest.dagger.scopes.FragmentScope;
@@ -24,17 +24,17 @@ public class TrainingPresenter {
     private int currentQuestionPos = 0;
 
     private TrainingView view;
-    private QuestionDao questionDao;
+    private QuestionService questionService;
 
     @Inject
-    public TrainingPresenter(TrainingView view, QuestionDao questionDao) {
+    public TrainingPresenter(TrainingView view, QuestionService questionService) {
         this.view = view;
-        this.questionDao = questionDao;
+        this.questionService = questionService;
     }
 
     public void startTraining(CategoryType categoryType) {
         Log.i(TAG, "Starting training");
-        questions = questionDao.loadQuestions(categoryType);
+        questions = questionService.loadQuestions(categoryType);
         showQuestion(questions, currentQuestionPos);
     }
 
@@ -52,8 +52,7 @@ public class TrainingPresenter {
 
     public void onHintClicked() {
         Log.i(TAG, "onHintClicked() - Correct answer will be highlighted");
-        Question currentQuestion = questions.get(currentQuestionPos);
-        view.showAnswer(currentQuestion);
+        view.showAnswer();
     }
 
     private void showQuestion(List<Question> questions, int index) {

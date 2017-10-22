@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by Dmytro Firago (firago94@gmail.com) on 10/14/2017.
  */
-public interface ConfigurationDao {
+public interface ConfigurationService {
 
     ConfigurationEntry findByKey(ConfigurationKey key, boolean createIfNotExists);
 

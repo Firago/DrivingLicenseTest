@@ -9,7 +9,7 @@ public interface TrainingView {
 
     void showQuestion(Question question);
 
-    void showAnswer(Question question);
+    void showAnswer();
 
     void updateQuestionNumber(int current, int total);
 }

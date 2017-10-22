@@ -2,7 +2,7 @@ package com.dfirago.drivinglicensetest.common.setup;
 
 import android.util.Log;
 
-import com.dfirago.drivinglicensetest.common.database.ConfigurationDao;
+import com.dfirago.drivinglicensetest.common.database.ConfigurationService;
 import com.dfirago.drivinglicensetest.common.model.ConfigurationEntry;
 import com.dfirago.drivinglicensetest.common.model.ConfigurationKey;
 
@@ -15,23 +15,23 @@ public class ExpansionSetupExecutor implements SetupExecutor {
 
     private final static String TAG = "ExpansionSetupExecutor";
 
-    private ConfigurationDao configurationDao;
+    private ConfigurationService configurationService;
 
     @Inject
-    public ExpansionSetupExecutor(ConfigurationDao configurationDao) {
-        this.configurationDao = configurationDao;
+    public ExpansionSetupExecutor(ConfigurationService configurationService) {
+        this.configurationService = configurationService;
     }
 
     @Override
     public boolean execute() throws Exception {
         Log.d(TAG, "Checking if expansion needs to be downloaded based on EXPANSION_READY flag");
-        ConfigurationEntry expansionReadyEntry = configurationDao
+        ConfigurationEntry expansionReadyEntry = configurationService
                 .findByKey(ConfigurationKey.EXPANSION_READY, true);
         Log.d(TAG, "EXPANSION_READY flag is set to " + expansionReadyEntry.getValue());
         if (Boolean.valueOf(expansionReadyEntry.getValue()).equals(Boolean.FALSE)) {
             downloadExpansion();
             expansionReadyEntry.setValue(String.valueOf(true));
-            configurationDao.put(expansionReadyEntry);
+            configurationService.put(expansionReadyEntry);
             return true;
         }
         return false;

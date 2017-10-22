@@ -1,6 +1,8 @@
 package com.dfirago.drivinglicensetest.common.database.impl;
 
-import com.dfirago.drivinglicensetest.common.database.QuestionDao;
+import android.util.Log;
+
+import com.dfirago.drivinglicensetest.common.database.QuestionService;
 import com.dfirago.drivinglicensetest.common.model.CategoryType;
 import com.dfirago.drivinglicensetest.common.model.Question;
 
@@ -15,12 +17,14 @@ import io.objectbox.BoxStore;
 /**
  * Created by Dmytro Firago (firago94@gmail.com) on 10/12/2017.
  */
-public class QuestionDaoImpl implements QuestionDao {
+public class QuestionServiceImpl implements QuestionService {
+
+    public static final String TAG = "QuestionService";
 
     private final Box<Question> questionBox;
 
     @Inject
-    public QuestionDaoImpl(BoxStore boxStore) {
+    public QuestionServiceImpl(BoxStore boxStore) {
         questionBox = boxStore.boxFor(Question.class);
     }
 
@@ -31,11 +35,14 @@ public class QuestionDaoImpl implements QuestionDao {
 
     @Override
     public List<Question> loadQuestions(CategoryType categoryType) {
-        return questionBox.query()
+        long start = System.currentTimeMillis();
+        List<Question> questions = questionBox.query()
                 .filter(question -> question.getCategories().hasA(
                         category -> category.getCategoryType() == categoryType))
                 .build()
                 .find();
+        Log.d(TAG, "Loading questions took: " + (System.currentTimeMillis() - start));
+        return questions;
     }
 
     @Override

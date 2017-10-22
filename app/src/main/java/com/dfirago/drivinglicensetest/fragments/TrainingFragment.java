@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.dfirago.drivinglicensetest.R;
 import com.dfirago.drivinglicensetest.common.model.CategoryType;
 import com.dfirago.drivinglicensetest.common.model.Question;
-import com.dfirago.drivinglicensetest.common.model.ResponseOption;
 import com.dfirago.drivinglicensetest.common.utils.ViewGroupUtils;
 import com.dfirago.drivinglicensetest.common.widget.AbstractQuestionView;
 import com.dfirago.drivinglicensetest.common.widget.factories.QuestionViewFactory;
@@ -89,13 +88,8 @@ public class TrainingFragment extends BaseFragment implements TrainingView {
     }
 
     @Override
-    public void showAnswer(Question question) {
-        for (ResponseOption option : question.getOptions()) {
-            if (option.isCorrect()) {
-                currentQuestionView.highlight(option);
-                break;
-            }
-        }
+    public void showAnswer() {
+        currentQuestionView.showAnswer();
     }
 
     @Override

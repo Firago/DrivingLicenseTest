@@ -1,6 +1,6 @@
 package com.dfirago.drivinglicensetest.common.database.impl;
 
-import com.dfirago.drivinglicensetest.common.database.ConfigurationDao;
+import com.dfirago.drivinglicensetest.common.database.ConfigurationService;
 import com.dfirago.drivinglicensetest.common.model.ConfigurationEntry;
 import com.dfirago.drivinglicensetest.common.model.ConfigurationKey;
 
@@ -16,12 +16,12 @@ import io.objectbox.BoxStore;
 /**
  * Created by Dmytro Firago (firago94@gmail.com) on 10/14/2017.
  */
-public class ConfigurationDaoImpl implements ConfigurationDao {
+public class ConfigurationServiceImpl implements ConfigurationService {
 
     private Box<ConfigurationEntry> configurationBox;
 
     @Inject
-    public ConfigurationDaoImpl(BoxStore boxStore) {
+    public ConfigurationServiceImpl(BoxStore boxStore) {
         this.configurationBox = boxStore.boxFor(ConfigurationEntry.class);
     }
 
