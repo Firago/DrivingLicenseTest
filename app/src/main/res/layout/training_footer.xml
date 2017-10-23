@@ -1,18 +1,13 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:paddingBottom="6dp"
-    android:paddingTop="6dp">
+    android:layout_height="wrap_content">
 
     <ImageButton
         android:id="@+id/button_previous"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
+        style="@style/QuestionViewFooterButton"
         android:contentDescription="@string/previous_question"
         android:src="@drawable/ic_keyboard_arrow_left_white_48dp"
-        android:tint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/button_hint"
@@ -20,12 +15,9 @@
 
     <ImageButton
         android:id="@+id/button_hint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
+        style="@style/QuestionViewFooterButton"
         android:contentDescription="@string/show_answer"
         android:src="@drawable/ic_help_outline_white_48dp"
-        android:tint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/button_previous"
         app:layout_constraintRight_toLeftOf="@+id/button_next"
@@ -33,12 +25,9 @@
 
     <ImageButton
         android:id="@+id/button_next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@null"
+        style="@style/QuestionViewFooterButton"
         android:contentDescription="@string/next_question"
         android:src="@drawable/ic_keyboard_arrow_right_white_48dp"
-        android:tint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/button_hint"
         app:layout_constraintRight_toRightOf="parent"

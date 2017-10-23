@@ -21,7 +21,7 @@ public class TrainingPresenter {
     private static final String TAG = "TrainingPresenter";
 
     private List<Question> questions;
-    private int currentQuestionPos = 0;
+    private int currentQuestionPos = 1300;
 
     private TrainingView view;
     private QuestionService questionService;

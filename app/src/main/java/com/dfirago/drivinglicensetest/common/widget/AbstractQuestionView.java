@@ -43,7 +43,12 @@ public abstract class AbstractQuestionView extends LinearLayout {
         optionsAdapter = new OptionsAdapter();
         responseOptionsView.setAdapter(optionsAdapter);
         responseOptionsView.setLayoutManager(
-                new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false) {
+                    @Override
+                    public boolean canScrollVertically() {
+                        return false;
+                    }
+                });
     }
 
     public void setQuestionValue(String questionValue) {

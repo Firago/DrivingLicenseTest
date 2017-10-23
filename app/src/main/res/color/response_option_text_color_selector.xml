@@ -5,20 +5,20 @@
     <item
         app:state_validated="true"
         app:state_correct="true"
-        android:color="@android:color/white" />
+        android:color="@android:color/primary_text_dark" />
     <item
         app:state_validated="true"
         app:state_correct="false"
-        android:color="@android:color/white" />
+        android:color="@android:color/primary_text_dark" />
 
     <item
         android:state_checked="true"
         app:state_validated="false"
-        android:color="@android:color/black" />
+        android:color="@android:color/primary_text_light" />
 
     <item
         android:state_checked="false"
         app:state_validated="false"
-        android:color="@android:color/black" />
+        android:color="@android:color/primary_text_light" />
 
 </selector>

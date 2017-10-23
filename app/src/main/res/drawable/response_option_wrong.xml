@@ -2,7 +2,7 @@
     <item>
         <shape android:shape="rectangle">
             <solid android:color="@color/colorOptionWrong" />
-            <corners android:radius="4dp" />
+            <corners android:radius="@dimen/response_option_button_radius" />
         </shape>
     </item>
 </layer-list>
