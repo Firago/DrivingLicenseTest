@@ -4,7 +4,8 @@
             <solid android:color="@color/colorOptionNormal" />
             <corners android:radius="@dimen/response_option_button_radius" />
             <stroke
-                android:color="@color/colorOptionNormalStroke" />
+                android:width="0.25dp"
+                android:color="@color/colorOptionStroke" />
         </shape>
     </item>
 </layer-list>

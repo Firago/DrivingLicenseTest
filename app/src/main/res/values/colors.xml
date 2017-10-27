@@ -5,7 +5,7 @@
     <color name="colorAccent">#008975</color>
 
     <color name="colorOptionCorrect">#008975</color>
-    <color name="colorOptionWrong">#E72D39</color>
+    <color name="colorOptionWrong">#B71C1C</color>
     <color name="colorOptionNormal">#EEEEEE</color>
-    <color name="colorOptionNormalStroke">#9E9E9E</color>
+    <color name="colorOptionStroke">#9E9E9E</color>
 </resources>

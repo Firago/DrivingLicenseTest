@@ -40,14 +40,20 @@ public class TrainingPresenter {
 
     public void onPreviousClicked() {
         Log.i(TAG, "onPreviousClicked() - previous question will be shown");
-        currentQuestionPos -= currentQuestionPos > 0 ? 1 : 0;
-        showQuestion(questions, currentQuestionPos);
+        int updatedPos = currentQuestionPos - 1;
+        if (updatedPos > -1) {
+            currentQuestionPos = updatedPos;
+            showQuestion(questions, currentQuestionPos);
+        }
     }
 
     public void onNextClicked() {
-        Log.i(TAG, "onNextClicked() - previous question will be shown");
-        currentQuestionPos += currentQuestionPos < (questions.size() - 1) ? 1 : 0;
-        showQuestion(questions, currentQuestionPos);
+        Log.i(TAG, "onNextClicked() - next question will be shown");
+        int updatedPos = currentQuestionPos + 1;
+        if (updatedPos < questions.size()) {
+            currentQuestionPos = updatedPos;
+            showQuestion(questions, currentQuestionPos);
+        }
     }
 
     public void onHintClicked() {

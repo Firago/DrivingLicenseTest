@@ -1,16 +1,22 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/colorAccent"
     android:paddingBottom="6dp"
+    android:paddingEnd="12dp"
+    android:paddingStart="12dp"
     android:paddingTop="6dp">
 
     <LinearLayout
-        android:id="@+id/question_number_container"
+        android:id="@+id/container_question_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/container_question_points"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/questions_current"
@@ -37,13 +43,30 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/question_points"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/container_question_points"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:textColor="@android:color/white"
-        android:textSize="16sp"
-        tools:text="3" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_weight="4"
+        app:layout_constraintLeft_toRightOf="@+id/container_question_number"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</LinearLayout>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/question_points"
+            android:src="@drawable/ic_grade_white_48dp" />
+
+        <TextView
+            android:id="@+id/question_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            tools:text="3" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -8,6 +8,7 @@
         style="@style/QuestionViewFooterButton"
         android:contentDescription="@string/previous_question"
         android:src="@drawable/ic_keyboard_arrow_left_white_48dp"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/button_hint"

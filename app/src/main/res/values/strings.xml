@@ -12,4 +12,6 @@
     <string name="show_answer">Poprawna odpowiedź</string>
     <string name="next_question">Następnie pytanie</string>
     <string name="question_number_delimiter">/</string>
+    <string name="question_points">Ilość punktów za pytanie</string>
+    <string name="question_timer_title">Czas na zapoznanie się z pytaniem:</string>
 </resources>

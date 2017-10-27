@@ -13,12 +13,12 @@
         android:drawable="@drawable/response_option_wrong" />
 
     <item
-        android:state_selected="true"
+        android:state_checked="true"
         app:state_validated="false"
         android:drawable="@drawable/response_option_selected" />
 
     <item
-        android:state_selected="false"
+        android:state_checked="false"
         app:state_validated="false"
         android:drawable="@drawable/response_option_normal" />
 

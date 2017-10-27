@@ -100,4 +100,13 @@ public class Question {
     public void setMedia(String media) {
         this.media = media;
     }
+
+    public ResponseOption getCorrectOption() {
+        for (ResponseOption option : options) {
+            if (option.isCorrect()) {
+                return option;
+            }
+        }
+        throw new IllegalStateException("Question should contain at least one correct response option");
+    }
 }
