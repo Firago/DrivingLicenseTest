@@ -1,6 +1,7 @@
 package com.dfirago.drivinglicensetest.fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,7 @@ import butterknife.OnClick;
  */
 public class ExamFragment extends BaseFragment implements ExamView {
 
+    private static final String TAG = "ExamFragment";
     private static final String CATEGORY_PARAM = "categoryType";
 
     private CategoryType categoryType;
@@ -91,8 +93,10 @@ public class ExamFragment extends BaseFragment implements ExamView {
 
     @Override
     public void showQuestion(Question question) {
+        Log.d(TAG, "Creating question view...");
         currentQuestionView = questionViewFactory
                 .createView(question, questionContainer.getLayoutParams());
+        Log.d(TAG, "Replacing question view...");
         ViewGroupUtils.replaceView(questionContainer, currentQuestionView);
         questionContainer = currentQuestionView;
         questionPointsView.setText(String.valueOf(question.getPoints()));

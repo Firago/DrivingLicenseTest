@@ -1,6 +1,6 @@
 package com.dfirago.drivinglicensetest.common.widget.builders;
 
-import android.content.res.AssetFileDescriptor;
+import android.net.Uri;
 import android.view.ViewGroup;
 
 import com.dfirago.drivinglicensetest.common.expansion.ExpansionFileProvider;
@@ -19,19 +19,16 @@ import javax.inject.Provider;
  */
 public class VideoQuestionViewBuilder extends AbstractQuestionViewBuilder<VideoQuestionView> {
 
-    private ExpansionFileProvider expansionFileProvider;
-
     @Inject
-    protected VideoQuestionViewBuilder(Map<QuestionType, Provider<AbstractQuestionView>> questionViewProviders, ExpansionFileProvider expansionFileProvider) {
+    protected VideoQuestionViewBuilder(Map<QuestionType, Provider<AbstractQuestionView>> questionViewProviders) {
         super(questionViewProviders);
-        this.expansionFileProvider = expansionFileProvider;
     }
 
     @Override
     public VideoQuestionView buildView(Question question, ViewGroup.LayoutParams layoutParams) {
         VideoQuestionView view = super.buildView(question, layoutParams);
-        AssetFileDescriptor afd = expansionFileProvider.getAssetFileDescriptor(question.getMedia());
-        view.setQuestionVideo(afd);
+        Uri videoUri = ExpansionFileProvider.getUri(question.getMedia());
+        view.setQuestionVideo(videoUri);
         view.setQuestionValue(question.getValue());
         view.setOptions(question.getOptions());
         return view;

@@ -1,7 +1,7 @@
 package com.dfirago.drivinglicensetest.common.widget;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -37,7 +37,7 @@ public class ImageQuestionView extends AbstractQuestionView {
         ButterKnife.bind(this);
     }
 
-    public void setQuestionImage(Drawable drawable) {
-        questionImageView.setImageDrawable(drawable);
+    public void setQuestionImage(Uri uri) {
+        questionImageView.setImageURI(uri);
     }
 }

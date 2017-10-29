@@ -1,56 +1,25 @@
 package com.dfirago.drivinglicensetest.common.expansion;
 
-import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.res.AssetFileDescriptor;
+import android.net.Uri;
 
-import com.google.android.vending.expansion.zipfile.APKExpansionSupport;
-import com.google.android.vending.expansion.zipfile.ZipResourceFile;
-
-import java.io.IOException;
-import java.io.InputStream;
-
-import javax.inject.Inject;
+import com.google.android.vending.expansion.zipfile.APEZProvider;
 
 /**
- * Created by Dmytro Firago (firago94@gmail.com) on 10/20/2017.
+ * Created by Dmytro Firago (firago94@gmail.com) on 10/29/2017.
  */
-public class ExpansionFileProvider {
+public class ExpansionFileProvider extends APEZProvider {
 
-    private Context context;
+    private static final String CONTENT_PREFIX = "content://";
 
-    @Inject
-    public ExpansionFileProvider(Context context) {
-        this.context = context;
+    private static final String AUTHORITY = "com.dfirago.drivinglicensetest.provider.ExpansionFileProvider";
+
+    public static final Uri EXPANSION_URI = Uri.parse(CONTENT_PREFIX + AUTHORITY);
+
+    public String getAuthority() {
+        return AUTHORITY;
     }
 
-    public AssetFileDescriptor getAssetFileDescriptor(String fileName) {
-        ZipResourceFile expansionFile = getApkExpansionZipFile();
-        return expansionFile.getAssetFileDescriptor(fileName);
-    }
-
-    public InputStream getInputStream(String fileName) throws IOException {
-        ZipResourceFile expansionFile = getApkExpansionZipFile();
-        return expansionFile.getInputStream(fileName);
-    }
-
-    private ZipResourceFile getApkExpansionZipFile() {
-        try {
-            int versionCode = getVersionCode();
-            return APKExpansionSupport.getAPKExpansionZipFile(context, versionCode, versionCode);
-        } catch (IOException e) {
-            throw new IllegalStateException("Failed to find expansion file", e);
-        }
-    }
-
-    private int getVersionCode() {
-        try {
-            PackageManager packageManager = context.getPackageManager();
-            PackageInfo packageInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
-            return packageInfo.versionCode;
-        } catch (PackageManager.NameNotFoundException e) {
-            throw new IllegalStateException("Failed to retrieve application version", e);
-        }
+    public static Uri getUri(String fileName) {
+        return Uri.withAppendedPath(ExpansionFileProvider.EXPANSION_URI, fileName);
     }
 }

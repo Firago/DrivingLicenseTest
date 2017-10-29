@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.res.AssetManager;
 
 import com.dfirago.drivinglicensetest.MainActivity;
-import com.dfirago.drivinglicensetest.common.expansion.ExpansionFileProvider;
 import com.dfirago.drivinglicensetest.common.utils.AssetReader;
 import com.dfirago.drivinglicensetest.common.utils.ColorProvider;
 import com.dfirago.drivinglicensetest.dagger.scopes.ActivityScope;
@@ -57,12 +56,6 @@ public abstract class ApplicationModule {
     @Provides
     static Gson provideGson() {
         return new GsonBuilder().create();
-    }
-
-    @Singleton
-    @Provides
-    static ExpansionFileProvider expansionFileProvider(Context context) {
-        return new ExpansionFileProvider(context);
     }
 
     @ActivityScope

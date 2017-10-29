@@ -1,9 +1,9 @@
 package com.dfirago.drivinglicensetest.common.widget;
 
 import android.content.Context;
-import android.content.res.AssetFileDescriptor;
 import android.graphics.SurfaceTexture;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.Surface;
@@ -26,6 +26,7 @@ public class VideoQuestionView extends AbstractQuestionView {
 
     private static final String TAG = "VideoQuestionView";
 
+    private Uri videoUri;
     private MediaPlayer mediaPlayer;
 
     @BindView(R.id.question_video)
@@ -38,28 +39,39 @@ public class VideoQuestionView extends AbstractQuestionView {
 
     @Override
     protected void inflateView() {
+        Log.d(TAG, "inflateView()");
         View.inflate(getContext(), R.layout.view_video_question, this);
         this.onFinishInflate();
     }
 
     @Override
     protected void onFinishInflate() {
+        Log.d(TAG, "onFinishInflate()");
         super.onFinishInflate();
         ButterKnife.bind(this);
     }
 
-    public void setQuestionVideo(AssetFileDescriptor afd) {
-        mediaPlayer = new MediaPlayer();
-        textureView.setOnTouchListener(new OnTextureViewTouchListener(mediaPlayer));
+    public void setQuestionVideo(Uri videoUri) {
+        this.videoUri = videoUri;
+    }
+
+    @Override
+    protected void onAttachedToWindow() {
+        Log.d(TAG, "onAttachedToWindow()");
+        super.onAttachedToWindow();
+        textureView.setOnTouchListener(new OnTextureViewTouchListener());
         textureView.setSurfaceTextureListener(new AbstractSurfaceTextureListener() {
+
             @Override
             public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width, int height) {
+                Log.d(TAG, "onSurfaceTextureAvailable()");
                 Surface surface = new Surface(surfaceTexture);
                 try {
-                    mediaPlayer.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+                    mediaPlayer = new MediaPlayer();
+                    mediaPlayer.setDataSource(getContext(), videoUri);
                     mediaPlayer.setSurface(surface);
+                    mediaPlayer.setOnPreparedListener(new OnMediaPlayerPreparedListener());
                     mediaPlayer.prepare();
-                    mediaPlayer.setOnPreparedListener(new OnMediaPlayerPreparedListener(textureView));
                 } catch (Exception e) {
                     Log.e(TAG, e.getMessage());
                 }
@@ -69,6 +81,7 @@ public class VideoQuestionView extends AbstractQuestionView {
 
     @Override
     protected void onDetachedFromWindow() {
+        Log.d(TAG, "onDetachedFromWindow()");
         if (mediaPlayer != null) {
             mediaPlayer.stop();
             mediaPlayer.release();
@@ -77,16 +90,11 @@ public class VideoQuestionView extends AbstractQuestionView {
         super.onDetachedFromWindow();
     }
 
-    private static class OnMediaPlayerPreparedListener implements MediaPlayer.OnPreparedListener {
-
-        private TextureView textureView;
-
-        private OnMediaPlayerPreparedListener(TextureView textureView) {
-            this.textureView = textureView;
-        }
+    private class OnMediaPlayerPreparedListener implements MediaPlayer.OnPreparedListener {
 
         @Override
         public void onPrepared(MediaPlayer player) {
+            Log.d(TAG, "onPrepared()");
             adjustViewHeight(player.getVideoWidth(), player.getVideoHeight());
             player.start();
         }
@@ -99,13 +107,7 @@ public class VideoQuestionView extends AbstractQuestionView {
         }
     }
 
-    private static class OnTextureViewTouchListener implements View.OnTouchListener {
-
-        private MediaPlayer mediaPlayer;
-
-        private OnTextureViewTouchListener(MediaPlayer mediaPlayer) {
-            this.mediaPlayer = mediaPlayer;
-        }
+    private class OnTextureViewTouchListener implements View.OnTouchListener {
 
         @Override
         public boolean onTouch(View v, MotionEvent event) {

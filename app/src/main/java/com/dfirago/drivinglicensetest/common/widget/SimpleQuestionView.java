@@ -7,6 +7,8 @@ import com.dfirago.drivinglicensetest.R;
 
 import javax.inject.Inject;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by Dmytro Firago (firago94@gmail.com) on 10/8/2017.
  */
@@ -20,5 +22,12 @@ public class SimpleQuestionView extends AbstractQuestionView {
     @Override
     protected void inflateView() {
         View.inflate(getContext(), R.layout.view_simple_question, this);
+        this.onFinishInflate();
+    }
+
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        ButterKnife.bind(this);
     }
 }
