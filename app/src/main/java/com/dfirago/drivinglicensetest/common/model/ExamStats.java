@@ -15,10 +15,10 @@ public class ExamStats {
     private Map<Question, ResponseOption> selectedAnswers = new HashMap<>();
 
     public ExamStats(List<Question> questions) {
-        questions.forEach(question -> {
+        for (Question question : questions) {
             selectedAnswers.put(question, null);
             totalPoints += question.getPoints();
-        });
+        }
     }
 
     public void put(Question question, ResponseOption option) {
