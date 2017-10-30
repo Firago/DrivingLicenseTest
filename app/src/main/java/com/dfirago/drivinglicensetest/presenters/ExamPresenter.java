@@ -7,6 +7,7 @@ import com.dfirago.drivinglicensetest.common.database.QuestionService;
 import com.dfirago.drivinglicensetest.common.model.CategoryType;
 import com.dfirago.drivinglicensetest.common.model.ExamStats;
 import com.dfirago.drivinglicensetest.common.model.Question;
+import com.dfirago.drivinglicensetest.common.model.ResponseOption;
 import com.dfirago.drivinglicensetest.dagger.scopes.FragmentScope;
 import com.dfirago.drivinglicensetest.views.ExamView;
 
@@ -28,6 +29,7 @@ public class ExamPresenter {
     private List<Question> questions;
     private int currentQuestionPos = 0;
     private ExamStats examStats;
+    private ResponseOption checkedOption;
 
     private ExamView view;
     private QuestionService questionService;
@@ -40,8 +42,8 @@ public class ExamPresenter {
 
     public void startExam(CategoryType categoryType) {
         Log.i(TAG, "Starting training");
-        examStats = new ExamStats();
         questions = questionService.shuffleQuestions(categoryType);
+        examStats = new ExamStats(questions);
         totalTimer = new TotalCountDownTimer(25 * 60 * 1000, 1000);
         questionTimer = new QuestionCountDownTimer(30 * 1000, 1000);
         showQuestion(questions, currentQuestionPos);
@@ -50,6 +52,16 @@ public class ExamPresenter {
 
     public void onNextClicked() {
         Log.i(TAG, "onNextClicked() - next question will be shown");
+        submitAndNext();
+    }
+
+    public void checkOption(ResponseOption option) {
+        this.checkedOption = option;
+    }
+
+    private void submitAndNext() {
+        Question question = questions.get(currentQuestionPos);
+        examStats.put(question, checkedOption);
         showNextQuestion();
     }
 
@@ -100,7 +112,7 @@ public class ExamPresenter {
 
         @Override
         public void onFinish() {
-            showNextQuestion();
+            submitAndNext();
         }
     }
 }

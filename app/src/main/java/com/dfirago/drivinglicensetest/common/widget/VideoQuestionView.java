@@ -22,7 +22,8 @@ import butterknife.ButterKnife;
 /**
  * Created by Dmytro Firago (firago94@gmail.com) on 10/8/2017.
  */
-public class VideoQuestionView extends AbstractQuestionView {
+public class VideoQuestionView extends AbstractQuestionView
+        implements TextureView.SurfaceTextureListener, MediaPlayer.OnPreparedListener {
 
     private static final String TAG = "VideoQuestionView";
 
@@ -49,6 +50,8 @@ public class VideoQuestionView extends AbstractQuestionView {
         Log.d(TAG, "onFinishInflate()");
         super.onFinishInflate();
         ButterKnife.bind(this);
+        textureView.setOnTouchListener(new OnTextureViewTouchListener());
+        textureView.setSurfaceTextureListener(this);
     }
 
     public void setQuestionVideo(Uri videoUri) {
@@ -59,24 +62,6 @@ public class VideoQuestionView extends AbstractQuestionView {
     protected void onAttachedToWindow() {
         Log.d(TAG, "onAttachedToWindow()");
         super.onAttachedToWindow();
-        textureView.setOnTouchListener(new OnTextureViewTouchListener());
-        textureView.setSurfaceTextureListener(new AbstractSurfaceTextureListener() {
-
-            @Override
-            public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width, int height) {
-                Log.d(TAG, "onSurfaceTextureAvailable()");
-                Surface surface = new Surface(surfaceTexture);
-                try {
-                    mediaPlayer = new MediaPlayer();
-                    mediaPlayer.setDataSource(getContext(), videoUri);
-                    mediaPlayer.setSurface(surface);
-                    mediaPlayer.setOnPreparedListener(new OnMediaPlayerPreparedListener());
-                    mediaPlayer.prepare();
-                } catch (Exception e) {
-                    Log.e(TAG, e.getMessage());
-                }
-            }
-        });
     }
 
     @Override
@@ -90,22 +75,50 @@ public class VideoQuestionView extends AbstractQuestionView {
         super.onDetachedFromWindow();
     }
 
-    private class OnMediaPlayerPreparedListener implements MediaPlayer.OnPreparedListener {
-
-        @Override
-        public void onPrepared(MediaPlayer player) {
-            Log.d(TAG, "onPrepared()");
-            adjustViewHeight(player.getVideoWidth(), player.getVideoHeight());
-            player.start();
-        }
-
-        private void adjustViewHeight(int videoWidth, int videoHeight) {
-            int newHeight = (int) (textureView.getWidth() * ((double) videoHeight / videoWidth));
-            LinearLayout.LayoutParams layoutParams = new LinearLayout
-                    .LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, newHeight);
-            textureView.setLayoutParams(layoutParams);
+    @Override
+    public void onSurfaceTextureAvailable(SurfaceTexture surfaceTexture, int width, int height) {
+        Log.d(TAG, "onSurfaceTextureAvailable()");
+        Surface surface = new Surface(surfaceTexture);
+        try {
+            mediaPlayer = new MediaPlayer();
+            mediaPlayer.setDataSource(getContext(), videoUri);
+            mediaPlayer.setSurface(surface);
+            mediaPlayer.setOnPreparedListener(this);
+            mediaPlayer.prepare();
+        } catch (Exception e) {
+            Log.e(TAG, e.getMessage());
         }
     }
+
+    @Override
+    public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
+
+    }
+
+    @Override
+    public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
+        return false;
+    }
+
+    @Override
+    public void onSurfaceTextureUpdated(SurfaceTexture surface) {
+
+    }
+
+    @Override
+    public void onPrepared(MediaPlayer mp) {
+        Log.d(TAG, "onPrepared()");
+        adjustViewHeight(mp.getVideoWidth(), mp.getVideoHeight());
+        mp.start();
+    }
+
+    private void adjustViewHeight(int videoWidth, int videoHeight) {
+        int newHeight = (int) (textureView.getWidth() * ((double) videoHeight / videoWidth));
+        LinearLayout.LayoutParams layoutParams = new LinearLayout
+                .LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, newHeight);
+        textureView.setLayoutParams(layoutParams);
+    }
+
 
     private class OnTextureViewTouchListener implements View.OnTouchListener {
 
@@ -114,29 +127,6 @@ public class VideoQuestionView extends AbstractQuestionView {
             mediaPlayer.seekTo(0);
             mediaPlayer.start();
             return false;
-        }
-    }
-
-    private class AbstractSurfaceTextureListener implements TextureView.SurfaceTextureListener {
-
-        @Override
-        public void onSurfaceTextureAvailable(SurfaceTexture surface, int width, int height) {
-
-        }
-
-        @Override
-        public void onSurfaceTextureSizeChanged(SurfaceTexture surface, int width, int height) {
-
-        }
-
-        @Override
-        public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
-            return false;
-        }
-
-        @Override
-        public void onSurfaceTextureUpdated(SurfaceTexture surface) {
-
         }
     }
 }

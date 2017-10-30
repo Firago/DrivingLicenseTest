@@ -1,6 +1,7 @@
 package com.dfirago.drivinglicensetest.common.widget.builders;
 
 import android.net.Uri;
+import android.util.Log;
 import android.view.ViewGroup;
 
 import com.dfirago.drivinglicensetest.common.expansion.ExpansionFileProvider;
@@ -19,6 +20,8 @@ import javax.inject.Provider;
  */
 public class VideoQuestionViewBuilder extends AbstractQuestionViewBuilder<VideoQuestionView> {
 
+    public static final String TAG = "VideoQVBuilder";
+
     @Inject
     protected VideoQuestionViewBuilder(Map<QuestionType, Provider<AbstractQuestionView>> questionViewProviders) {
         super(questionViewProviders);
@@ -27,7 +30,9 @@ public class VideoQuestionViewBuilder extends AbstractQuestionViewBuilder<VideoQ
     @Override
     public VideoQuestionView buildView(Question question, ViewGroup.LayoutParams layoutParams) {
         VideoQuestionView view = super.buildView(question, layoutParams);
+        Log.d(TAG, "View created");
         Uri videoUri = ExpansionFileProvider.getUri(question.getMedia());
+        Log.d(TAG, "Setting video Uri: " + videoUri.getPath());
         view.setQuestionVideo(videoUri);
         view.setQuestionValue(question.getValue());
         view.setOptions(question.getOptions());

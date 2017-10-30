@@ -1,6 +1,7 @@
 package com.dfirago.drivinglicensetest.common.model;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -10,13 +11,20 @@ public class ExamStats {
 
     private int score = 0;
     private int totalPoints = 0;
+
     private Map<Question, ResponseOption> selectedAnswers = new HashMap<>();
 
-    public void put(Question question, ResponseOption selectedAnswer) {
+    public ExamStats(List<Question> questions) {
+        questions.forEach(question -> {
+            selectedAnswers.put(question, null);
+            totalPoints += question.getPoints();
+        });
+    }
+
+    public void put(Question question, ResponseOption option) {
         ResponseOption correctOption = question.getCorrectOption();
-        score += selectedAnswer.equals(correctOption) ? question.getPoints() : 0;
-        totalPoints += question.getPoints();
-        selectedAnswers.put(question, selectedAnswer);
+        if (option != null && option.equals(correctOption)) score += question.getPoints();
+        selectedAnswers.put(question, option);
     }
 
     public ResponseOption get(Question question) {

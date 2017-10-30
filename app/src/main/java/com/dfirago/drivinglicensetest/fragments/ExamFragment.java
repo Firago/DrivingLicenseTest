@@ -96,6 +96,9 @@ public class ExamFragment extends BaseFragment implements ExamView {
         Log.d(TAG, "Creating question view...");
         currentQuestionView = questionViewFactory
                 .createView(question, questionContainer.getLayoutParams());
+        currentQuestionView.setOptionSelectionChangeListener((option, isChecked) -> {
+            if (isChecked) examPresenter.checkOption(option);
+        });
         Log.d(TAG, "Replacing question view...");
         ViewGroupUtils.replaceView(questionContainer, currentQuestionView);
         questionContainer = currentQuestionView;

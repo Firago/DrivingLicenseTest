@@ -1,5 +1,6 @@
 package com.dfirago.drivinglicensetest.common.widget.factories;
 
+import android.util.Log;
 import android.view.ViewGroup;
 
 import com.dfirago.drivinglicensetest.common.model.Question;
@@ -14,6 +15,8 @@ import java.util.Map;
  */
 public class QuestionViewFactory {
 
+    public static final String TAG = "QuestionViewFactory";
+
     private final Map<QuestionType, AbstractQuestionViewBuilder> builderMapping;
 
     public QuestionViewFactory(Map<QuestionType, AbstractQuestionViewBuilder> builderMapping) {
@@ -21,9 +24,11 @@ public class QuestionViewFactory {
     }
 
     public AbstractQuestionView createView(Question question, ViewGroup.LayoutParams layoutParams) {
-        AbstractQuestionViewBuilder viewBuilder = builderMapping.get(question.getType());
+        QuestionType type = question.getType();
+        Log.d(TAG, "Question type: " + type);
+        AbstractQuestionViewBuilder viewBuilder = builderMapping.get(type);
         if (viewBuilder == null) {
-            throw new IllegalArgumentException("Mapping not found for question type: " + question.getType());
+            throw new IllegalArgumentException("Mapping not found for question type: " + type);
         }
         return viewBuilder.buildView(question, layoutParams);
     }
