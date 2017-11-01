@@ -1,6 +1,6 @@
 package com.dfirago.drivinglicensetest.dagger.mappings;
 
-import com.dfirago.drivinglicensetest.common.model.QuestionType;
+import com.dfirago.drivinglicensetest.database.model.enums.QuestionType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -1,6 +1,6 @@
 package com.dfirago.drivinglicensetest.views;
 
-import com.dfirago.drivinglicensetest.common.model.CategoryType;
+import com.dfirago.drivinglicensetest.database.model.enums.CategoryType;
 
 /**
  * Created by Dmytro Firago on 16/07/2017.

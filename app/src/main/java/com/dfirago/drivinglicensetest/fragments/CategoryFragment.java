@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dfirago.drivinglicensetest.R;
-import com.dfirago.drivinglicensetest.common.model.CategoryType;
-import com.dfirago.drivinglicensetest.common.model.TestMode;
+import com.dfirago.drivinglicensetest.database.model.enums.CategoryType;
+import com.dfirago.drivinglicensetest.database.model.enums.TestMode;
 import com.dfirago.drivinglicensetest.navigation.impl.NavigationManagerImpl;
 import com.dfirago.drivinglicensetest.presenters.CategoryPresenter;
 import com.dfirago.drivinglicensetest.views.CategoryView;

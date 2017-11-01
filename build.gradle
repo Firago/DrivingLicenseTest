@@ -3,21 +3,18 @@
 buildscript {
     repositories {
         jcenter()
-        maven { url 'http://objectbox.net/beta-repo/' }
         maven { url 'https://maven.google.com' }
         maven { url "https://jitpack.io" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
-        classpath 'me.tatarka:gradle-retrolambda:3.6.1'
-        classpath 'io.objectbox:objectbox-gradle-plugin:1.1.0'
+        classpath 'me.tatarka:gradle-retrolambda:3.7.0'
     }
 }
 
 allprojects {
     repositories {
         jcenter()
-        maven { url 'http://objectbox.net/beta-repo/' }
         maven { url 'https://maven.google.com' }
         maven { url "https://jitpack.io" }
     }

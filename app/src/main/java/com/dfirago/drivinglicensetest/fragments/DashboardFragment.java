@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.dfirago.drivinglicensetest.R;
-import com.dfirago.drivinglicensetest.common.model.CategoryType;
+import com.dfirago.drivinglicensetest.database.model.enums.CategoryType;
 import com.dfirago.drivinglicensetest.navigation.impl.NavigationManagerImpl;
 import com.dfirago.drivinglicensetest.presenters.DashboardPresenter;
 import com.dfirago.drivinglicensetest.views.DashboardView;

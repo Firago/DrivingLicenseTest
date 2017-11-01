@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dfirago.drivinglicensetest.R;
-import com.dfirago.drivinglicensetest.common.model.ResponseOption;
+import com.dfirago.drivinglicensetest.database.model.types.ResponseOption;
 import com.dfirago.drivinglicensetest.common.widget.utils.OnOptionSelectionChangeListener;
 import com.dfirago.drivinglicensetest.common.widget.utils.OptionsAdapter;
 

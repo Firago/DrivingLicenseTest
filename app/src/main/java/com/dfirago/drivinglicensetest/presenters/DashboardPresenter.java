@@ -2,7 +2,7 @@ package com.dfirago.drivinglicensetest.presenters;
 
 import android.util.Log;
 
-import com.dfirago.drivinglicensetest.common.model.CategoryType;
+import com.dfirago.drivinglicensetest.database.model.enums.CategoryType;
 import com.dfirago.drivinglicensetest.common.setup.SetupExecutionHelper;
 import com.dfirago.drivinglicensetest.dagger.scopes.FragmentScope;
 import com.dfirago.drivinglicensetest.views.DashboardView;

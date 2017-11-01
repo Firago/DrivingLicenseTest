@@ -3,8 +3,8 @@ package com.dfirago.drivinglicensetest.common.widget.factories;
 import android.util.Log;
 import android.view.ViewGroup;
 
-import com.dfirago.drivinglicensetest.common.model.Question;
-import com.dfirago.drivinglicensetest.common.model.QuestionType;
+import com.dfirago.drivinglicensetest.database.model.entities.Question;
+import com.dfirago.drivinglicensetest.database.model.enums.QuestionType;
 import com.dfirago.drivinglicensetest.common.widget.AbstractQuestionView;
 import com.dfirago.drivinglicensetest.common.widget.builders.AbstractQuestionViewBuilder;
 

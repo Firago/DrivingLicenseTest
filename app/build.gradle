@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'io.objectbox'
 
 android {
 
@@ -80,4 +79,7 @@ dependencies {
     // Better expansion file reader
     compile 'com.github.bolein.better-apk-expansion:zip_file:5.0.2'
 
+    // Room Persistence Library
+    compile 'android.arch.persistence.room:runtime:1.0.0-rc1'
+    annotationProcessor 'android.arch.persistence.room:compiler:1.0.0-rc1'
 }

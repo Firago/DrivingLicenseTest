@@ -7,8 +7,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dfirago.drivinglicensetest.R;
-import com.dfirago.drivinglicensetest.common.model.CategoryType;
-import com.dfirago.drivinglicensetest.common.model.Question;
+import com.dfirago.drivinglicensetest.database.dao.CategoryDao;
+import com.dfirago.drivinglicensetest.database.model.entities.Category;
+import com.dfirago.drivinglicensetest.database.model.enums.CategoryType;
+import com.dfirago.drivinglicensetest.database.model.entities.Question;
 import com.dfirago.drivinglicensetest.common.utils.ViewGroupUtils;
 import com.dfirago.drivinglicensetest.common.widget.AbstractQuestionView;
 import com.dfirago.drivinglicensetest.common.widget.factories.QuestionViewFactory;
@@ -29,7 +31,7 @@ public class TrainingFragment extends BaseFragment implements TrainingView {
 
     private static final String CATEGORY_PARAM = "categoryType";
 
-    private CategoryType categoryType;
+    private Category category;
     private AbstractQuestionView currentQuestionView;
 
     @BindView(R.id.question_container)
@@ -41,6 +43,8 @@ public class TrainingFragment extends BaseFragment implements TrainingView {
     @BindView(R.id.question_points)
     TextView questionPointsView;
 
+    @Inject
+    CategoryDao categoryDao;
     @Inject
     TrainingPresenter trainingPresenter;
     @Inject
@@ -59,7 +63,8 @@ public class TrainingFragment extends BaseFragment implements TrainingView {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             String categoryArg = getArguments().getString(CATEGORY_PARAM);
-            categoryType = CategoryType.valueOf(categoryArg);
+            CategoryType categoryType = CategoryType.valueOf(categoryArg);
+            category = categoryDao.findCategoryByType(categoryType);
         }
     }
 
@@ -73,7 +78,7 @@ public class TrainingFragment extends BaseFragment implements TrainingView {
     @Override
     public void onResume() {
         super.onResume();
-        trainingPresenter.startTraining(categoryType);
+        trainingPresenter.startTraining(category);
     }
 
     @Override

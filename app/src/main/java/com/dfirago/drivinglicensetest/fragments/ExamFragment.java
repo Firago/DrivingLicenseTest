@@ -9,13 +9,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dfirago.drivinglicensetest.R;
-import com.dfirago.drivinglicensetest.common.model.CategoryType;
-import com.dfirago.drivinglicensetest.common.model.ExamStats;
-import com.dfirago.drivinglicensetest.common.model.Question;
 import com.dfirago.drivinglicensetest.common.utils.StringUtils;
 import com.dfirago.drivinglicensetest.common.utils.ViewGroupUtils;
 import com.dfirago.drivinglicensetest.common.widget.AbstractQuestionView;
 import com.dfirago.drivinglicensetest.common.widget.factories.QuestionViewFactory;
+import com.dfirago.drivinglicensetest.database.dao.CategoryDao;
+import com.dfirago.drivinglicensetest.database.model.entities.Category;
+import com.dfirago.drivinglicensetest.database.model.entities.Question;
+import com.dfirago.drivinglicensetest.database.model.enums.CategoryType;
+import com.dfirago.drivinglicensetest.database.model.types.ExamStats;
 import com.dfirago.drivinglicensetest.presenters.ExamPresenter;
 import com.dfirago.drivinglicensetest.views.ExamView;
 
@@ -33,7 +35,7 @@ public class ExamFragment extends BaseFragment implements ExamView {
     private static final String TAG = "ExamFragment";
     private static final String CATEGORY_PARAM = "categoryType";
 
-    private CategoryType categoryType;
+    private Category category;
     private AbstractQuestionView currentQuestionView;
 
     @BindView(R.id.question_container)
@@ -52,6 +54,8 @@ public class ExamFragment extends BaseFragment implements ExamView {
     TextView questionTimerValueView;
 
     @Inject
+    CategoryDao categoryDao;
+    @Inject
     ExamPresenter examPresenter;
     @Inject
     QuestionViewFactory questionViewFactory;
@@ -69,7 +73,8 @@ public class ExamFragment extends BaseFragment implements ExamView {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             String categoryArg = getArguments().getString(CATEGORY_PARAM);
-            categoryType = CategoryType.valueOf(categoryArg);
+            CategoryType categoryType = CategoryType.valueOf(categoryArg);
+            category = categoryDao.findCategoryByType(categoryType);
         }
     }
 
@@ -83,7 +88,7 @@ public class ExamFragment extends BaseFragment implements ExamView {
     @Override
     public void onResume() {
         super.onResume();
-        examPresenter.startExam(categoryType);
+        examPresenter.startExam(category);
     }
 
     @OnClick(R.id.button_next)

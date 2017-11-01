@@ -1,7 +1,7 @@
 package com.dfirago.drivinglicensetest.presenters;
 
-import com.dfirago.drivinglicensetest.common.model.CategoryType;
-import com.dfirago.drivinglicensetest.common.model.TestMode;
+import com.dfirago.drivinglicensetest.database.model.enums.CategoryType;
+import com.dfirago.drivinglicensetest.database.model.enums.TestMode;
 import com.dfirago.drivinglicensetest.dagger.scopes.FragmentScope;
 import com.dfirago.drivinglicensetest.views.CategoryView;
 

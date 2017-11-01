@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
 import com.dfirago.drivinglicensetest.R;
-import com.dfirago.drivinglicensetest.common.model.ResponseOption;
+import com.dfirago.drivinglicensetest.database.model.types.ResponseOption;
 import com.dfirago.drivinglicensetest.common.widget.ResponseOptionButton;
 
 import org.apache.commons.collections4.BidiMap;

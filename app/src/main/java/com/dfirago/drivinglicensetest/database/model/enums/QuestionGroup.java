@@ -1,4 +1,4 @@
-package com.dfirago.drivinglicensetest.common.model;
+package com.dfirago.drivinglicensetest.database.model.enums;
 
 /**
  * Created by Dmytro Firago on 07/07/2017.

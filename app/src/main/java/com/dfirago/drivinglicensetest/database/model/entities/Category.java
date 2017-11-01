@@ -1,11 +1,9 @@
-package com.dfirago.drivinglicensetest.common.model;
+package com.dfirago.drivinglicensetest.database.model.entities;
 
-import com.dfirago.drivinglicensetest.common.model.converters.CategoryTypeConverter;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
-import io.objectbox.annotation.Convert;
-import io.objectbox.annotation.Entity;
-import io.objectbox.annotation.Id;
-import io.objectbox.relation.ToMany;
+import com.dfirago.drivinglicensetest.database.model.enums.CategoryType;
 
 /**
  * Created by Dmytro Firago (firago94@gmail.com) on 10/13/2017.
@@ -13,11 +11,9 @@ import io.objectbox.relation.ToMany;
 @Entity
 public class Category {
 
-    @Id
+    @PrimaryKey(autoGenerate = true)
     private long id;
-    @Convert(converter = CategoryTypeConverter.class, dbType = String.class)
     private CategoryType categoryType;
-    private ToMany<Question> questions;
 
     public Category() {
 
@@ -41,13 +37,5 @@ public class Category {
 
     public void setCategoryType(CategoryType categoryType) {
         this.categoryType = categoryType;
-    }
-
-    public ToMany<Question> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(ToMany<Question> questions) {
-        this.questions = questions;
     }
 }

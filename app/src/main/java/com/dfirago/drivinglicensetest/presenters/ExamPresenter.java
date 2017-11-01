@@ -3,11 +3,11 @@ package com.dfirago.drivinglicensetest.presenters;
 import android.os.CountDownTimer;
 import android.util.Log;
 
-import com.dfirago.drivinglicensetest.common.database.QuestionService;
-import com.dfirago.drivinglicensetest.common.model.CategoryType;
-import com.dfirago.drivinglicensetest.common.model.ExamStats;
-import com.dfirago.drivinglicensetest.common.model.Question;
-import com.dfirago.drivinglicensetest.common.model.ResponseOption;
+import com.dfirago.drivinglicensetest.database.dao.QuestionDao;
+import com.dfirago.drivinglicensetest.database.model.entities.Category;
+import com.dfirago.drivinglicensetest.database.model.types.ExamStats;
+import com.dfirago.drivinglicensetest.database.model.entities.Question;
+import com.dfirago.drivinglicensetest.database.model.types.ResponseOption;
 import com.dfirago.drivinglicensetest.dagger.scopes.FragmentScope;
 import com.dfirago.drivinglicensetest.views.ExamView;
 
@@ -32,17 +32,17 @@ public class ExamPresenter {
     private ResponseOption checkedOption;
 
     private ExamView view;
-    private QuestionService questionService;
+    private QuestionDao questionDao;
 
     @Inject
-    public ExamPresenter(ExamView view, QuestionService questionService) {
+    public ExamPresenter(ExamView view, QuestionDao questionDao) {
         this.view = view;
-        this.questionService = questionService;
+        this.questionDao = questionDao;
     }
 
-    public void startExam(CategoryType categoryType) {
+    public void startExam(Category category) {
         Log.i(TAG, "Starting training");
-        questions = questionService.shuffleQuestions(categoryType);
+        questions = questionDao.findByCategoryId(category.getId(), 32);
         examStats = new ExamStats(questions);
         totalTimer = new TotalCountDownTimer(25 * 60 * 1000, 1000);
         questionTimer = new QuestionCountDownTimer(30 * 1000, 1000);

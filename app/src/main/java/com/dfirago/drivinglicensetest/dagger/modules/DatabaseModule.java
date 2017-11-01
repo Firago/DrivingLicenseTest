@@ -1,21 +1,18 @@
 package com.dfirago.drivinglicensetest.dagger.modules;
 
+import android.arch.persistence.room.Room;
 import android.content.Context;
 
-import com.dfirago.drivinglicensetest.common.database.CategoryService;
-import com.dfirago.drivinglicensetest.common.database.ConfigurationService;
-import com.dfirago.drivinglicensetest.common.database.QuestionService;
-import com.dfirago.drivinglicensetest.common.database.impl.CategoryServiceImpl;
-import com.dfirago.drivinglicensetest.common.database.impl.ConfigurationServiceImpl;
-import com.dfirago.drivinglicensetest.common.database.impl.QuestionServiceImpl;
-import com.dfirago.drivinglicensetest.common.model.MyObjectBox;
+import com.dfirago.drivinglicensetest.database.AppDatabase;
+import com.dfirago.drivinglicensetest.database.dao.CategoryDao;
+import com.dfirago.drivinglicensetest.database.dao.CategoryQuestionDao;
+import com.dfirago.drivinglicensetest.database.dao.ConfigurationDao;
+import com.dfirago.drivinglicensetest.database.dao.QuestionDao;
 
 import javax.inject.Singleton;
 
-import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
-import io.objectbox.BoxStore;
 
 /**
  * Created by Dmytro Firago (firago94@gmail.com) on 10/13/2017.
@@ -25,19 +22,32 @@ public abstract class DatabaseModule {
 
     @Singleton
     @Provides
-    static BoxStore boxStore(Context context) {
-        return MyObjectBox.builder().androidContext(context).build();
+    static AppDatabase appDatabase(Context context) {
+        return Room.databaseBuilder(context, AppDatabase.class, "driving-license-test-db")
+                .allowMainThreadQueries().build();
     }
 
     @Singleton
-    @Binds
-    abstract ConfigurationService configurationService(ConfigurationServiceImpl configurationService);
+    @Provides
+    static QuestionDao questionDao(AppDatabase appDatabase) {
+        return appDatabase.questionDao();
+    }
 
     @Singleton
-    @Binds
-    abstract QuestionService questionService(QuestionServiceImpl questionService);
+    @Provides
+    static CategoryDao categoryDao(AppDatabase appDatabase) {
+        return appDatabase.categoryDao();
+    }
 
     @Singleton
-    @Binds
-    abstract CategoryService categoryService(CategoryServiceImpl categoryService);
+    @Provides
+    static ConfigurationDao configurationDao(AppDatabase appDatabase) {
+        return appDatabase.configurationDao();
+    }
+
+    @Singleton
+    @Provides
+    static CategoryQuestionDao categoryQuestionDao(AppDatabase appDatabase) {
+        return appDatabase.categoryQuestionDao();
+    }
 }

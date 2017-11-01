@@ -1,13 +1,14 @@
-package com.dfirago.drivinglicensetest.common.model;
+package com.dfirago.drivinglicensetest.database.model.entities;
 
-import com.dfirago.drivinglicensetest.common.model.converters.QuestionGroupConverter;
-import com.dfirago.drivinglicensetest.common.model.converters.QuestionTypeConverter;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
-import io.objectbox.annotation.Backlink;
-import io.objectbox.annotation.Convert;
-import io.objectbox.annotation.Entity;
-import io.objectbox.annotation.Id;
-import io.objectbox.relation.ToMany;
+import com.dfirago.drivinglicensetest.database.model.types.ResponseOption;
+import com.dfirago.drivinglicensetest.database.model.enums.QuestionGroup;
+import com.dfirago.drivinglicensetest.database.model.enums.QuestionType;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Dmytro Firago (firago94@gmail.com) on 10/12/2017.
@@ -15,16 +16,12 @@ import io.objectbox.relation.ToMany;
 @Entity
 public class Question {
 
-    @Id
+    @PrimaryKey(autoGenerate = true)
     private long id;
-    @Convert(converter = QuestionTypeConverter.class, dbType = String.class)
     private QuestionType type;
     private String value;
-    @Backlink
-    private ToMany<ResponseOption> options;
-    @Convert(converter = QuestionGroupConverter.class, dbType = String.class)
+    private List<ResponseOption> options = new ArrayList<>();
     private QuestionGroup group;
-    private ToMany<Category> categories;
     private String comment;
     private int points;
     private String media;
@@ -53,11 +50,11 @@ public class Question {
         this.value = value;
     }
 
-    public ToMany<ResponseOption> getOptions() {
+    public List<ResponseOption> getOptions() {
         return options;
     }
 
-    public void setOptions(ToMany<ResponseOption> options) {
+    public void setOptions(List<ResponseOption> options) {
         this.options = options;
     }
 
@@ -67,14 +64,6 @@ public class Question {
 
     public void setGroup(QuestionGroup group) {
         this.group = group;
-    }
-
-    public ToMany<Category> getCategories() {
-        return categories;
-    }
-
-    public void setCategories(ToMany<Category> categories) {
-        this.categories = categories;
     }
 
     public String getComment() {

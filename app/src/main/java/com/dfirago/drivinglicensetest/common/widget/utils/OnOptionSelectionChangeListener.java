@@ -1,6 +1,6 @@
 package com.dfirago.drivinglicensetest.common.widget.utils;
 
-import com.dfirago.drivinglicensetest.common.model.ResponseOption;
+import com.dfirago.drivinglicensetest.database.model.types.ResponseOption;
 
 /**
  * Created by Dmytro Firago (firago94@gmail.com) on 10/8/2017.

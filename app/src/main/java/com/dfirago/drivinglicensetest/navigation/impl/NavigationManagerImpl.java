@@ -4,7 +4,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 
-import com.dfirago.drivinglicensetest.common.model.CategoryType;
+import com.dfirago.drivinglicensetest.database.model.enums.CategoryType;
 import com.dfirago.drivinglicensetest.fragments.CategoryFragment;
 import com.dfirago.drivinglicensetest.fragments.DashboardFragment;
 import com.dfirago.drivinglicensetest.fragments.ExamFragment;

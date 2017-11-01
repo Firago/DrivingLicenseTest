@@ -1,4 +1,6 @@
-package com.dfirago.drivinglicensetest.common.model;
+package com.dfirago.drivinglicensetest.database.model.types;
+
+import com.dfirago.drivinglicensetest.database.model.entities.Question;
 
 import java.util.HashMap;
 import java.util.List;

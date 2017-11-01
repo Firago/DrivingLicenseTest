@@ -1,8 +1,8 @@
 package com.dfirago.drivinglicensetest.common.setup;
 
-import com.dfirago.drivinglicensetest.common.database.ConfigurationService;
-import com.dfirago.drivinglicensetest.common.model.ConfigurationEntry;
-import com.dfirago.drivinglicensetest.common.model.ConfigurationKey;
+import com.dfirago.drivinglicensetest.database.dao.ConfigurationDao;
+import com.dfirago.drivinglicensetest.database.model.entities.ConfigurationEntry;
+import com.dfirago.drivinglicensetest.database.model.enums.ConfigurationKey;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -23,12 +23,12 @@ public class SetupExecutionHelper {
             ConfigurationKey.EXPANSION_READY
     };
 
-    private ConfigurationService configurationService;
+    private ConfigurationDao configurationDao;
     private Set<SetupExecutor> setupExecutors;
 
     @Inject
-    public SetupExecutionHelper(ConfigurationService configurationService, Set<SetupExecutor> setupExecutors) {
-        this.configurationService = configurationService;
+    public SetupExecutionHelper(ConfigurationDao configurationDao, Set<SetupExecutor> setupExecutors) {
+        this.configurationDao = configurationDao;
         this.setupExecutors = setupExecutors;
     }
 
@@ -38,7 +38,7 @@ public class SetupExecutionHelper {
      * @return true if at least one setup flag does not exist or at least one flag is set to false
      */
     public boolean isSetupNeeded() {
-        List<ConfigurationEntry> configurationEntries = configurationService.getByKeys(setupReadyFlags);
+        List<ConfigurationEntry> configurationEntries = configurationDao.findByKeys(setupReadyFlags);
         if (setupReadyFlags.length != configurationEntries.size()) {
             return true;
         }

@@ -2,10 +2,10 @@ package com.dfirago.drivinglicensetest.presenters;
 
 import android.util.Log;
 
-import com.dfirago.drivinglicensetest.common.database.QuestionService;
-import com.dfirago.drivinglicensetest.common.model.CategoryType;
-import com.dfirago.drivinglicensetest.common.model.Question;
 import com.dfirago.drivinglicensetest.dagger.scopes.FragmentScope;
+import com.dfirago.drivinglicensetest.database.dao.QuestionDao;
+import com.dfirago.drivinglicensetest.database.model.entities.Category;
+import com.dfirago.drivinglicensetest.database.model.entities.Question;
 import com.dfirago.drivinglicensetest.views.TrainingView;
 
 import java.util.List;
@@ -20,22 +20,22 @@ public class TrainingPresenter {
 
     private static final String TAG = "TrainingPresenter";
 
-    private List<Question> questions;
+    private List<Long> questionIds;
     private int currentQuestionPos = 1300;
 
     private TrainingView view;
-    private QuestionService questionService;
+    private QuestionDao questionDao;
 
     @Inject
-    public TrainingPresenter(TrainingView view, QuestionService questionService) {
+    public TrainingPresenter(TrainingView view, QuestionDao questionDao) {
         this.view = view;
-        this.questionService = questionService;
+        this.questionDao = questionDao;
     }
 
-    public void startTraining(CategoryType categoryType) {
+    public void startTraining(Category category) {
         Log.i(TAG, "Starting training");
-        questions = questionService.loadQuestions(categoryType);
-        showQuestion(questions, currentQuestionPos);
+        questionIds = questionDao.findIdsByCategoryId(category.getId());
+        showQuestion(questionIds, currentQuestionPos);
     }
 
     public void onPreviousClicked() {
@@ -43,16 +43,16 @@ public class TrainingPresenter {
         int updatedPos = currentQuestionPos - 1;
         if (updatedPos > -1) {
             currentQuestionPos = updatedPos;
-            showQuestion(questions, currentQuestionPos);
+            showQuestion(questionIds, currentQuestionPos);
         }
     }
 
     public void onNextClicked() {
         Log.i(TAG, "onNextClicked() - next question will be shown");
         int updatedPos = currentQuestionPos + 1;
-        if (updatedPos < questions.size()) {
+        if (updatedPos < questionIds.size()) {
             currentQuestionPos = updatedPos;
-            showQuestion(questions, currentQuestionPos);
+            showQuestion(questionIds, currentQuestionPos);
         }
     }
 
@@ -61,9 +61,10 @@ public class TrainingPresenter {
         view.showAnswer();
     }
 
-    private void showQuestion(List<Question> questions, int index) {
-        Log.i(TAG, "Showing question " + (index + 1) + " of " + questions.size());
-        view.showQuestion(questions.get(index));
-        view.updateQuestionNumber(index + 1, questions.size());
+    private void showQuestion(List<Long> questionIds, int index) {
+        Log.i(TAG, "Showing question " + (index + 1) + " of " + questionIds.size());
+        Question question = questionDao.loadQuestionById(questionIds.get(index));
+        view.showQuestion(question);
+        view.updateQuestionNumber(index + 1, questionIds.size());
     }
 }

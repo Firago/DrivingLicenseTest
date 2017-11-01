@@ -1,6 +1,6 @@
 package com.dfirago.drivinglicensetest.fragments.listeners;
 
-import com.dfirago.drivinglicensetest.common.model.ResponseOption;
+import com.dfirago.drivinglicensetest.database.model.types.ResponseOption;
 import com.dfirago.drivinglicensetest.common.widget.AbstractQuestionView;
 import com.dfirago.drivinglicensetest.common.widget.utils.OnOptionSelectionChangeListener;
 

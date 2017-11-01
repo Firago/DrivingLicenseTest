@@ -1,25 +1,22 @@
-package com.dfirago.drivinglicensetest.common.model;
+package com.dfirago.drivinglicensetest.database.model.entities;
 
-import com.dfirago.drivinglicensetest.common.model.converters.ConfigurationKeyConverter;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
-import io.objectbox.annotation.Convert;
-import io.objectbox.annotation.Entity;
-import io.objectbox.annotation.Id;
+import com.dfirago.drivinglicensetest.database.model.enums.ConfigurationKey;
 
 /**
  * Created by Dmytro Firago (firago94@gmail.com) on 10/14/2017.
  */
-@Entity
+@Entity(tableName = "Configuration")
 public class ConfigurationEntry {
 
-    @Id
+    @PrimaryKey(autoGenerate = true)
     private long id;
-    @Convert(converter = ConfigurationKeyConverter.class, dbType = String.class)
     private ConfigurationKey key;
     private String value;
 
     public ConfigurationEntry() {
-
     }
 
     public ConfigurationEntry(ConfigurationKey key, String value) {

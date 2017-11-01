@@ -1,6 +1,6 @@
 package com.dfirago.drivinglicensetest.navigation;
 
-import com.dfirago.drivinglicensetest.common.model.CategoryType;
+import com.dfirago.drivinglicensetest.database.model.enums.CategoryType;
 
 /**
  * Created by Dmytro Firago (firago94@gmail.com) on 10/7/2017.

@@ -1,6 +1,6 @@
 package com.dfirago.drivinglicensetest.dagger.modules;
 
-import com.dfirago.drivinglicensetest.common.model.QuestionType;
+import com.dfirago.drivinglicensetest.database.model.enums.QuestionType;
 import com.dfirago.drivinglicensetest.common.widget.AbstractQuestionView;
 import com.dfirago.drivinglicensetest.common.widget.ImageQuestionView;
 import com.dfirago.drivinglicensetest.common.widget.SimpleQuestionView;
